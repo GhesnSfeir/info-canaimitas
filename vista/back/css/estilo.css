@@ -10,6 +10,7 @@ footer {
     width: 100%;
     background-color: #000;
     vertical-align: middle;
+    z-index: 1;
 }
 
 header {
@@ -19,10 +20,20 @@ header {
     height: 150px;
     width: 100%;
     background-color: #000;
+    z-index: 1;
 }
 
 div.container nav.navbar-fixed-top {
     position: fixed;
     left: 0;
     top: 150px;
+}
+
+.navbar-nav.nav-justified > li{
+    float:none;
+}
+
+#contenido {
+    margin-top: 250px;
+    margin-bottom: 100px;
 }
