@@ -1,3 +1,12 @@
 a:hover {
     cursor: pointer;
 }
+
+body {
+    background-color: #fde5d4;
+}
+
+div#contenido {
+    background-color: #fef7f1;
+    min-height: 568px;
+}

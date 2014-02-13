@@ -17,54 +17,51 @@
         <title>InfoCanaimitas (BackOffice)</title>
     </head>
     <body>
-<!--        <div class="encabezado">
-            <img src="img/banner3.png" alt="banner">
-        </div>
-
-        <div class="menu">
-            <ul>
-                <li onclick="cargarContenido('inicio.html')">Inicio</li>
-                <li onclick="cargarContenido('buscar.html')">Buscar recursos</li>
-                <li onclick="cargarContenido('preguntas_frecuentes.html')">Preguntas frecuentes</li>
-                <li onclick="cargarContenido('contacto.html')">Contacto</li>
-            </ul>
-            <ul>
-                <li>Iniciar sesi&oacute;n</li>
-                <li onclick="cargarContenido('registrarse.html')">Registrarse</li>
-            </ul>
-        </div>
-
-        <div class="contenido" id="contenido"></div>-->
-
         <div class="container">
-            <header>
-                <img class="center-block" src="img/banner3.png" alt="banner" onclick="cargarContenido('inicio.php')">
-            </header>
+            <div class="row">
+                <div class="col-sm-12">
+                    <header>
+                        <img class="center-block" src="img/banner3.png" alt="banner" onclick="cargarContenido('inicio.php')">
+                    </header>
+                </div>
+            </div>
             
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <ul class="nav navbar-nav navbar-left">
-                    <li class="active"><a onclick="cargarContenido('inicio.php')">Inicio</a></li>
-                    <li><a onclick="cargarContenido('buscar.php')">Buscar recursos</a></li>
-                    <li><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
-                    <li><a onclick="cargarContenido('contacto.php')">Contacto</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a onclick="cargarContenido('contacto.php')">Iniciar Sesi&oacute;n</a></li>
-                    <li><a onclick="cargarContenido('contacto.php')">Registrarse</a></li>
-                </ul>
-            </nav>
             
-            <div class="contenido" id="contenido"></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                        <ul id ="menu-principal" class="nav navbar-nav navbar-justified">
+                            <li class="active"><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
+                            <li><a onclick="cargarContenido('recursos.php')">Recursos</a></li>
+                            <li><a onclick="cargarContenido('cuentas_de_usuario.php')">Cuentas de usuario</a></li>
+                            <li><a onclick="cargarContenido('mi_cuenta.php')">Mi cuenta</a></li>
+                            <li><a onclick="cargarContenido('ayuda.php')">Ayuda</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">    
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="contenido" id="contenido"></div>
+                </div>
+            </div>
             
-            <footer>
-                <p class="text-center">Hecho por Ghesn Sfeir, Mimia Lo y Benyi Tarazona.</p>
-            </footer>
+            <div class="row">
+                <div class="col-sm-12">
+                    <footer>
+                        <p class="text-center">Hecho por Ghesn Sfeir, Mimia Lo y Benyi Tarazona.</p>
+                    </footer>
+                </div>
+            </div>
             
         </div>
 
         <script type="text/javascript" >
             if (document.getElementById("contenido").innerHTML == "") {
-                    $("#contenido").load("buscar.php");
+                    $("#contenido").load("inicio.php");
             }
         </script>
     </body>

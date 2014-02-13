@@ -49,8 +49,8 @@
                     <li><a onclick="cargarContenido('contacto.php')">Contacto</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a onclick="cargarContenido('contacto.php')">Iniciar Sesi&oacute;n</a></li>
-                    <li><a onclick="cargarContenido('contacto.php')">Registrarse</a></li>
+                    <li><a onclick="cargarContenido('inicio.php')">Iniciar Sesi&oacute;n</a></li>
+                    <li><a onclick="cargarContenido('registrarse.php')">Registrarse</a></li>
                 </ul>
             </nav>
             
@@ -60,7 +60,7 @@
 
         <script type="text/javascript" >
             if (document.getElementById("contenido").innerHTML == "") {
-                    $("#contenido").load("buscar.php");
+                    $("#contenido").load("inicio.php");
             }
         </script>
     </body>
