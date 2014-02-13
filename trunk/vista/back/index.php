@@ -10,9 +10,12 @@
         
         <!-- JAVASCRIPT -->
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/benyi.js"></script>
         <script type="text/javascript" src="js/ghesn.js"></script>
         <script type="text/javascript" src="js/mimia.js"></script>
+        <script type="text/javascript">
+        </script>
         
         <title>InfoCanaimitas (BackOffice)</title>
     </head>
@@ -30,13 +33,23 @@
             <div class="row">
                 <div class="col-sm-12">
                     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                        <ul id ="menu-principal" class="nav navbar-nav navbar-justified">
-                            <li class="active"><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
-                            <li><a onclick="cargarContenido('recursos.php')">Recursos</a></li>
-                            <li><a onclick="cargarContenido('cuentas_de_usuario.php')">Cuentas de usuario</a></li>
-                            <li><a onclick="cargarContenido('mi_cuenta.php')">Mi cuenta</a></li>
-                            <li><a onclick="cargarContenido('ayuda.php')">Ayuda</a></li>
-                        </ul>
+                        <div class="container text-center">
+                            <ul id ="menu-principal" class="nav navbar-nav">
+                                <li class="tab active"><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
+                                <li><a onclick="cargarContenido('recursos.php')">Recursos</a></li>
+                                <li><a onclick="cargarContenido('cuentas_de_usuario.php')">Cuentas de usuario</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">
+                                        Mi cuenta <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu text-left">
+                                        <li><a>Gestionar</a></li>
+                                        <li><a>Cerrar sesi&oacute;n</a></li>
+                                    </ul>
+                                </li>
+                                <li><a onclick="cargarContenido('ayuda.php')">Ayuda</a></li>
+                            </ul>
+                        </div>
                     </nav>
                 </div>
             </div>
@@ -63,6 +76,10 @@
             if (document.getElementById("contenido").innerHTML == "") {
                     $("#contenido").load("inicio.php");
             }
+            $('.nav li a').on('click', function() {
+                $(this).parent().parent().find('.active').removeClass('active');
+                $(this).parent().addClass('active');
+            });
         </script>
     </body>
 </html>
