@@ -4,9 +4,9 @@
         <label for="grado">Grado:</label>
         <select class="form-control" id="grado" name="grado">
             <option>Todos</option>
-            <option>1ero</option>
+            <option>1ro</option>
             <option>2do</option>
-            <option>3ero</option>
+            <option>3ro</option>
             <option>4to</option>
             <option>5to</option>
             <option>6to</option>
