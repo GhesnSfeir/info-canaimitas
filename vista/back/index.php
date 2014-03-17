@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <header>
-                        <img class="center-block" src="img/banner3.png" alt="banner" onclick="cargarContenido('inicio.php')">
+                      <img class="center-block" src="img/banner3.png" alt="banner" onclick="cargarContenido('inicio.php')">
                     </header>
                 </div>
             </div>
@@ -35,8 +35,8 @@
                     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                         <div class="container text-center">
                             <ul id ="menu-principal" class="nav navbar-nav">
-                                <li class="tab active"><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
-                                <li><a onclick="cargarContenido('recursos.php')">Recursos</a></li>
+                                <li class="tab active"><a onclick="cargarContenido('agregar_pregunta_frecuente.php')">Preguntas frecuentes</a></li>
+                                <li><a onclick="cargarContenido('agregar_recurso.php')">Recursos</a></li>
                                 <li><a onclick="cargarContenido('cuentas_de_usuario.php')">Cuentas de usuario</a></li>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown">
@@ -44,7 +44,7 @@
                                     </a>
                                     <ul class="dropdown-menu text-left">
                                         <li><a>Gestionar</a></li>
-                                        <li><a>Cerrar sesi&oacute;n</a></li>
+                                        <li><a onclick="cargarContenido('iniciar_sesion.php')">Cerrar sesi&oacute;n</a></li>
                                     </ul>
                                 </li>
                                 <li><a onclick="cargarContenido('ayuda.php')">Ayuda</a></li>
