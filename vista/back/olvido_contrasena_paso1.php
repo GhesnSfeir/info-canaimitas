@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <div class="col-md-12 text-right">
-                <button type="submit" class="btn btn-default pequeno">Iniciar sesi&oacute;n</button>
+                <button type="button" class="btn btn-default pequeno" onclick="cargarContenido('olvido_contrasena_paso2.php')">Aceptar</button>
             </div>
         </div>     
     </form>
