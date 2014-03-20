@@ -1,18 +1,5 @@
-<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-
-<h1 class="text-center">Nueva pregunta frecuente</h1>
-<form class="form-horizontal" role="form" style="overflow-y: auto">
-<script type="text/javascript">
-    var nextinput = 1;
-    function AgregarCampos()
-    {
-        nextinput++;
-        campo = ' <div class="form-group"> <div class="col-md-4" align="right"> <label for="ruta'+nextinput+'">'+nextinput+'. </label></div> <div class="col-md-8"> <input type="text" class="form-control" id="ruta' + nextinput + '"> </div> </div>';
-//        campo = '<li id="ruta'+nextinput+'">'+nextinput+'.<input type="text" size="20" id="campo' + nextinput + '"  name="campo' + nextinput + '"  /></li>';
-        $("#campos").append(campo);
-    }
-</script>
+<h1 class="text-center">Nuevo Recurso</h1>
+<form class="form-horizontal" role="form">
 
     <div class="col-md-6">
         <div class="row">
@@ -100,10 +87,10 @@
             </div>
         
             <div class="col-md-8" >
-                <button type="button" class="btn btn-default btn-sm" onclick="AgregarCampos();">
+                <button type="button" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-plus"></span> Agregar Caracterizaci&oacute;n
                </button>
-                <button type="button" class="btn btn-default btn-sm" onclick="AgregarCampos();">
+                <button type="button" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-plus"></span> Agregar Recurso
                </button>
             </div>
@@ -135,7 +122,7 @@
         <div class="row">
             <br></br>
             <div class="col-md-4" align="right">
-                <button type="button" class="btn btn-default btn-sm" onclick="AgregarCampos();">
+                <button type="button" class="btn btn-default btn-sm" onclick="agregarCampos();">
                     <span class="glyphicon glyphicon-plus"></span> Agregar Campos
                 </button>
             </div>
