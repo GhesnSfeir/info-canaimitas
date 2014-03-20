@@ -10,24 +10,24 @@
         </div>
         
         <div class="form-group">
-            <label for="correo" class="col-md-5 control-label">Introduzca su Correo: </label>
-            <input type="email" id="correo" name="correo" class="form-control mediano">
+            <label for="correo" class="col-md-offset-1 col-md-4">Introduzca su Correo: </label>
+            <input type="email" id="correo" name="correo" class="col-md-7 form-control mediano">
         </div>
         
         <div class="form-group">
-            <div class="col-md-9 text-right">
+            <div class="col-md-offset-1 col-md-11">
                 <label for="captcha"> Escriba los caracteres que aparecen en la im&aacute;gen</label>
             </div>
         </div>
 		
         <div class="form-group">
-            <div class="col-md-12">
+            <div class="col-md-offset-1 col-md-11">
                 <img alt="100x100" src="http://lorempixel.com/140/140/" />
             </div>
         </div>
         
         <div class="form-group">
-            <div class="col-md-12">
+            <div class="col-md-offset-1 col-md-11">
                 <input type="text" id="captcha" name="captcha" class="form-control mediano">
             </div>
         </div>
