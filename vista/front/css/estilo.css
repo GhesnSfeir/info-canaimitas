@@ -11,6 +11,10 @@ div#contenido {
     min-height: 568px;
 }
 
+.pequeno {
+    width: 120px !important;
+}
+
 .mediano {
     width: 200px !important;
 }

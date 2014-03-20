@@ -51,6 +51,10 @@ div.container nav.navbar-fixed-top {
     height: 44px;
 }
 
+.pequeno {
+    width: 120px !important;
+}
+
 .mediano {
     width: 200px !important;
 }
