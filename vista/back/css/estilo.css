@@ -50,3 +50,11 @@ div.container nav.navbar-fixed-top {
 #menu-principal {
     height: 44px;
 }
+
+.mediano {
+    width: 200px !important;
+}
+
+.largo {
+    width: 400px !important;
+}
