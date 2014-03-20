@@ -15,7 +15,7 @@
         </div>
        
      <div class="row">
-            <button type="submit" class="btn btn-default">Aceptar</button>
+            <button type="button" class="btn btn-default" onclick="cargarContenido('olvido_contrasena_paso3.php')">Aceptar</button>
     </div>
     
     </form>
