@@ -43,7 +43,7 @@ div.container nav.navbar-fixed-top {
 }
 
 #contenido {
-    margin-top: 250px;
+    margin-top: 200px;
     margin-bottom: 100px;
 }
 
@@ -61,4 +61,8 @@ div.container nav.navbar-fixed-top {
 
 .largo {
     width: 400px !important;
+}
+
+h1 {
+    padding: 30px;
 }

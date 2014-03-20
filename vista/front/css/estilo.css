@@ -22,3 +22,7 @@ div#contenido {
 .largo {
     width: 400px !important;
 }
+
+h1 {
+    padding: 30px;
+}
