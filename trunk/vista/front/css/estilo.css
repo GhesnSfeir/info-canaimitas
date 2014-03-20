@@ -10,3 +10,11 @@ div#contenido {
     background-color: #fef7f1;
     min-height: 568px;
 }
+
+.mediano {
+    width: 200px !important;
+}
+
+.largo {
+    width: 400px !important;
+}
