@@ -41,10 +41,10 @@
             <br>
             <div class="form-group">
                 <div class="col-md-6 text-right">
-                    <button type="submit" class="btn btn-default">Registrarse</button>
+                    <button type="submit" class="btn btn-default pequeno">Registrarse</button>
                 </div>
                 <div class="col-md-6 text-left">
-                    <button type="button" class="btn btn-default">Cancelar</button>
+                    <button type="button" class="btn btn-default pequeno">Cancelar</button>
                 </div>
             </div>
         </form>
