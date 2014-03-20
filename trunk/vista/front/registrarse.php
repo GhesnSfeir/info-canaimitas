@@ -30,6 +30,23 @@
                 <label for="fecha_nacimiento" class="col-md-5 control-label">Fecha de nacimiento: </label>
                 <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control mediano">
             </div>
+            <div class="form-group">
+                <label for="contrasena" class="col-md-5 control-label">Contrase&ntilde;a: </label>
+                <input type="password" id="contrasena" name="contrasena" class="form-control mediano">
+            </div>
+            <div class="form-group">
+                <label for="verificar_contrasena" class="col-md-5 control-label">Verificar contrase&ntilde;a: </label>
+                <input type="password" id="verificar_contrasena" name="verificar_contrasena" class="form-control mediano">
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="col-md-6 text-right">
+                    <button type="submit" class="btn btn-default">Registrarse</button>
+                </div>
+                <div class="col-md-6 text-left">
+                    <button type="button" class="btn btn-default">Cancelar</button>
+                </div>
+            </div>
         </form>
     </div>
     
