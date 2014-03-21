@@ -6,11 +6,14 @@
         
         <!-- CSS -->
         <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+        <link type="text/css" src="css/bootstrap-checkbox.css">
         <link type="text/css" rel="stylesheet" href="css/estilo.css">
+
         
         <!-- JAVASCRIPT -->
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap-checkbox.js"></script>
         <script type="text/javascript" src="js/benyi.js"></script>
         <script type="text/javascript" src="js/ghesn.js"></script>
         <script type="text/javascript" src="js/mimia.js"></script>
@@ -35,16 +38,18 @@
                     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                         <div class="container text-center">
                             <ul id ="menu-principal" class="nav navbar-nav">
-                                <li class="tab active"><a onclick="cargarContenido('agregar_pregunta_frecuente.php')">Preguntas frecuentes</a></li>
-                                <li><a onclick="cargarContenido('agregar_recurso.php')">Recursos</a></li>
-                                <li><a onclick="cargarContenido('cuentas_de_usuario.php')">Cuentas de usuario</a></li>
+                                <!--<li class="tab active"><a onclick="cargarContenido('agregar_pregunta_frecuente.php')">Preguntas frecuentes</a></li>-->
+                                <li class="tab active"><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
+                                <li><a onclick="cargarContenido('recursos.php')">Recursos</a></li>
+                                <li><a onclick="cargarContenido('usuarios.php')">Cuentas de usuario</a></li>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown">
                                         Mi cuenta <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu text-left">
-                                        <li><a>Gestionar</a></li>
+                                        <li><a onclick="cargarContenido('agregar_cuenta_usuarios.php')">Agregar cuenta</a></li>
                                         <li><a onclick="cargarContenido('iniciar_sesion.php')">Cerrar sesi&oacute;n</a></li>
+                                        <li><a onclick="cargarContenido('gestionar_cuenta_usuario.php')">Gestionar</a></li>
                                     </ul>
                                 </li>
                                 <li><a onclick="cargarContenido('ayuda.php')">Ayuda</a></li>
