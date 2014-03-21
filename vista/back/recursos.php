@@ -3,10 +3,10 @@
 <br/><br/>
 
 <div class="navbar">
-    <ul id="search" class="nav">
+    <ul id="search" class="nav" >
         <li>
             <ul>
-                <li id="ommit">
+                <li>
                 <label class="between-margin-left">Grado: </label>
                 </li>
                 <li>
@@ -76,6 +76,13 @@
                 </li>
             </ul>
             
+        </li>
+         <li>
+            <button id="btnSearchComplete" type="submit" class="btn btn-default">
+                <img class="glyphicon " src="../fonts/glyphicons_search.png"></img>
+                <label class="between-margin-left">Buscar</label>
+            </button>
+
         </li>
         <li>
             <button id="btnNew" class="btn btn-default" onclick="cargarContenido('agregar_recurso.php')">

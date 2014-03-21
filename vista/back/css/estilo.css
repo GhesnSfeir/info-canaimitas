@@ -79,11 +79,11 @@ label{
 }
 
 #search{
-    margin-left: 20px;
+    margin-left: auto;
 }
 
-#search li{
-    padding: auto;
+#search li, #search li ul{
+    padding: 4px;
 }
 
 #btnSearch{ 
@@ -125,10 +125,12 @@ table tbody tr{
 
 #tipo{
     min-width: 170px;
+    height: 35px;
 }
 
 #tipo-select{
     min-width: 100px;
+    height: 35px;
 }
 
 .float-right{
@@ -145,3 +147,8 @@ table tbody tr{
 .row-custom{
     width: 421px;
 }
+
+#btnSearchComplete{ 
+    height: 35px;
+}
+
