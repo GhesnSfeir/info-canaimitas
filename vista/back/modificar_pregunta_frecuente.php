@@ -1,38 +1,29 @@
-<h1 class="text-center">Nueva pregunta frecuente</h1>
-<form class="form-horizontal" role="form">
+<h1 class="text-center">Modificar pregunta frecuente</h1> 
+<div class="col-md-3"></div>
 
-    <div class="row">
+<div class="col-md-6">
+    <form class="form-horizontal" role="form"> 
         <div class="form-group">
-            <div class="col-md-4">
-                <label for="nuevaPregunta">Pregunta: </label>
-            </div>
-            <div class="col-md-8">
-                <input type="text" class="form-control" id="nuevaPregunta" placeholder=" Pregunta a modificar "> 
-            </div>
+            <label for="nuevaPregunta" class="col-md-5 control-label">Pregunta: </label>
+            <input type="text" id="nuevaPregunta" name="nuevaPregunta" class="form-control mediano">
         </div>
-    </div>
+        
+        <div class="form-group">
+            <label for="nuevaRespuesta" class="col-md-5 control-label">Respuesta: </label>
+            <textarea class="form-control mediano" rows="3" id="nuevaRespuesta"></textarea>
+        </div>
 
-    <div class="row">
+
         <div class="form-group">
-            <div class="col-md-4">
-                <label for="nuevaRespuesta">Respuesta: </label>
+            <div class="col-md-6 text-right">
+                <button type="submit" class="btn btn-default pequeno">Guardar</button>
             </div>
-            <div class="col-md-8">
-                <textarea class="form-control" rows="3" id="nuevaRespuesta" placeholder=" Respuesta a modificar "></textarea>
+            <div class="col-md-6 text-left">
+                <button type="button" class="btn btn-default pequeno">Cancelar</button>
             </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <Div  class = "checkbox" > 
-            <label> 
-                <input  type = "checkbox"  value = "" > Visible
-            </label> 
-        </div>
-    </div>
-    
-    <div class="row">
-            <button type="submit" class="btn btn-default">Guardar</button>
-            <button type="submit" class="btn btn-default">Cancelar</button>
-    </div>
-</form>
+        </div>  
+    </form>
+</div>
+
+<div class="col-md-3">
+</div>
