@@ -6,10 +6,13 @@
         
         <!-- CSS -->
         <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+        <link type="text/css" src="css/bootstrap-checkbox.css">
         <link type="text/css" rel="stylesheet" href="css/estilo.css">
         
         <!-- JAVASCRIPT -->
-        <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="js/jquery-1.10.2.js"></script>        
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap-checkbox.js"></script>
         <script type="text/javascript" src="js/benyi.js"></script>
         <script type="text/javascript" src="js/ghesn.js"></script>
         <script type="text/javascript" src="js/mimia.js"></script>
@@ -44,8 +47,9 @@
             <nav class="navbar navbar-default" role="navigation">
                 <ul class="nav navbar-nav navbar-left">
                     <li class="active"><a onclick="cargarContenido('inicio.php')">Inicio</a></li>
-                    <li><a onclick="cargarContenido('buscar.php')">Buscar recursos</a></li>
-                    <li><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
+                    <li><a onclick="cargarContenido('recursos.php')">Buscar recursos</a></li>
+                    <li><a onclick="cargarContenido('inicio.php')">Preguntas frecuentes</a></li>
+                    <!--<li><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>-->
                     <li><a onclick="cargarContenido('contacto.php')">Contacto</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -59,9 +63,15 @@
         </div>
 
         <script type="text/javascript" >
+            $('.nav li a').on('click', function() {
+                $(this).parent().parent().find('.active').removeClass('active');
+                $(this).parent().addClass('active');
+            });
+
             if (document.getElementById("contenido").innerHTML == "") {
                     $("#contenido").load("inicio.php");
             }
+            
         </script>
     </body>
 </html>

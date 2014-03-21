@@ -14,7 +14,7 @@
 	{ 
 		$col1 = '<tr>';
 		$col2 = "<td value=\"$key\"><a>$value[0]</a></td>";
-		$col3 = "<td value=\"$key\"><a>$value[1]</a></td>";
+		$col3 = "<td value=\"$key\">$value[1]</td>";
 		if ($value[2]=='True'){
 			$col4 = "<td><input type=\"checkbox\" class=\"checkbox\" value=\"true\" checked></input></td>";	
 		}
@@ -22,7 +22,7 @@
 			$col4 = "<td><input type=\"checkbox\" class=\"checkbox\" value=\"true\"></input></td>";	
 		}
 
-		$col5 = "<td><button id=\"btnDel\" class=\"btn btn-default\" 
+		$col5 = "<td><button id=\"btnInTable\" class=\"btn btn-default\" 
                             onclick=\"cargarContenido('eliminar_cuenta.php')\">
                             <img class=\"glyphicon search\" src=\"../fonts/glyphicons_remove.png\">
                             </img></button></td>";

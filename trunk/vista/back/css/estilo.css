@@ -83,7 +83,7 @@ label{
 }
 
 #search li, #search li ul{
-    padding: 4px;
+    padding: 3px;
 }
 
 #btnSearch{ 
@@ -94,7 +94,7 @@ label{
 }
 
 #btnNew{ 
-    border-width: 0px;
+    border-width: 1px;
     height: 35px;
 }
 
@@ -149,6 +149,11 @@ table tbody tr{
 }
 
 #btnSearchComplete{ 
-    height: 35px;
+    height: 35px;    
+    margin-left: 5px;
+    margin-right: 10px;
 }
 
+#btnInTable{
+    border-width: 0px;
+}
