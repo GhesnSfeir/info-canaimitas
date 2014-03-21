@@ -9,7 +9,7 @@
                bandeja de correo no deseado.</p>
         </div>
         
-        <div class="col-md-6">
+        <div class="col-md-9">
             <div class="form-group">
                 <label for="contrasenaTemporal" class="col-md-5 control-label">Introduzca su Contrase&ntilde;a Temporal: </label>
                 <input type="password" id="contrasenaTemporal" name="contrasenaTemporal" class="form-control mediano">
@@ -27,7 +27,7 @@
            
         </div>
     
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="form-group">
                 <p class="text-justify">&#191;C&oacute;mo hacer su contrase&ntilde;a m&aacute;s segura?</p>
                 <div id="D_ListaPasosContrasenaSegura">
