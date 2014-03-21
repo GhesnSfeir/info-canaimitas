@@ -38,7 +38,6 @@
                     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                         <div class="container text-center">
                             <ul id ="menu-principal" class="nav navbar-nav">
-                                <!--<li class="tab active"><a onclick="cargarContenido('agregar_pregunta_frecuente.php')">Preguntas frecuentes</a></li>-->
                                 <li class="tab active"><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
                                 <li><a onclick="cargarContenido('recursos.php')">Recursos</a></li>
                                 <li><a onclick="cargarContenido('usuarios.php')">Cuentas de usuario</a></li>
