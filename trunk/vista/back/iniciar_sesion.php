@@ -1,4 +1,7 @@
 <h1 class="text-center">Administraci&oacute;n de InfoCanaimitas</h1>  
+
+<br/>
+
 <div class="col-md-3"></div>
 
 <div class="col-md-6">

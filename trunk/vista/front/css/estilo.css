@@ -25,6 +25,7 @@ div#contenido {
 
 h1 {
     padding: 30px;
+    margin-bottom: 10px;
 }
 
 
@@ -39,11 +40,12 @@ label{
 }
 
 #search{
-    margin-left: auto;
+    display: table;
+    margin: 0 auto;
 }
 
-#search li, #search li ul{
-    padding: 3px;
+#search li{
+    padding: 15px;
 }
 
 #btnSearch{ 
@@ -123,6 +125,39 @@ table tbody tr{
 	display: block;
 }
 
-ul li{
-	text-decoration: none;
+#subContenido{
+    margin-top: 30px !important;
+}
+
+#faq{
+    list-style-type: square;
+}
+
+#faq li{
+    padding: 3px;
+}
+
+textarea{
+    height: 150px !important;
+    overflow: auto;
+}
+
+.block{
+    display: block;
+    width: 58%;
+    float: right;
+}
+
+.block button
+{
+    margin: 10px;
+    margin-left: 14px;
+}
+
+th, td{
+    text-align: center;
+}
+
+#rigthNav{
+    margin-left: 466.4px;
 }

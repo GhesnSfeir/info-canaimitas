@@ -1,10 +1,7 @@
-<h1 class="text-center">Nueva pregunta frecuente</h1> 
-
-<br/>
 
 <form class="form-horizontal" role="form"> 
     <div class="form-group">
-        <label for="nuevaPregunta" class="col-md-4 control-label">Pregunta: </label>
+        <label for="nuevaPregunta" class="col-md-4 control-label">Motivo: </label>
         <input type="text" id="nuevaPregunta" name="nuevaPregunta" class="form-control largo">
     </div>
     
@@ -19,3 +16,31 @@
         <button type="button" class="btn btn-default pequeno" onclick="cargarContenido('inicio.php')">Cancelar</button>
     </div>  
 </form>
+
+
+
+<script type="text/javascript">
+
+    function GetListFaq()
+    {
+        $.get("scripts/FAQ-cargar-faq.php", function(resultado){
+            console.log("Recibo: ");
+            if(resultado == false)
+            {
+                console.log("resultado");
+                alert("Error");
+            }
+            else
+            {   
+                $('#faq').append(resultado);
+            }
+        }); 
+    }
+
+
+    $(document).ready(function()
+    {
+        GetListFaq();
+    });
+
+</script>
