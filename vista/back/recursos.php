@@ -1,16 +1,10 @@
 <h1 class="text-center">Recusos</h1>
 
-<br/><br/>
-
 <div class="navbar">
     <ul id="search" class="nav" >
         <li>
-            <ul>
-                <li>
-                <label class="between-margin-left">Grado: </label>
-                </li>
-                <li>
                 <select id="tipo-select" class="form-control">
+                    <option value="0">Grado ...</option>
                     <option value="1">1ro</option>
                     <option value="2">2do</option>
                     <option value="3">3ro</option>
@@ -22,18 +16,11 @@
                     <option value="9">9no</option>
                     <option value="10">Primer Ciclo D.</option>
                     <option value="11">Segundo Ciclo D.</option>
-                </select>
-                </li>
-            </ul>
-            
+                </select>            
         </li>
         <li>
-            <ul>
-                <li id="ommit">
-                <label class="between-margin-left">Asignatura: </label>
-                </li>
-                <li>
                 <select id="tipo-select" class="form-control">
+                    <option value="0">Asignatura ...</option>
                     <option value="ciencias">Ciencias</option>   
                     <option value="geografia">Geografia</option>                                     
                     <option value="historia">Historia</option>                    
@@ -41,43 +28,27 @@
                     <option value="literatura">Literatura</option>
                     <option value="matematica" selected>Matematica</option>
                 </select>
-                </li>  
-            </ul>          
         </li>
         <li>
-            <ul>
-                <li id="ommit">
-                <label class="between-margin-left">Tema: </label>
-                </li>
-                <li>
                 <select id="tipo-select" class="form-control">
+                    <option value="0">Tema ...</option>
                     <option value="suma">Suma</option>
                     <option value="resta">resta</option>
                     <option value="multiplicacion">Multiplicacion</option>
                     <option value="division">Division</option>
                     <option value="nprimos">Numeros Primos</option>
                 </select>
-                </li>
-            </ul>
         </li>
         <li>
-            <ul>
-                <li id="ommit">
-                <label class="between-margin-left">Tipo: </label>
-                </li>
-                <li>
                 <select id="tipo-select" class="form-control">
+                    <option value="0">Formato ...</option>
                     <option value="all">Todos</option>
                     <option value="video">Video</option>
                     <option value="pdf">PDF</option>                    
                     <option value="jclick">JClick</option>
-
-                </select>
-                </li>
-            </ul>
-            
+                </select>            
         </li>
-         <li>
+        <li>
             <button id="btnSearchComplete" type="submit" class="btn btn-default">
                 <img class="glyphicon " src="../fonts/glyphicons_search.png"></img>
                 <label class="between-margin-left">Buscar</label>
@@ -120,8 +91,6 @@
 
 <script type="text/javascript">
 
-
-
     function GetResources()
     {
         $.get("scripts/RESOURCES-cargar-recursos.php", function(resultado){
@@ -145,8 +114,5 @@
         GetResources();
         $('input[type="checkbox"]').checkbox(); 
     });
-
-
-
-
+    
 </script>

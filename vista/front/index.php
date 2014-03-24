@@ -45,15 +45,12 @@
             </header>
             
             <nav class="navbar navbar-default" role="navigation">
-                <ul class="nav navbar-nav navbar-left">
+                <ul class="nav navbar-nav">
                     <li class="active"><a onclick="cargarContenido('inicio.php')">Inicio</a></li>
                     <li><a onclick="cargarContenido('recursos.php')">Buscar recursos</a></li>
-                    <li><a onclick="cargarContenido('inicio.php')">Preguntas frecuentes</a></li>
-                    <!--<li><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>-->
+                    <li><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
                     <li><a onclick="cargarContenido('contacto.php')">Contacto</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a onclick="cargarContenido('inicio.php')">Iniciar Sesi&oacute;n</a></li>
+                    <li><a id="rigthNav" onclick="cargarContenido('inicio.php')">Iniciar Sesi&oacute;n</a></li>
                     <li><a onclick="cargarContenido('registrarse.php')">Registrarse</a></li>
                 </ul>
             </nav>
