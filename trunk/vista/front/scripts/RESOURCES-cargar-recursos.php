@@ -6,7 +6,6 @@
 
 	$selects = new selects();
 	$Clases = $selects->CargarRecursos(); 
-
 	//Llamada a la funcion contenida dentro del php de la primera linea
 
 	foreach ($Clases as $key=>$value)

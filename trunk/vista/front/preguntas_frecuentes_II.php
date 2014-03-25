@@ -1,4 +1,3 @@
-
 <form class="form-horizontal" role="form"> 
     <div class="form-group">
         <label for="nuevaPregunta" class="col-md-4 control-label">Motivo: </label>

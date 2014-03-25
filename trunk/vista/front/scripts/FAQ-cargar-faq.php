@@ -8,7 +8,6 @@
 	$Clases = $selects->CargarFaq(); 
 
 	//Llamada a la funcion contenida dentro del php de la primera linea
-
 	foreach ($Clases as $key=>$value)
 	{ 
 		$col1 = "<li value=\"$key\"><a>$value</a></li>";
