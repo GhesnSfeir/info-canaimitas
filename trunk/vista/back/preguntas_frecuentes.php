@@ -1,27 +1,17 @@
 <h1 class="text-center">Preguntas frecuentes</h1>
 
-<br/><br/>
-
 <div class="navbar">
     <ul id="search" class="nav">
         <li>
-            <ul>
-                <li id="ommit">
-                <label class="between-margin-left">Tipo: </label>
-                </li>
-                <li>
                 <select id="tipo" class="form-control">
+                    <option value="0">Tipo ...</option>
                     <option value="all">Todos</option>
                     <option value="sugeridos">Sugeridos</option>
                     <option value="predeterminados">Predeterminados</option>
-
-                </select>
-                </li>
-            
+                </select>            
         </li>
         <li>
             <form class="navbar-form" role="search">
-                <label class="between-margin-right">Filtro: </label>
                 <div class="form-group">
                     <input id="inptSearch" type="text" class="form-control" placeholder="Buscar ...">
                 </div>
@@ -64,8 +54,6 @@
 
 <script type="text/javascript">
 
-
-
     function GetFaq()
     {
         $.get("scripts/FAQ-cargar-faq.php", function(resultado){
@@ -89,8 +77,5 @@
         GetFaq();
         $('input[type="checkbox"]').checkbox(); 
     });
-
-
-
 
 </script>
