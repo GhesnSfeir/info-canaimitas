@@ -14,7 +14,7 @@ class selects
 		$Clases['Second question'] = "Second question";
 		$Clases['Third question'] = "Third question";
 		$Clases['Fourth question'] = "Fourth question";
-		//echo $Clases;
+		echo $Clases;
 		return $Clases;
 		
 
