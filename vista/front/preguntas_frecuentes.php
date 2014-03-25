@@ -10,7 +10,6 @@
 	</div>
 </div>
 
-
 <script type="text/javascript">
 
     $('.nav-tabs li a').on('click', function() {

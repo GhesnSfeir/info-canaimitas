@@ -1,4 +1,5 @@
 <h1 class="text-center">Buscar recursos</h1>
+
 <form class="form-inline" role="form">
     <div class="form-group">
         <label for="grado">Grado:</label>

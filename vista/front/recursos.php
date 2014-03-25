@@ -19,7 +19,6 @@
             </select>
         </li>
         <li>
-            
                 <select id="tipo-select" class="form-control">
                     <option value="0">Asignatura ...</option>
                     <option value="ciencias">Ciencias</option>   

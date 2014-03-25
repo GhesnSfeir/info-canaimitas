@@ -20,6 +20,7 @@
         <title>InfoCanaimitas</title>
     </head>
     <body>
+        
 <!--        <div class="encabezado">
             <img src="img/banner3.png" alt="banner">
         </div>
