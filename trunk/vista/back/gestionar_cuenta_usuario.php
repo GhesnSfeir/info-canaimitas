@@ -1,6 +1,7 @@
 <h1 class="text-center">Gestionar cuenta de Usuario</h1>
 
-<br/>
+<br/><br/>
+
 <div>
 
     <form class="form-horizontal" role="form">
@@ -27,6 +28,8 @@
                      </div>
             </div> 
 
+            <br/>
+
             <div class="row row-custom">
                 <ul class="row-inline">
                     <li>
@@ -38,6 +41,7 @@
                   
             </div>
 
+            <br/>
             <br/>
             <div class="row row-custom">
                 <ul class="row-inline">

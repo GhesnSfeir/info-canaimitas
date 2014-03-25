@@ -1,7 +1,4 @@
 <h1 class="text-center">Nuevo Recurso</h1>
-
-<br/>
-
 <form class="form-horizontal" role="form">
 
     <div class="col-md-6">
