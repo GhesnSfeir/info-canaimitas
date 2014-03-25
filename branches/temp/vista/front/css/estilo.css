@@ -1,0 +1,128 @@
+a:hover {
+    cursor: pointer;
+}
+
+body {
+    background-color: #fde5d4;
+}
+
+div#contenido {
+    background-color: #fef7f1;
+    min-height: 568px;
+}
+
+.pequeno {
+    width: 120px !important;
+}
+
+.mediano {
+    width: 200px !important;
+}
+
+.largo {
+    width: 400px !important;
+}
+
+h1 {
+    padding: 30px;
+}
+
+
+#search li {
+    display: inline-block;
+    text-align: center;
+}
+
+label{
+    margin-right: 3px;
+    vertical-align: middle;
+}
+
+#search{
+    margin-left: auto;
+}
+
+#search li, #search li ul{
+    padding: 3px;
+}
+
+#btnSearch{ 
+    margin-left: -4px;
+    border-top-left-radius:0px;
+    border-bottom-left-radius:0px;
+    height: 35px;
+}
+
+#btnNew{ 
+    border-width: 1px;
+    height: 35px;
+}
+
+#inptSearch{
+    border-top-right-radius:0px;
+    border-bottom-right-radius:0px;
+    height: 35px;
+    width: 450px;
+}
+
+.between-margin-left{
+    margin-left: 5px;
+}
+
+.between-margin-right{
+    margin-right: 5px;
+}
+
+.between-margin-top{
+    margin-top: 80px;
+}
+
+table tbody tr{
+    padding: 3px;
+    height: 15px;
+    vertical-align: middle;
+}
+
+
+#tipo{
+    min-width: 170px;
+    height: 35px;
+}
+
+#tipo-select{
+    min-width: 100px;
+    height: 35px;
+}
+
+.float-right{
+    float: right;
+}
+
+.row-inline li{
+    display: inline-block;
+    text-decoration: none;
+    float: right;
+    padding: 10px;
+}
+
+.row-custom{
+    width: 421px;
+}
+
+#btnSearchComplete{ 
+    height: 35px;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+#btnInTable{
+	border-width: 0px;
+}
+
+#tabs{
+	display: block;
+}
+
+ul li{
+	text-decoration: none;
+}
