@@ -12,7 +12,7 @@ class selects
 		$Clases['M.C.M'] = array("6", "Matematica", "Divisiones","M.C.M", "PDF", "CL. O.");
 		$Clases['M.C.D'] = array("6", "Matematica", "Divisiones","M.C.D", "Video", "Ale. H. T.");
 		$Clases['Multiplicacion entera'] = array("6", "Matematica", "Multiplicacion", "Multiplicacion entera", "JClick", "Thomas T. Lop");
-		echo $Clases;
+		//echo $Clases;
 		return $Clases;
 		
 
