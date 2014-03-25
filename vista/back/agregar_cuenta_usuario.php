@@ -1,7 +1,5 @@
-<h1 class="text-center">Nueva cuenta de Usuario</h1>
-
-<br/><br/>
-
+<h1 class="text-center">Agregar Usuario</h1>
+<br/>
 <div>
 
     <form class="form-horizontal" role="form">

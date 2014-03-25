@@ -1,14 +1,9 @@
 <h1 class="text-center">Usuarios</h1>
 
-<br/><br/>
-
 <div class="navbar">
     <ul id="search" class="nav">
         <li>
-
-        <li>
             <form class="navbar-form" role="search">
-                <label class="between-margin-right">Filtro: </label>
                 <div class="form-group">
                     <input id="inptSearch" type="text" class="form-control" placeholder="Buscar ...">
                 </div>
@@ -16,8 +11,7 @@
                     <img class="glyphicon" src="../fonts/glyphicons_search.png"></img>
                 </button>
             </form>
-                            
-        </li>
+
         <li>
             <button id="btnNew" class="btn btn-default" onclick="cargarContenido('agregar_cuenta_usuario.php')">
                 <img class="glyphicon search" src="../fonts/glyphicons_plus.png"></img>
