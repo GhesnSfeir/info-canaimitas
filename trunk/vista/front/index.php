@@ -67,7 +67,7 @@
             });
 
             if (document.getElementById("contenido").innerHTML == "") {
-                    $("#contenido").load("inicio.php");
+                    $("#contenido").load("comentarios_y_recomendaciones_recurso.php");
             }
             
         </script>
