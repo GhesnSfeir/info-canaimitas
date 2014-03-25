@@ -8,10 +8,10 @@ class selects
 	function CargarRecursos()
 	{
 
-		$Clases['Divisiones'] = array("6", "Matematica", "Divisiones", "Divisiones enteras", "PDF", "Casimiro KO.");
-		$Clases['M.C.M'] = array("6", "Matematica", "Divisiones","M.C.M", "PDF", "CL. O.");
-		$Clases['M.C.D'] = array("6", "Matematica", "Divisiones","M.C.D", "Video", "Ale. H. T.");
-		$Clases['Multiplicacion entera'] = array("6", "Matematica", "Multiplicacion", "Multiplicacion entera", "JClick", "Thomas T. Lop");
+		$Clases['Plantas'] = array("6", "Estudios de la Naturaleza", "Plantas", "Arbustos del Amazonas", "PDF", "Ghesn S.");
+		$Clases['Arboles'] = array("6", "Estudios de la Naturaleza","Plantas", "Naturaleza", "PDF", "CL. O.");
+		$Clases['Naturaleza'] = array("6", "Estudios de la Naturaleza", "Plantas","Arboles", "Video", "Ale. H. T.");
+		$Clases['Savia'] = array("6", "Estudios de la Naturaleza", "Plantas", "Troncos", "JClick", "Thomas T. Lop");
 		
 		return $Clases;
 		

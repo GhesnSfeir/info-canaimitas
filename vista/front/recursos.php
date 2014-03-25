@@ -10,7 +10,7 @@
                 <option value="3">3ro</option>
                 <option value="4">4to</option>
                 <option value="5">5to</option>
-                <option value="6">6to</option>
+                <option value="6" selected>6to</option>
                 <option value="7">7mo</option>
                 <option value="8">8vo</option>
                 <option value="9">9no</option>
@@ -21,23 +21,20 @@
         <li>
                 <select id="tipo-select" class="form-control">
                     <option value="0">Asignatura ...</option>
-                    <option value="ciencias">Ciencias</option>   
+                    <option value="naturaleza" selected>Estudios de la naturaleza</option>   
                     <option value="geografia">Geografia</option>                                     
                     <option value="historia">Historia</option>                    
                     <option value="lenguaje">Lenguaje</option>
                     <option value="literatura">Literatura</option>
-                    <option value="matematica" selected>Matematica</option>
+                    <option value="matematica">Matematica</option>
                 </select>        
         </li>
         <li>
            
                 <select id="tipo-select" class="form-control">
                     <option value="0">Tema ...</option>
-                    <option value="suma">Suma</option>
-                    <option value="resta">resta</option>
-                    <option value="multiplicacion">Multiplicacion</option>
-                    <option value="division">Division</option>
-                    <option value="nprimos">Numeros Primos</option>
+                    <option value="plantas" selected>Plantas</option>
+                    <option value="arboles">Arboles</option>
                 </select>
         </li>
         <li>
@@ -46,7 +43,7 @@
                     <option value="0">Formato ...</option>
                     <option value="all">Todos</option>
                     <option value="video">Video</option>
-                    <option value="pdf">PDF</option>                    
+                    <option value="pdf" selected>PDF</option>                    
                     <option value="jclick">JClick</option>
 
                 </select>
@@ -64,7 +61,7 @@
 </div>
 
 <div id="table" class="table">
-    <table class="table table-hover">
+    <table id="tableResource" class="table table-hover">
 
         <thead>
             <tr>
@@ -90,11 +87,10 @@
 <script type="text/javascript">
 
 
-
     function GetResources()
     {
         $.get("scripts/RESOURCES-cargar-recursos.php", function(resultado){
-            console.log("Recibo: ");
+
             if(resultado == false)
             {
                 console.log("resultado");
@@ -109,13 +105,13 @@
         }); 
     }
 
+
+
     $(document).ready(function()
     {
         GetResources();
         $('input[type="checkbox"]').checkbox(); 
+
     });
-
-
-
 
 </script>
