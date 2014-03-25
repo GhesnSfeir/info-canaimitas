@@ -11,7 +11,7 @@ class selects
 		$Clases["batr.26@gmail.com"] = array("batr.26@gmail.com", "Benyi Tarazona", "False");
 		$Clases["ghesn.sfeir@gmail.com"] = array("ghesn.sfeir@gmail.com", "Ghesn Sfeir", "False");
 		$Clases["mhlo.11@est.ucab.edu.ve"] = array("mhlo.11@est.ucab.edu.ve", "Mimia Lo", "True");
-		//echo $Clases;
+
 		return $Clases;
 		
 
