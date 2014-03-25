@@ -161,3 +161,7 @@ th, td{
 #rigthNav{
     margin-left: 466.4px;
 }
+
+textarea {
+    resize: none;
+}
