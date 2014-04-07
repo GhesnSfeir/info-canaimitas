@@ -78,7 +78,7 @@
 
         <script type="text/javascript" >
             if (document.getElementById("contenido").innerHTML == "") {
-                    $("#contenido").load("inicio.php");
+                    $("#contenido").load("comentarios.php");
             }
             $('.nav li a').on('click', function() {
                 $(this).parent().parent().find('.active').removeClass('active');

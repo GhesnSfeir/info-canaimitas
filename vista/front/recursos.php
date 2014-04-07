@@ -1,5 +1,7 @@
 <h1 class="text-center">Recursos</h1>
 
+<div class="col-md-10 col-md-offset-1">
+
 <div class="navbar">
     <ul id="search" class="nav" >
         <li>
@@ -81,7 +83,7 @@
     </table>
     
 </div>
-
+</div>
 
 
 <script type="text/javascript">
