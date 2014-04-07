@@ -3,7 +3,8 @@ a:hover {
 }
 
 body {
-    background-color: #fde5d4;
+    background-color: #003366;
+    
 }
 
 div#contenido {
@@ -77,6 +78,10 @@ label{
 
 .between-margin-top{
     margin-top: 80px;
+}
+
+table, button#btnInTable{
+    background-color:  #fef7f1 !important;
 }
 
 table tbody tr{
@@ -165,3 +170,4 @@ th, td{
 textarea {
     resize: none;
 }
+

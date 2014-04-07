@@ -7,8 +7,8 @@
     <div class="col-md-6">
         <div class="row">
             <div class="form-group">
-                <div class="col-md-4">
-                    <label for="titulo">T&iacute;tulo: </label>
+                <div class="col-md-4 text-right">
+                    <label for="titulo" class="control-label">T&iacute;tulo: </label>
                 </div>
                 <div class="col-md-8">
                     <input type="text" class="form-control" id="titulo"> 
@@ -18,8 +18,8 @@
         
          <div class="row">
             <div class="form-group">
-                <div class="col-md-4">
-                    <label for="grado">Grado: </label>
+                <div class="col-md-4 text-right">
+                    <label for="grado" class="control-label">Grado: </label>
                 </div>
                 <div class="col-md-8">
                     <select class="form-control" id="grado" name="grado">
@@ -37,8 +37,8 @@
         
         <div class="row">
             <div class="form-group">
-                <div class="col-md-4">
-                    <label for="asignatura">Asignatura: </label>
+                <div class="col-md-4 text-right">
+                    <label for="asignatura" class="control-label">Asignatura: </label>
                 </div>
                 <div class="col-md-8">
                     <input type="text" class="form-control" id="asignatura"> 
