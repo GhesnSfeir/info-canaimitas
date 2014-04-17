@@ -4,7 +4,7 @@
     <ul id="search" class="nav" >
         <li>
                 <select id="tipo-select" class="form-control">
-                    <option value="0">Grado ...</option>
+                    <option value="0">Grado</option>
                     <option value="1">1ro</option>
                     <option value="2">2do</option>
                     <option value="3">3ro</option>
@@ -20,7 +20,7 @@
         </li>
         <li>
                 <select id="tipo-select" class="form-control">
-                    <option value="0">Asignatura ...</option>
+                    <option value="0">Asignatura</option>
                     <option value="ciencias">Ciencias</option>   
                     <option value="geografia">Geografia</option>                                     
                     <option value="historia">Historia</option>                    
@@ -31,7 +31,7 @@
         </li>
         <li>
                 <select id="tipo-select" class="form-control">
-                    <option value="0">Tema ...</option>
+                    <option value="0">Tema</option>
                     <option value="suma">Suma</option>
                     <option value="resta">resta</option>
                     <option value="multiplicacion">Multiplicacion</option>
@@ -41,7 +41,7 @@
         </li>
         <li>
                 <select id="tipo-select" class="form-control">
-                    <option value="0">Formato ...</option>
+                    <option value="0">Formato</option>
                     <option value="all">Todos</option>
                     <option value="video">Video</option>
                     <option value="pdf">PDF</option>                    
