@@ -4,7 +4,7 @@
     <ul id="search" class="nav">
         <li>
                 <select id="tipo" class="form-control">
-                    <option value="0">Tipo ...</option>
+                    <option value="0">Tipo</option>
                     <option value="all">Todos</option>
                     <option value="sugeridos">Sugeridos</option>
                     <option value="predeterminados">Predeterminados</option>
@@ -13,7 +13,7 @@
         <li>
             <form class="navbar-form" role="search">
                 <div class="form-group">
-                    <input id="inptSearch" type="text" class="form-control" placeholder="Buscar ...">
+                    <input id="inptSearch" type="text" class="form-control" placeholder="Buscar">
                 </div>
                 <button id="btnSearch" type="submit" class="btn btn-default">
                     <img class="glyphicon" src="../fonts/glyphicons_search.png"></img>

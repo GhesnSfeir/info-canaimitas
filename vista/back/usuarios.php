@@ -5,7 +5,7 @@
         <li>
             <form class="navbar-form" role="search">
                 <div class="form-group">
-                    <input id="inptSearch" type="text" class="form-control" placeholder="Buscar ...">
+                    <input id="inptSearch" type="text" class="form-control" placeholder="Buscar">
                 </div>
                 <button id="btnSearch" type="submit" class="btn btn-default">
                     <img class="glyphicon" src="../fonts/glyphicons_search.png"></img>
