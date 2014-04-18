@@ -22,7 +22,7 @@
         </li>
         <li>
                 <select id="tipo-select" class="form-control">
-                    <option value="0">Asignatura</option>
+                    <option value="0">&Aacute;rea</option>
                     <option value="naturaleza" selected>Estudios de la naturaleza</option>   
                     <option value="geografia">Geografia</option>                                     
                     <option value="historia">Historia</option>                    

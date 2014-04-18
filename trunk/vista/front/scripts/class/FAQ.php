@@ -8,12 +8,12 @@ class selects
 	function CargarFaq()
 	{
 
-		$Clases['What is your question babe'] = "What is your question babe";
-		$Clases['What should we do if ....'] = "What should we do if ....";
-		$Clases['First question'] = "First question";
-		$Clases['Second question'] = "Second question";
-		$Clases['Third question'] = "Third question";
-		$Clases['Fourth question'] = "Fourth question";
+		$Clases['What is your question babe'] = array("What is your question babe", "None1");
+		$Clases['What should we do if ....'] = array("What should we do if ....", "None2");
+		$Clases['First question'] = array("First question", "None3");
+		$Clases['Second question'] = array("Second question", "None4");
+		$Clases['Third question'] = array("Third question","None5");
+		$Clases['Fourth question'] = array("Fourth question","None6");
 		
 		return $Clases;
 		
