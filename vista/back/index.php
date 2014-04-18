@@ -69,7 +69,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <footer>
-                        <p class="footer text-center">Desarrollado por Benyi Tarazona, Ghesn Sfeir y Mimia Lo</p>
+                        <p class="footer text-center" style="color:white;">Desarrollado por Benyi Tarazona, Ghesn Sfeir y Mimia Lo. Todos los derechos reservados.</p>
                     </footer>
                 </div>
             </div>

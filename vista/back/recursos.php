@@ -20,7 +20,7 @@
         </li>
         <li>
                 <select id="tipo-select" class="form-control">
-                    <option value="0">Asignatura</option>
+                    <option value="0">&Aacute;rea</option>
                     <option value="ciencias">Ciencias</option>   
                     <option value="geografia">Geografia</option>                                     
                     <option value="historia">Historia</option>                    

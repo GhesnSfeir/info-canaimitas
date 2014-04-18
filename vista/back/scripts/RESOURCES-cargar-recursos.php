@@ -19,7 +19,11 @@
 		$col5 = "<td value=\"$key\">$value[4]</td>";
 		$col6 = "<td value=\"$key\">$value[5]</td>";
 		$col7 = "<td><button id=\"btnInTable\" class=\"btn btn-default\" 
-                            onclick=\"cargarContenido('eliminar_recurso.php')\">
+                            onclick=\"cargarContenido('../ver_comentario.php')\">
+                            <img class=\"glyphicon search\" src=\"../fonts/glyphicons_comments.png\">
+                            </img></button>
+                            <button id=\"btnInTable\" class=\"btn btn-default\" 
+                            onclick=\"cargarContenido('../eliminar_recurso.php')\">
                             <img class=\"glyphicon search\" src=\"../fonts/glyphicons_remove.png\">
                             </img></button></td>";
 		echo $col1.$col2.$col3.$col4.$col5.$col6.$col7;

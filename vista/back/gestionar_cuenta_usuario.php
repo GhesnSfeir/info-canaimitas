@@ -11,41 +11,39 @@
         <div class="col-md-6">
             <div class="row">
                  <div class="col-md-4 text-right">
-                      <label for="usuario">Usuario: </label>
+                      <label for="usuario">Nombre: </label>
                  </div>
                  <div class="col-md-5">
-                     <input type="text" class="form-control" id="usuario" placeholder="batr.26@gmail.com"> 
+                     <input type="text" class="form-control" id="usuario" placeholder="BT."> 
                  </div>
             </div>
             <br/>
             <div class="row">
                      <div class="col-md-4 text-right">
-                          <label for="clave">Clave: </label>
+                          <label for="clave">Nueva Clave: </label>
                      </div> 
                      <div class="col-md-5">
-                         <input type="password" class="form-control" id="clave" placeholder="12345678">
+                         <input type="password" class="form-control" id="clave" >
+                     </div>
+            </div> 
+            <br/>
+            <div class="row">
+                     <div class="col-md-4 text-right">
+                          <label for="clave">Confirmar Clave: </label>
+                     </div> 
+                     <div class="col-md-5">
+                         <input type="password" class="form-control" id="clave" >
                      </div>
             </div> 
 
+            <br/><br/>
             <div class="row row-custom">
                 <ul class="row-inline">
                     <li>
-                        <label>Mostrar Clave</label>
+                        <button id="cancelar" class="btn btn-default">Cancelar</button>
                     </li>
                     <li> 
-                        <input type="checkbox" class="checkbox" data-label="Mostrar Clave" checked></input>
-                    </li>
-                  
-            </div>
-
-            <br/>
-            <div class="row row-custom">
-                <ul class="row-inline">
-                    <li>
-                        <button id="cancelar" class="btn btn-defaul">Cancelar</button>
-                    </li>
-                    <li> 
-                        <button id="guardar" type="submit" class="btn btn-defaul">Guardar</button>
+                        <button id="guardar" type="submit" class="btn btn-default">Guardar</button>
                     </li>
             </div>
     </form>
