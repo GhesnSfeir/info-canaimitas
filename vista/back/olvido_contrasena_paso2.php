@@ -1,7 +1,7 @@
 <h1 class="text-center">&#191;Olvid&oacute; su contrase&ntilde;a?</h1>
-<div class="col-md-3"></div>
 
-<div class="col-md-6">
+<!--Dos columnas de margen (una de cada lado)-->
+<div class="col-md-8 col-md-offset-2"> 
     <form class="form-horizontal" role="form"> 
         <div class="form-group">
             <p class="text-justify">Paso 2 de 3: Le hemos enviado un correo electr&oacute;nico con todo lo que necesita
@@ -21,5 +21,3 @@
         </div>     
     </form>
 </div>
-
-<div class="col-md-3"></div>
