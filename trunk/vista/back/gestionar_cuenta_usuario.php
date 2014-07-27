@@ -14,7 +14,7 @@
                       <label for="usuario">Nombre: </label>
                  </div>
                  <div class="col-md-5">
-                     <input type="text" class="form-control" id="usuario" placeholder="BT."> 
+                     <input type="text" class="form-control" id="usuario" > 
                  </div>
             </div>
             <br/>
