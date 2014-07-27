@@ -27,7 +27,7 @@ CREATE TABLE preguntas_frecuentes (
 			id int 						not null auto_increment,
 			pregunta VARCHAR(1000)		not null,
 			respuesta VARCHAR(1000)		not null,			
-			PRIMARY KEY (id),
+			PRIMARY KEY (id)
 			);
 			
 CREATE TABLE fichas_recursos (
@@ -37,7 +37,7 @@ CREATE TABLE fichas_recursos (
 			ruta_acceso VARCHAR(1000)				not null,
 			caracterizacion_url VARCHAR(1000)		not null,
 			recurso_url VARCHAR(1000)				not null,
-			PRIMARY KEY (id),
+			PRIMARY KEY (id)
 			);
 			
 CREATE TABLE comentarios (
@@ -53,28 +53,29 @@ CREATE TABLE comentarios (
 			FOREIGN KEY (fk_comentarios)
 				REFERENCES comentarios(id) ON DELETE CASCADE,
 			FOREIGN KEY (fk_usuarios)
-				REFERENCES usuarios(id) ON DELETE CASCADE
+				REFERENCES usuarios(id) ON DELETE CASCADE,
 			FOREIGN KEY (fk_fichas_recursos)
 				REFERENCES fichas_recursos(id) ON DELETE CASCADE
 			);
-			
+
+--Ojo, averiguar que es abreviacion 			
 CREATE TABLE periodos_academicos (
 			id int 						not null auto_increment,
 			nombre VARCHAR(50)			not null,
 			--abreviacion char(1000)		not null,			
-			PRIMARY KEY (id),
+			PRIMARY KEY (id)
 			);
 			
 CREATE TABLE asignaturas (
 			id int 					not null auto_increment,
 			nombre VARCHAR(100)		not null,
-			PRIMARY KEY (id),
+			PRIMARY KEY (id)
 			);		
 			
 CREATE TABLE temas (
 			id int 					not null auto_increment,
 			nombre VARCHAR(1000)	not null,
-			PRIMARY KEY (id),
+			PRIMARY KEY (id)
 			);
 			
 CREATE TABLE audencia (
@@ -83,7 +84,7 @@ CREATE TABLE audencia (
 			fk_fichas_recursos_audi int 	not null,
 			PRIMARY KEY (id),
 			FOREIGN KEY (fk_periodos_academicos)
-				REFERENCES periodos_academicos(id) ON DELETE CASCADE
+				REFERENCES periodos_academicos(id) ON DELETE CASCADE,
 			FOREIGN KEY (fk_fichas_recursos_audi)
 				REFERENCES fichas_recursos(id) ON DELETE CASCADE
 			);
@@ -94,7 +95,7 @@ CREATE TABLE disciplina_conocimiento (
 			fk_fichas_recursos_disc int 	not null,
 			PRIMARY KEY (id),
 			FOREIGN KEY (fk_asignaturas)
-				REFERENCES asignaturas(id) ON DELETE CASCADE
+				REFERENCES asignaturas(id) ON DELETE CASCADE,
 			FOREIGN KEY (fk_fichas_recursos_disc)
 				REFERENCES fichas_recursos(id) ON DELETE CASCADE
 			);
@@ -105,7 +106,7 @@ CREATE TABLE contenidos (
 			fk_fichas_recursos_cont int 	not null,
 			PRIMARY KEY (id),
 			FOREIGN KEY (fk_temas)
-				REFERENCES temas(id) ON DELETE CASCADE
+				REFERENCES temas(id) ON DELETE CASCADE,
 			FOREIGN KEY (fk_fichas_recursos_cont)
 				REFERENCES fichas_recursos(id) ON DELETE CASCADE
 			);
@@ -122,7 +123,7 @@ CREATE TABLE recomendaciones (
 CREATE TABLE autores (
 			id int 					not null auto_increment,
 			nombre VARCHAR(50)	not null,
-			PRIMARY KEY (id),
+			PRIMARY KEY (id)
 			);
 			
 CREATE TABLE autores_recomendaciones (
