@@ -1,8 +1,8 @@
 <h1 class="text-center">Preguntas frecuentes</h1>
 
-<div class="col-md-10 col-md-offset-1">
+<div class="col-md-8 col-md-offset-2" style="overflow-y:auto; height:400px;">
 
-    <div id="subContenido" class="tab-content">
+    <div id="subContenido" class="tab-content" >
 
         <div id="accordion" class="panel-group" >
          
@@ -15,6 +15,8 @@
 
 
 <script type="text/javascript">
+
+    $('.collapse').collapse();
 
     function GetListFaq()
     {

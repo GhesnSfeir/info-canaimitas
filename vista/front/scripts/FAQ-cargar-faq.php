@@ -11,8 +11,7 @@
 	foreach ($Clases as $key=>$value)
 	{ 
 
-		$col1 = "<div class=\"panel panel-default\"><div class=\"panel-heading\"><h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\" value=\"$key\">
-              $value[0]</a></h4></div><div id=\"col-$key\" class=\"panel-collapse collapse in\"><div class=\"panel-body\">$value[1]</div></div></div>";
+		$col1 = "<div class=\"panel panel-default\"><div class=\"panel-heading\"><h4 class=\"panel-title\"><a data-toggle=\"collapse\" data-target=\"#col$key\" value=\"$key\">$value[0]</a></h4></div><div id=\"col$key\" class=\"panel-collapse collapse\"><div class=\"panel-body\">$value[1]</div></div></div>";
 		echo $col1;
 	}
 	
