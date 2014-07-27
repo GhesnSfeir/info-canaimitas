@@ -9,6 +9,7 @@ class ConexionBD {
     private $conexion;
     private $seleccionBD;
     
+    
     public function __construct(){
         
         $this->servidor = "localhost";
@@ -47,11 +48,23 @@ class ConexionBD {
     
     public function correrQuery($query) {
         
-        if (!mysql_query($query)) {
+        $resultado = mysql_query($query);
+        
+        if (!$resultado) {
             
             die('Error: ' . mysql_error($this->conexion));
             
         }
+        else {
+            
+            return $resultado;
+            
+        }
+    }
+    
+    public function obtenerId() {
+        
+        return mysql_insert_id($this->conexion);
         
     }
 }

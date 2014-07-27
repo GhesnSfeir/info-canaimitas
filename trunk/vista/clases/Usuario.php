@@ -11,6 +11,7 @@ class Usuario {
     private $tipo;
     private $activo;
     
+    
     public function __construct($nombre, $email, $clave, $tipo) {
         
         $this->nombre = $nombre;
@@ -21,16 +22,53 @@ class Usuario {
         
     }
     
+    public function cambiarEstado(){
+        
+        if ($this->activo === '1'){
+            
+            $this->activo = '0';
+            
+        }
+        else {
+            
+            $this->activo = '1';
+            
+        }
+        
+    }
+    
     public function Guardar() {
         
-        $query = "INSERT INTO usuarios (nombre, email, clave, tipo, activo) 
-                    VALUES ('$this->nombre', '$this->email', '$this->clave',
-                            '$this->tipo', '$this->activo')";
-        
-        $conexion = new ConexionBD();
-        $conexion->abrir();
-        $conexion->correrQuery($query);
-        $conexion->cerrar();
+        if (isset($this->id)) {
+            
+            $query = "UPDATE usuarios SET nombre='$this->nombre', 
+                        email='$this->email', clave='$this->clave', 
+                        tipo='$this->tipo', activo='$this->activo'
+                        WHERE id=$this->id";
+
+            $conexion = new ConexionBD();
+            $conexion->abrir();
+            $conexion->correrQuery($query);
+
+            $this->id = $conexion->obtenerId();
+
+            $conexion->cerrar();
+            
+        }
+        else {
+            
+            $query = "INSERT INTO usuarios (nombre, email, clave, tipo, activo) 
+                        VALUES ('$this->nombre', '$this->email', '$this->clave',
+                                '$this->tipo', '$this->activo')";
+
+            $conexion = new ConexionBD();
+            $conexion->abrir();
+            $conexion->correrQuery($query);
+
+            $this->id = $conexion->obtenerId();
+
+            $conexion->cerrar();
+        }
         
     }
     
