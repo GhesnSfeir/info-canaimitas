@@ -58,11 +58,10 @@ CREATE TABLE comentarios (
 				REFERENCES fichas_recursos(id) ON DELETE CASCADE
 			);
 
---Ojo, averiguar que es abreviacion 			
 CREATE TABLE periodos_academicos (
 			id int 						not null auto_increment,
 			nombre VARCHAR(50)			not null,
-			--abreviacion char(1000)		not null,			
+			abreviacion VARCHAR(20)		not null,			
 			PRIMARY KEY (id)
 			);
 			
