@@ -6,7 +6,7 @@
         <p class="text-justify">Paso 1 de 3: ¿Olvidó su contraseña? Escriba a
            continuación la dirección de correo electrónico con la que fue registrado y le 
            enviaremos las instrucciones para su restablecimiento.</p>
-     <div class="col-md-10 col-md-offset-1"> 
+     <div class="col-md-offset-1"> 
         <div class="form-group">  
             <div class="col-md-6">
                 <label for="correo" class="control-label">Introduzca su Correo: </label>
