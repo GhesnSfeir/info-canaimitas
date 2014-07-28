@@ -49,11 +49,16 @@ class Usuario {
 
             $conexion = new ConexionBD();
             $conexion->abrir();
-            $conexion->correrQuery($query);
-
-            $this->id = $conexion->obtenerId();
-
-            $conexion->cerrar();
+            
+            if ($conexion->correrQuery($query)){
+             
+                $this->id = $conexion->obtenerId();
+                $conexion->cerrar();
+                return true;
+                
+            }
+            
+            return false;
             
         }
         else { //Si el usuario no esta en la base de datos
@@ -64,11 +69,16 @@ class Usuario {
 
             $conexion = new ConexionBD();
             $conexion->abrir();
-            $conexion->correrQuery($query);
+            
+            if ($conexion->correrQuery($query)){
+                
+                $this->id = $conexion->obtenerId();
+                $conexion->cerrar();
+                return true;
+            
+            }
 
-            $this->id = $conexion->obtenerId();
-
-            $conexion->cerrar();
+            return false;
         }
         
     }

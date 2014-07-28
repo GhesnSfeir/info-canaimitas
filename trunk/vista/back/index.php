@@ -23,11 +23,12 @@
         <script type="text/javascript" src="js/mimia.js"></script>
         <script type="text/javascript" src="js/bootstrap-tagsinput.js"></script> 
         <script type="text/javascript" src="js/bootstrap-select.js"></script>
-
-
-
-
+        <script type="text/javascript">
+            baseurl = 'InfoCanaimitasBack/'
         </script>
+        
+
+
         
         <title>InfoCanaimitas (BackOffice)</title>
     </head>

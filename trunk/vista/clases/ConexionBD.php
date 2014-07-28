@@ -48,18 +48,8 @@ class ConexionBD {
     
     public function correrQuery($query) {
         
-        $resultado = mysql_query($query);
+        return mysql_query($query);
         
-        if (!$resultado) {
-            
-            die('Error: ' . mysql_error($this->conexion));
-            
-        }
-        else {
-            
-            return $resultado;
-            
-        }
     }
     
     public function obtenerId() {
