@@ -1,15 +1,14 @@
--- Creacion de la base de datos
-CREATE DATABASE infocanaimitas;
-
 -- Creacion de las tablas
 
+-- TIPO: Gestor, Administrador, General, Invitado
+-- ACTIVO: 1 (True), 0 (False)
 CREATE TABLE usuarios (
 			id int 						not null auto_increment,
-			nombre VARCHAR(50)			not null, 
-			email VARCHAR(50) 			not null, 
-			clave VARCHAR(20)			not null, 
-			tipo varchar(10)			not null, 
-			activo TINYINT 				not null,
+			nombre VARCHAR(100)			not null, 
+			email VARCHAR(100) 			not null unique, 
+			clave VARCHAR(32)			not null, 
+			tipo varchar(50)			not null, 	
+			activo TINYINT 				not null,	
 			PRIMARY KEY (id)
 			);
 			
@@ -133,32 +132,3 @@ CREATE TABLE autores_recomendaciones (
 				REFERENCES autores(id) ON DELETE CASCADE
 			);
 			
--- elimanacion de las tablas
-
-DROP TABLE usuarios;
-
-DROP TABLE preguntas_particulares;
-
-DROP TABLE preguntas_frecuentes;
-
-DROP TABLE fichas_recursos;
-
-DROP TABLE comentarios;
-
-DROP TABLE periodos_academicos;
-
-DROP TABLE asignaturas;
-
-DROP TABLE temas;
-
-DROP TABLE audencia;
-
-DROP TABLE disciplina_conocimiento;
-
-DROP TABLE contenidos;
-
-DROP TABLE recomendaciones;
-
-DROP TABLE autores;
-
-DROP TABLE autores_recomendaciones;
