@@ -124,11 +124,14 @@ CREATE TABLE autores (
 			PRIMARY KEY (id)
 			);
 			
-CREATE TABLE autores_recomendaciones (
-			id int 					not null auto_increment,
-			fk_autores	int 		not null,
+CREATE TABLE autores_fichas_recursos (
+			id int 							not null auto_increment,
+			fk_autores	int 				not null,
+			fk_fichas_recursos_auto int 	not null,
 			PRIMARY KEY (id),
 			FOREIGN KEY (fk_autores)
-				REFERENCES autores(id) ON DELETE CASCADE
+				REFERENCES autores(id) ON DELETE CASCADE,
+			FOREIGN KEY (fk_fichas_recursos_auto)
+				REFERENCES fichas_recursos(id) ON DELETE CASCADE
 			);
 			
