@@ -25,6 +25,6 @@ DROP TABLE temas;
 
 DROP TABLE usuarios;
 
-DROP TABLE autores_recomendaciones;
+DROP TABLE autores_fichas_recursos;
 
 DROP TABLE autores;
