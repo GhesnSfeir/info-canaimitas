@@ -14,12 +14,28 @@ class Usuario {
     
     public function __construct($nombre, $email, $clave, $tipo, $id = null) {
         
-        $this->nombre = $nombre;
-        $this->email = $email;
-        $this->clave = $clave;
-        $this->tipo = $tipo;
-        $this->activo = '1';
-        $this->id = $id;
+        $mensajeErrores = "";
+        $mensajeErrores = $mensajeErrores . $this->validarNombreUsuario($nombre);
+        $mensajeErrores = $mensajeErrores . $this->validarEmail($email);
+        $mensajeErrores = $mensajeErrores . $this->validarClave($clave);
+        
+        if ($mensajeErrores == "") {
+            
+            $this->nombre = $nombre;
+            $this->email = $email;
+            $this->clave = $clave;
+            $this->tipo = $tipo;
+            $this->activo = '1';
+            $this->id = $id;
+            
+        }
+        else {
+            
+            throw new Exception($mensajeErrores);
+            
+        }
+        
+        
         
     }
     
@@ -120,34 +136,112 @@ class Usuario {
         $conexion->abrir();
         
         $resultado = $conexion->correrQuery($query);
+        $usuarios = array();
         
-        $numeroRegistros = mysql_num_rows($resultado);
-        
-        if ($numeroRegistros) {
+        foreach ($resultado as &$registro) {
             
-            $usuarios = array();
-            
-            while ($registro = mysql_fetch_array($resultado)){
-                
-                array_push($usuarios, new Usuario(
-                    $registro['nombre'],
-                    $registro['email'],
-                    $registro['clave'],
-                    $registro['tipo'],
+            array_push($usuarios, new Usuario($registro['nombre'], 
+                    $registro['email'], 
+                    $registro['clave'], 
+                    $registro['tipo'], 
                     $registro['id']));
-                
-            }
             
-            return $usuarios;
+        }
+        
+        $conexion->cerrar();
+        
+        return $usuarios;
+    }
+    
+    private function existeEmail($email) {
+        
+        $query = "SELECT COUNT(*) cuenta FROM usuarios WHERE email='$email'";
+        
+        $conexion = new ConexionBD();
+        $conexion->abrir();
+        
+        $resultado = $conexion->correrQuery($query);
+        
+        $conexion->cerrar();
+        
+        if ($resultado[0]['cuenta'] == 1) {
+            
+            return true;
+            
         }
         else {
             
             return false;
             
         }
-        
-        $conexion->cerrar();
     }
+    
+    private function validarEmail($email) {
+
+        $mensaje = "";
+
+        if (empty($email)) {
+
+            return "- Es necesario especificar un email.\n";
+
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+
+            $mensaje = $mensaje . "- El email no tiene un formato válido.\n";
+
+        }
+
+        if (strlen($email) > 100){
+
+            $mensaje = $mensaje . "- El email no debe exceder los 100 
+                    caracteres.\n";
+
+        }
+
+        if ($this->existeEmail($email)){
+
+            $mensaje = $mensaje . "- El email especificado ya existe.\n";
+
+        }
+
+        return $mensaje;
+    }
+    
+    private function validarNombreUsuario($nombreUsuario) {
+    
+        $mensaje = "";
+
+        if (empty($nombreUsuario)) {
+
+            return "- Es necesario especificar un nombre de usuario.\n";
+
+        }
+
+        if (strlen($nombreUsuario) > 100) {
+
+            $mensaje = $mensaje . "- El nombre de usuario no debe exceder los 100 
+                    caracteres.\n";
+
+        }
+
+        return $mensaje;
+    }
+    
+    private function validarClave($clave) {
+    
+        if (empty($clave)){
+
+            return "- Es necesario especificar una clave.\n";
+
+        }
+        else {
+
+            return "";
+
+        }
+    }
+    
     
 }
 ?>
