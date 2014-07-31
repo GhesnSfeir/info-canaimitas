@@ -48,7 +48,25 @@ class ConexionBD {
     
     public function correrQuery($query) {
         
-        return mysql_query($query);
+        $resultado = mysql_query($query);
+        
+        if (is_resource($resultado)){
+            
+            if (mysql_num_rows($resultado)) {
+
+                $cursor = array();
+
+                while ($registro = mysql_fetch_array($resultado, MYSQLI_ASSOC)){
+
+                    array_push($cursor, $registro);
+
+                }
+
+                return $cursor;
+            }
+            
+        }
+        return $resultado;
         
     }
     
