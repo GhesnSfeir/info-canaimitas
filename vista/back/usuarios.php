@@ -35,7 +35,7 @@
         var respuesta = '';
         var tabla = document.getElementById('tabla');
         var xmlhttp = new XMLHttpRequest();
-        var parametros = 'buscar=' + document.getElementById('inptSearch').value;
+        var parametros = 'busqueda=' + document.getElementById('inptSearch').value;
         var url = 'scripts/consultar_usuarios.php';
         
         xmlhttp.open('POST', url, true);
@@ -52,14 +52,14 @@
         xmlhttp.send(parametros);
     }
     
-    buscarUsuarios();
+    
 </script>
 <h1 class="text-center">Usuarios</h1>
 
 <div class="navbar">
     <ul id="search" class="nav">
         <li>
-            <form class="navbar-form" role="search">
+            <form class="navbar-form" role="search" action="javascript: buscarUsuarios();">
                 <div class="form-group">
                     <input id="inptSearch" type="text" class="form-control" placeholder="Buscar">
                 </div>
@@ -106,11 +106,12 @@
 
     $(document).ready(function()
     {
-        GetUsers();
-        $('input[type="checkbox"]').checkbox(); 
+        //GetUsers();
+        //$('input[type="checkbox"]').checkbox();
+        buscarUsuarios();
     });
 
 
-
+    
 
 </script>
