@@ -1,3 +1,59 @@
+<script type="text/javascript">
+    function desactivar(email) {
+        
+        var mensaje = '¿Seguro de que desea desactivar la cuenta de usuario "' + email + '"?';
+        if (confirm(mensaje)) {
+            
+            var xmlhttp = new XMLHttpRequest();
+            var parametros = 'email=' + email;
+            var url = 'scripts/desactivar_usuario.php';
+            
+            xmlhttp.open('POST', url, true);
+
+            xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xmlhttp.onreadystatechange = function() {
+                if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    respuesta = xmlhttp.responseText;
+                    alert(respuesta);
+                    buscarUsuarios();
+                }
+            }
+
+            xmlhttp.send(parametros);
+            
+        }
+        else {
+            
+            buscarUsuarios();
+            
+        }
+    }
+    
+    function buscarUsuarios() {
+        
+        var respuesta = '';
+        var tabla = document.getElementById('tabla');
+        var xmlhttp = new XMLHttpRequest();
+        var parametros = 'buscar=' + document.getElementById('inptSearch').value;
+        var url = 'scripts/consultar_usuarios.php';
+        
+        xmlhttp.open('POST', url, true);
+        
+        xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        
+        xmlhttp.onreadystatechange = function() {
+            if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                respuesta = xmlhttp.responseText;
+                tabla.innerHTML = respuesta;
+            }
+        }
+        
+        xmlhttp.send(parametros);
+    }
+    
+    buscarUsuarios();
+</script>
 <h1 class="text-center">Usuarios</h1>
 
 <div class="navbar">
@@ -23,23 +79,7 @@
 
 </div>
 
-<div id="table" class="table">
-    <table class="table table-hover">
-
-        <thead>
-            <tr>
-                <th>Usuario</th>
-                <th>Nombre</th>
-                <th>Suspendido</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
-    
-</div>
+<div id="tabla"></div>
 
 
 <script type="text/javascript">
