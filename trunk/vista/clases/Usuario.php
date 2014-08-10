@@ -270,7 +270,7 @@ class Usuario {
             $query = "SELECT * 
                 FROM usuarios 
                 WHERE nombre like '%$cadena%'
-                AND email like '%$cadena%'";
+                OR email like '%$cadena%'";
             
         }
         
@@ -280,14 +280,22 @@ class Usuario {
         $resultado = $conexion->correrQuery($query);
         $usuarios = array();
         
-        foreach ($resultado as &$registro) {
+        if (is_array($resultado)) {
             
-            array_push($usuarios, new Usuario($registro['nombre'], 
-                    $registro['email'], 
-                    $registro['clave'], 
-                    $registro['tipo'], 
-                    $registro['activo'],
-                    $registro['id']));
+            foreach ($resultado as $registro) {
+
+                array_push($usuarios, new Usuario($registro['nombre'], 
+                        $registro['email'], 
+                        $registro['clave'], 
+                        $registro['tipo'], 
+                        $registro['activo'],
+                        $registro['id']));
+
+            }
+        }
+        else {
+            
+            return array();
             
         }
         
