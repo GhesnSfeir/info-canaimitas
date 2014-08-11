@@ -1,7 +1,8 @@
 <script type="text/javascript">
     function desactivar(email) {
         
-        var mensaje = '¿Seguro de que desea desactivar la cuenta de usuario "' + email + '"?';
+        var mensaje = '¿Seguro de que desea cambiar el estado de la cuenta de '+
+                'usuario "' + email + '"?';
         if (confirm(mensaje)) {
             
             var xmlhttp = new XMLHttpRequest();
@@ -61,7 +62,7 @@
         <li>
             <form class="navbar-form" role="search" action="javascript: buscarUsuarios();">
                 <div class="form-group">
-                    <input id="inptSearch" type="text" class="form-control" placeholder="Buscar">
+                    <input id="inptSearch" type="text" class="form-control" placeholder="Buscar" autofocus>
                 </div>
                 <button id="btnSearch" type="submit" class="btn btn-default">
                     <img class="glyphicon" src="../fonts/glyphicons_search.png"></img>

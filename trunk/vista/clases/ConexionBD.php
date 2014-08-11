@@ -1,5 +1,7 @@
 <?php
 
+include_once "config/config.php";
+
 class ConexionBD {
     
     private $servidor;
@@ -12,10 +14,10 @@ class ConexionBD {
     
     public function __construct(){
         
-        $this->servidor = "localhost";
-        $this->usuario = "root";
-        $this->clave = "1234";
-        $this->baseDeDatos = "infocanaimitas";
+        $this->servidor = DB_SERVER;
+        $this->usuario = DB_USERNAME;
+        $this->clave = DB_PASSWORD;
+        $this->baseDeDatos = DB_DATABASE;
         
     }
     

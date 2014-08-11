@@ -4,7 +4,7 @@ include_once "../../clases/Usuario.php";
 
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 $nombreUsuario = filter_input(INPUT_POST, 'nombreUsuario', FILTER_SANITIZE_STRING);
-$clave = filter_input(INPUT_POST, 'clave', FILTER_SANITIZE_STRING);
+$clave = md5(filter_input(INPUT_POST, 'clave', FILTER_SANITIZE_STRING));
 
 try {
     
