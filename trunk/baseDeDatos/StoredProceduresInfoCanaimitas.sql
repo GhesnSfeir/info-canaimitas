@@ -42,3 +42,30 @@ BEGIN
     SELECT * FROM preguntas_frecuentes;
 END // 
 
+-- Procedimiento para agregar preguntas frecuentes
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS agregar_preguntas_frecuentes; 
+CREATE  PROCEDURE agregar_preguntas_frecuentes (preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000)) 		
+BEGIN  										
+   INSERT INTO preguntas_frecuentes (pregunta, respuesta) VALUES (preguntaFrecuente, respuestaFrecuente);
+END //  
+
+  -- Procedimiento para modificar preguntas frecuentes
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS modificar_preguntas_frecuentes; 
+CREATE  PROCEDURE modificar_preguntas_frecuentes (idPreguntaFrecuente INT, preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000)) 		
+BEGIN  	
+	UPDATE preguntas_frecuentes  SET
+    pregunta = preguntaFrecuente, 
+	respuesta = respuestaFrecuente
+    WHERE id = idPreguntaFrecuente;							
+END // 
+
+  -- Procedimiento para eliminar preguntas frecuentes
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_preguntas_frecuentes; 
+CREATE  PROCEDURE eliminar_preguntas_frecuentes (idPreguntaFrecuente INT) 		
+BEGIN  	
+	DELETE FROM preguntas_frecuentes
+    WHERE id = idPreguntaFrecuente;							
+END //
