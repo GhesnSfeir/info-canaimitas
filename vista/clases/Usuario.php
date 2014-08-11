@@ -1,6 +1,6 @@
 <?php
 
-include "ConexionBD.php";
+include_once "ConexionBD.php";
 
 class Usuario {
     
@@ -16,7 +16,7 @@ class Usuario {
         
         $this->nombre = $nombre;
         $this->email = $email;
-        $this->clave = md5($clave);
+        $this->clave = $clave;
         $this->tipo = $tipo;
         $this->activo = $activo;
         $this->id = $id;

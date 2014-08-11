@@ -6,7 +6,7 @@
         
         <!-- CSS -->
         <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
-        <link type="text/css" src="css/bootstrap-checkbox.css">
+        <link type="text/css" rel="stylesheet" href="css/bootstrap-checkbox.css">
         <link type="text/css" rel="stylesheet" href="css/estilo.css">
         <link type="text/css" rel="stylesheet" href="css/bootstrap-tagsinput.css">
         <link type="text/css" rel="stylesheet" href="css/bootstrap-select.css">
@@ -54,7 +54,7 @@
                                     </a>
                                     <ul class="dropdown-menu text-left">
                                         <li><a onclick="cargarContenido('agregar_cuenta_usuario.php')">Agregar cuenta</a></li>
-                                        <li><a onclick="cargarContenido('iniciar_sesion.php')">Cerrar sesi&oacute;n</a></li>
+                                        <li><a onclick="cerrarSesion()">Cerrar sesi&oacute;n</a></li>
                                         <li><a onclick="cargarContenido('gestionar_cuenta_usuario.php')">Gestionar</a></li>
                                     </ul>
                                 </li>
@@ -87,7 +87,9 @@
 
         <script type="text/javascript" >
             if (document.getElementById("contenido").innerHTML == "") {
-                    $("#contenido").load("comentarios.php");
+                    $("#contenido").load("iniciar_sesion.php", function() {
+                        chequearSesion();
+                    });
             }
             $('.nav li a').on('click', function() {
                 $(this).parent().parent().find('.active').removeClass('active');

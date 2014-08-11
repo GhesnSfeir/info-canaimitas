@@ -37,7 +37,7 @@ class TablaUsuarios extends ElementoHTML{
                     new ElementoHTML("input", null, array(
                         "type" => "checkbox",
                         "class" => "checkbox",
-                        $usuario->getActivo()=="1" ? "checked" : "",
+                        $usuario->getActivo()=="1" ? "" : "checked",
                         "onclick" => "javascript: desactivar('$emailUsuario');"
                     )));
             
