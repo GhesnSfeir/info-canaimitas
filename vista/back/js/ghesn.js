@@ -13,6 +13,7 @@ function cerrarSesion() {
     xmlhttp.onreadystatechange = function() {
         if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             $("#contenido").load('iniciar_sesion.php');
+            document.getElementById('menu-principal').innerHTML = '';
         }
     }
 
@@ -43,13 +44,28 @@ function chequearSesion() {
     
     if (tipoUsuario == "administrador") {
         $('#contenido').load('inicio.php');
+        if (document.getElementById('menu-principal').innerHTML == '') {
+            $('#menu-principal').load('menu_administrador.php');
+        }
     }
     else if (tipoUsuario == "gestor") {
         $('#contenido').load('inicio.php');
+        if (document.getElementById('menu-principal').innerHTML == '') {
+            $('#menu-principal').load('menu_gestor.php');
+        }
     }
     else {
         $('#contenido').load('iniciar_sesion.php');
+        document.getElementById('menu-principal').innerHTML = '';
     }
+    
+}
+
+function clickNavMenu(elemento, pagina) {
+    
+    cargarContenido(pagina);
+    $(elemento).parent().parent().find('.active').removeClass('active');
+    $(elemento).parent().addClass('active');
     
 }
 
