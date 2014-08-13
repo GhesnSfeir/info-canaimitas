@@ -69,7 +69,8 @@
             <div class="row row-custom">
                 <ul class="row-inline">
                     <li>
-                    <button id="cancelar" class="btn btn-default">Cancelar</button>
+                    <button type="button" id="cancelar" class="btn btn-default"
+                            onclick="cargarContenido('usuarios.php')">Cancelar</button>
                     </li>
                     <li> 
                     <button id="guardar" type="submit" class="btn btn-default">Guardar</button>

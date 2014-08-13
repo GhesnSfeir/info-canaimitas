@@ -21,20 +21,26 @@ function cerrarSesion() {
     
 }
 
+function obtenerNombreUsuario() {
+    
+    var xmlhttp = new XMLHttpRequest();
+    var url = 'scripts/obtener_nombre_usuario.php';
+
+    xmlhttp.open('GET', url, false);
+    xmlhttp.send();
+    
+    return xmlhttp.responseText;
+    
+}
+
 function obtenerTipoUsuario() {
     
     var xmlhttp = new XMLHttpRequest();
     var url = 'scripts/chequear_sesion.php';
 
     xmlhttp.open('GET', url, false);
-
-    xmlhttp.onreadystatechange = function() {
-        if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            
-        }
-    }
-
     xmlhttp.send();
+    
     return xmlhttp.responseText;
 }
 
@@ -66,6 +72,15 @@ function clickNavMenu(elemento, pagina) {
     cargarContenido(pagina);
     $(elemento).parent().parent().find('.active').removeClass('active');
     $(elemento).parent().addClass('active');
+    
+}
+
+function clickNavSubMenu(elemento, pagina) {
+    
+    cargarContenido(pagina);
+    $(elemento).parent().parent().parent().parent().find('.active').
+        removeClass('active');
+    $(elemento).parent().parent().parent().addClass('active');
     
 }
 
