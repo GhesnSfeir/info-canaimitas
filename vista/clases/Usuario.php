@@ -111,6 +111,24 @@ class Usuario {
         
     }
     
+    public function cambiarNombre($nombreNuevo) {
+        
+        $mensajeErrores = $this->validarNombreUsuario($nombreNuevo);
+        
+        if ($mensajeErrores == "") {
+            
+            $this->nombre = $nombreNuevo;
+            
+        }
+        else {
+            
+            throw new Exception($mensajeErrores);
+        
+        }
+        
+        return true;
+    }
+    
     public function Guardar() {
         
         $mensajeErrores = "";

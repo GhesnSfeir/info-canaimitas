@@ -20,17 +20,12 @@
     </a>
     <ul class="dropdown-menu text-left">
         <li>
-            <a onclick="cargarContenido('agregar_cuenta_usuario.php')">
-                Agregar cuenta
-            </a>
-        </li>
-        <li>
             <a onclick="cerrarSesion()">
                 Cerrar sesi&oacute;n
             </a>
         </li>
         <li>
-            <a onclick="cargarContenido('gestionar_cuenta_usuario.php')">
+            <a onclick="clickNavSubMenu(this, 'gestionar_cuenta_usuario.php')">
                 Gestionar
             </a>
         </li>

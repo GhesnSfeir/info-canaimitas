@@ -27,27 +27,30 @@ class TablaUsuarios extends ElementoHTML{
         
         foreach ($this->usuarios as $usuario) {
             
-            $emailUsuario = $usuario->getEmail();
-            $nombreUsuario = $usuario->getNombre();
-            
-            $celdaUsuario = new ElementoHTML("td", 
-                    new ElementoHTML("a",$emailUsuario));
-            $celdaNombre = new ElementoHTML("td", $nombreUsuario);
-            $celdaSuspendido = new ElementoHTML("td", 
-                    new ElementoHTML("input", null, array(
-                        "type" => "checkbox",
-                        "class" => "checkbox",
-                        $usuario->getActivo()=="1" ? "" : "checked",
-                        "onclick" => "javascript: desactivar('$emailUsuario');"
-                    )));
-            
-            $filaUsuario = new ElementoHTML("tr", array(
-                $celdaUsuario,
-                $celdaNombre,
-                $celdaSuspendido
-            ));
-            
-            $cuerpo->agregarContenidos($filaUsuario);
+            if ($usuario->getTipo() == "gestor") {
+                
+                $emailUsuario = $usuario->getEmail();
+                $nombreUsuario = $usuario->getNombre();
+
+                $celdaUsuario = new ElementoHTML("td", 
+                        new ElementoHTML("a",$emailUsuario));
+                $celdaNombre = new ElementoHTML("td", $nombreUsuario);
+                $celdaSuspendido = new ElementoHTML("td", 
+                        new ElementoHTML("input", null, array(
+                            "type" => "checkbox",
+                            "class" => "checkbox",
+                            $usuario->getActivo()=="1" ? "" : "checked",
+                            "onclick" => "javascript: desactivar('$emailUsuario');"
+                        )));
+
+                $filaUsuario = new ElementoHTML("tr", array(
+                    $celdaUsuario,
+                    $celdaNombre,
+                    $celdaSuspendido
+                ));
+
+                $cuerpo->agregarContenidos($filaUsuario);
+            }
         }
         
         $this->agregarContenidos(array($encabezado, $cuerpo));

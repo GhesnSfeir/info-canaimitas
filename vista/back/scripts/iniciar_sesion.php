@@ -23,6 +23,7 @@ try {
             
             $_SESSION['UsuarioId'] = $usuario->getId();
             $_SESSION['UsuarioTipo'] = $usuario->getTipo();
+            $_SESSION['UsuarioNombre'] = $usuario->getNombre();
             echo $usuario->getTipo();
             
         }
