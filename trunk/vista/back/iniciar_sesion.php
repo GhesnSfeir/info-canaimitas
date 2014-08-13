@@ -21,8 +21,12 @@
                     alert(respuesta);
                 }
                 else {
-                    $("#contenido").load("inicio.php");
+                    chequearSesion();
                 }
+                /*else if (obtenerTipoUsuario() == 'administrador'){
+                    $("#contenido").load("inicio.php");
+                    $("#menu-principal").load("inicio.php");
+                }*/
             }
         }
         

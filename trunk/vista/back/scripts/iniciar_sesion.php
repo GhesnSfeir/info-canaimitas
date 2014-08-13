@@ -19,9 +19,19 @@ try {
     else if ($usuario->getClave() == $clave and
             $usuario->getTipo() != "general") {
         
-        $_SESSION['UsuarioId'] = $usuario->getId();
-        $_SESSION['UsuarioTipo'] = $usuario->getTipo();
-        echo $usuario->getTipo();
+        if ($usuario->getActivo() == 1) {
+            
+            $_SESSION['UsuarioId'] = $usuario->getId();
+            $_SESSION['UsuarioTipo'] = $usuario->getTipo();
+            echo $usuario->getTipo();
+            
+        }
+        else {
+            
+            echo "¡Error!\n\nLa cuenta de usuario \"$email\" se encuentra " .
+                    "suspendida.";
+            
+        }
         
     }
     else {

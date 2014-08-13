@@ -6,9 +6,11 @@
         
         <!-- CSS -->
         <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
-        <link type="text/css" rel="stylesheet" href="css/bootstrap-checkbox.css">
+        <link type="text/css" rel="stylesheet" 
+              href="css/bootstrap-checkbox.css">
         <link type="text/css" rel="stylesheet" href="css/estilo.css">
-        <link type="text/css" rel="stylesheet" href="css/bootstrap-tagsinput.css">
+        <link type="text/css" rel="stylesheet" 
+              href="css/bootstrap-tagsinput.css">
         <link type="text/css" rel="stylesheet" href="css/bootstrap-select.css">
 
 
@@ -34,7 +36,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <header>
-                      <img class="center-block" src="img/banner3.png" alt="banner" onclick="cargarContenido('inicio.php')">
+                      <img class="center-block" src="img/banner3.png" 
+                           alt="banner" onclick="cargarContenido('inicio.php')">
                     </header>
                 </div>
             </div>
@@ -42,26 +45,10 @@
             
             <div class="row">
                 <div class="col-sm-12">
-                    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                    <nav class="navbar navbar-inverse navbar-fixed-top" 
+                         role="navigation">
                         <div class="container text-center">
-                            <ul id ="menu-principal" class="nav navbar-nav">
-                                <li class="tab active"><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
-                                <li><a onclick="cargarContenido('recursos.php')">Recursos</a></li>
-                                <li><a onclick="cargarContenido('usuarios.php')">Cuentas de usuario</a></li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown">
-                                        Mi cuenta <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu text-left">
-                                        <li><a onclick="cargarContenido('agregar_cuenta_usuario.php')">Agregar cuenta</a></li>
-                                        <li><a onclick="cerrarSesion()">Cerrar sesi&oacute;n</a></li>
-                                        <li><a onclick="cargarContenido('gestionar_cuenta_usuario.php')">Gestionar</a></li>
-                                    </ul>
-                                </li>
-                                <li><a onclick="cargarContenido('ayuda.php')">Ayuda</a></li>
-
-                             
-                            </ul>
+                            <ul id="menu-principal" class="nav navbar-nav"></ul>
                         </div>
                     </nav>
                 </div>
@@ -78,7 +65,10 @@
             <div class="row">
                 <div class="col-sm-12">
                     <footer>
-                        <p class="footer text-center" style="color:white;">Desarrollado por Benyi Tarazona, Ghesn Sfeir y Mimia Lo. Todos los derechos reservados.</p>
+                        <p class="footer text-center" style="color:white;">
+                            Desarrollado por Benyi Tarazona, Ghesn Sfeir y Mimia
+                            Lo. Todos los derechos reservados.
+                        </p>
                     </footer>
                 </div>
             </div>
@@ -87,9 +77,9 @@
 
         <script type="text/javascript" >
             if (document.getElementById("contenido").innerHTML == "") {
-                    $("#contenido").load("iniciar_sesion.php", function() {
+                    //$("#contenido").load("iniciar_sesion.php", function() {
                         chequearSesion();
-                    });
+                    //});
             }
             $('.nav li a').on('click', function() {
                 $(this).parent().parent().find('.active').removeClass('active');
