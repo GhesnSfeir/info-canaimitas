@@ -92,9 +92,9 @@ END //
 -- Procedimiento para agregar preguntas particulares
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_preguntas_particulares; 
-CREATE  PROCEDURE agregar_preguntas_particulares (preguntaparticular VARCHAR(1000), revisadaparticular TINYINT, idUsuario INT) 		
+CREATE  PROCEDURE agregar_preguntas_particulares (preguntaparticular VARCHAR(1000), idUsuario INT) 		
 BEGIN  										
-   INSERT INTO preguntas_particulares (pregunta, revisada, fk_usuarios) VALUES (preguntaparticular, revisadaparticular, idUsuario);
+   INSERT INTO preguntas_particulares (pregunta, revisada, fk_usuarios) VALUES (preguntaparticular, false, idUsuario);
 END //  
 
   -- Procedimiento para modificar preguntas particulares
@@ -298,3 +298,5 @@ BEGIN
 	DELETE FROM preguntas_frecuentes
     WHERE id = idPreguntaFrecuente;							
 END //
+
+
