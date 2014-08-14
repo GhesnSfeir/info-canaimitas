@@ -118,6 +118,40 @@ class Faq
 	}
 
 
+    public function ObtenerPParticulares()
+    {
+        $procedimiento = new Procedimientos();
+        $query = $procedimiento->ComandoConsultarPParticulares();
+        $resultado = $this->Ejecutar($query);
+
+        $retorno = array();
+       
+        foreach ($resultado as &$registro) 
+        {
+            $temporal = $this->ConvertirEnArreglo( 
+                                $registro['pregunta'], 
+                                $registro['respuesta'], 
+                                $registro['id'] );
+            
+            array_push($retorno, $temporal);
+        }
+        
+        return $retorno;
+    }
+
+
+    public function AgregarPParticulares()
+    {
+        $pregunta = $this->_pregunta;
+        
+        $procedimiento = new Procedimientos();
+        $query = $procedimiento->ComandoAgregarPParticular($pregunta);
+        $resultado = $this->Ejecutar($query);
+
+        echo "Resultado: " . $resultado;
+    }
+
+
 	public function ToArrayKeyValue() {
         
         $retorno = array(

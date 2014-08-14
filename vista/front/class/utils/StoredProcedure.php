@@ -17,16 +17,16 @@ define("SP_ModificarPreguntaFrecuente",
 
 //front
 
-define("SP_Preguntas", 
+define("SP_PParticulares", 
 		"consultar_preguntas_particulares");
 
-define("SP_AgregarPregunta", 
+define("SP_AgregarPParticular", 
 		"agregar_preguntas_particulares");
 
-define("SP_EliminarPregunta", 
+define("SP_EliminarPParticular", 
 		"eliminar_preguntas_particulares");
 
-define("SP_ModificarPregunta", 
+define("SP_ModificarPParticular", 
 		"modificar_preguntas_particulares");
 
 
@@ -36,6 +36,7 @@ class Procedimientos
 	var $_apertura;
 	var $_cierre;
 	var $_separador;
+	var $_comillas;
 
 
 	public function __construct() {
@@ -44,6 +45,7 @@ class Procedimientos
 		$this->_apertura = "( ";
 		$this->_cierre = " )";
 		$this->_separador = ",";
+		$this->_comillas = '"';
     }
 
 	
@@ -63,7 +65,7 @@ class Procedimientos
 	{
 		$lineaComando = $this->ConstruirComando(SP_PreguntasFrecuentes);
 		$lineaComando = $lineaComando . $this->_cierre;
-
+		//echo "Comando: ".$lineaComando;
 		return $lineaComando;
 	}
 
@@ -81,23 +83,24 @@ class Procedimientos
 	*Metodos para las preguntas particulares de front
 	*/
 
-	function ComandoConsultarPreguntasParticulares()
+	function ComandoConsultarPParticulares()
 	{
-		$lineaComando = $this->ConstruirComando(SP_Preguntas);
+		$lineaComando = $this->ConstruirComando(SP_PParticulares);
 		$lineaComando = $lineaComando . $this->_cierre;
-		echo "Comando: ".$lineaComando;
-		var_dump($lineaComando);
+		//echo "Comando: ".$lineaComando;
+		//var_dump($lineaComando);
 		return $lineaComando;
 	}
 
 
-	function ComandoAgregarPregunta($pregunta)
+	function ComandoAgregarPParticular($pregunta)
 	{
 		$usuario = 1;
 
-		$lineaComando = $this->ConstruirComando(SP_AgregarPregunta);
-		$lineaComando = $lineaComando . $pregunta . $this->_separador ;
-		$lineaComando = $lineaComando . $usuario ;
+		$lineaComando = $this->ConstruirComando(SP_AgregarPParticular);
+		$lineaComando .= $this->_comillas .$pregunta . $this->_comillas;
+		$lineaComando .= $this->_separador ;
+		$lineaComando .= $usuario ;
 		$lineaComando .= $this->_cierre;
 		echo "Comando: ".$lineaComando;
 		return $lineaComando;

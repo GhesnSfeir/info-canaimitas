@@ -31,13 +31,11 @@
 
     function GetListFaq()
     {
-        $.get("scripts/S_FAQ.php", function(resultado){
-            console.log("Recibo: ");
-            
+        $.get("scripts/S_FAQ.php", function(resultado)
+        {
             if(resultado == false)
             {
-                console.log("resultado");
-                alert("Error");
+                console.log("resultado", resultado);
             }
             else
             {   

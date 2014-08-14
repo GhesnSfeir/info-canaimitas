@@ -7,7 +7,7 @@
         <div class="form-group">
             <label for="nuevaPregunta" class="col-md-4 control-label">Pregunta: </label>
             <textarea class="form-control largo" rows="2" 
-                        id="nuevaPregunta" placeholder="Comentario al respecto">
+                      id="nuevaPregunta" placeholder="Comentario al respecto">
             </textarea>
         </div>
 
