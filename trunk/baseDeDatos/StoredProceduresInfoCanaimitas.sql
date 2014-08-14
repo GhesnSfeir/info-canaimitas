@@ -44,8 +44,8 @@ END //
 
 -- Procedimiento para consultar preguntas frecuentes por id
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_preguntas_frecuentes;
-CREATE  PROCEDURE consultar_preguntas_frecuentes (idPregunta INT) 
+DROP PROCEDURE IF EXISTS consultar_preguntas_frecuentes_id;
+CREATE  PROCEDURE consultar_preguntas_frecuentes_id (idPregunta INT) 
 BEGIN 
     SELECT * FROM preguntas_frecuentes where id = idPregunta;
 END // 
@@ -317,3 +317,97 @@ BEGIN
 	DELETE FROM audiencia
     WHERE id = idAudiencia;							
 END //
+
+
+  -- Procedimiento para eliminar los periodos academicos
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_preguntas_frecuentes; 
+CREATE  PROCEDURE eliminar_preguntas_frecuentes (idPreguntaFrecuente INT) 		
+BEGIN  	
+	DELETE FROM preguntas_frecuentes
+    WHERE id = idPreguntaFrecuente;							
+END //
+
+-- A U D I E N C I A
+			
+-- Procedimiento para agregar audiencia
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS agregar_audiencia;
+CREATE  PROCEDURE agregar_audiencia (idPeriodoAcademico INT, idFichaRecurso INT) 		
+BEGIN  										
+   INSERT INTO audiencia (fk_periodos_academicos, fk_fichas_recursos_audi) VALUES (idPeriodoAcademico, idFichaRecurso);
+END //  
+ 
+  -- Procedimiento para eliminar audencia
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_audiencia; 
+CREATE  PROCEDURE eliminar_audiencia(idAudiencia INT)
+BEGIN  	
+	DELETE FROM audiencia
+    WHERE id = idAudiencia;							
+END //
+
+-- A S I G N A T U R A S
+
+-- Procedimiento para consultar todas las asignaturas
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_asignaturas;
+CREATE  PROCEDURE consultar_asignaturas () 
+BEGIN 
+    SELECT * FROM asignaturas;
+END // 
+
+-- Procedimiento para consultar las asignaturas
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_asignaturas;
+CREATE  PROCEDURE consultar_asignaturas (idAsignatura INT) 
+BEGIN 
+    SELECT * FROM asignaturas where id = idAsignatura;
+END // 
+
+-- Procedimiento para agregar asignaturas
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS agregar_asignaturas; 
+CREATE  PROCEDURE agregar_asignaturas (nombreAsignatura VARCHAR(100)) 		
+BEGIN  										
+   INSERT INTO asignaturas (nombre) VALUES (nombreAsignatura);
+END //  
+
+  -- Procedimiento para modificar asignaturas
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS modificar_asignaturas; 
+CREATE  PROCEDURE modificar_asignaturas (idAsignatura INT, nombreAsignatura VARCHAR(1000)) 		
+BEGIN  	
+	UPDATE asignaturas  SET
+    nombre = nombreAsignatura
+    WHERE id = idAsignatura;							
+END // 
+
+  -- Procedimiento para eliminar asignaturas
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_asignaturas; 
+CREATE  PROCEDURE eliminar_asignaturas (idAsignatura INT) 		
+BEGIN  	
+	DELETE FROM asignaturas
+    WHERE id = idAsignatura;							
+END //
+
+-- D I S C I P L I N A   D E L   C O N O C I M I E N T O
+			
+-- Procedimiento para agregar disciplina del conocimiento
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS agregar_audiencia;
+CREATE  PROCEDURE agregar_audiencia (idPeriodoAcademico INT, idFichaRecurso INT) 		
+BEGIN  										
+   INSERT INTO audiencia (fk_periodos_academicos, fk_fichas_recursos_audi) VALUES (idPeriodoAcademico, idFichaRecurso);
+END //  
+ 
+  -- Procedimiento para eliminar audencia
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_audiencia; 
+CREATE  PROCEDURE eliminar_audiencia(idAudiencia INT)
+BEGIN  	
+	DELETE FROM audiencia
+    WHERE id = idAudiencia;							
+END //
+
