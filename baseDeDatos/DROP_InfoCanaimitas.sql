@@ -7,7 +7,7 @@ DROP TABLE preguntas_frecuentes;
 
 DROP TABLE comentarios;
 
-DROP TABLE audencia;
+DROP TABLE audiencia;
 
 DROP TABLE disciplina_conocimiento;
 
