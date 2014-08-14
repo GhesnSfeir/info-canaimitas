@@ -9,6 +9,14 @@ BEGIN  											-- inicio cuerpo procedimiento almacenado
     SELECT * FROM usuarios;						-- consulta
 END //  										-- fin de cuerpo del procedimiento almacenado
 
+-- Procedimiento para consultar todas usuarios por ID
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS consultar_usuarios_id; 
+CREATE  PROCEDURE consultar_usuarios_id (idUsuario INT)
+BEGIN  											
+    SELECT * FROM usuarios WHERE id = idUsuario;
+END //  
+
 -- Procedimiento para agregar usuarios
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_usuarios; 
@@ -89,6 +97,13 @@ BEGIN
     SELECT * FROM preguntas_particulares;
 END // 
 
+-- Procedimiento para consultar todas las preguntas particulares por id
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_preguntas_particulares_id;
+CREATE  PROCEDURE consultar_preguntas_particulares_id (idPregunta) 
+BEGIN 
+    SELECT * FROM preguntas_particulares WHERE id = idPregunta;
+END // 
 -- Procedimiento para agregar preguntas particulares
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_preguntas_particulares; 
@@ -128,6 +143,14 @@ BEGIN
     SELECT * FROM fichas_recursos;
 END // 
 
+-- Procedimiento para consultar las fichas de los recursos por ID
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_fichas_recursos_id;
+CREATE  PROCEDURE consultar_fichas_recursos_id (idFicha INT) 
+BEGIN 
+    SELECT * FROM fichas_recursos WHERE id = idFicha;
+END // 
+
 -- Procedimiento para agregar las fichas de los recursos
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_fichas_recursos; 
@@ -158,6 +181,7 @@ BEGIN
 	DELETE FROM fichas_recursos
     WHERE id = idFichaRecurso;							
 END //
+
 
 -- R E C O M E N D A C I O N E S
 
@@ -257,75 +281,46 @@ END //
 
 -- Procedimiento para consultar todas los periodos academicos
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_preguntas_frecuentes;
-CREATE  PROCEDURE consultar_preguntas_frecuentes () 
+DROP PROCEDURE IF EXISTS consultar_periodos_academicos;
+CREATE  PROCEDURE consultar_periodos_academicos () 
 BEGIN 
-    SELECT * FROM preguntas_frecuentes;
+    SELECT * FROM periodos_academicos;
 END // 
 
 -- Procedimiento para consultar los periodos academicos
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_preguntas_frecuentes;
-CREATE  PROCEDURE consultar_preguntas_frecuentes (idPregunta INT) 
+DROP PROCEDURE IF EXISTS consultar_periodos_academicos_id;
+CREATE  PROCEDURE consultar_preguntas_frecuentes_id (idPeriodo INT) 
 BEGIN 
-    SELECT * FROM preguntas_frecuentes where id = idPregunta;
+    SELECT * FROM periodos_academicos where id = idPeriodo;
 END // 
 
 -- Procedimiento para agregar los periodos academicos
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS agregar_preguntas_frecuentes; 
-CREATE  PROCEDURE agregar_preguntas_frecuentes (preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000)) 		
+DROP PROCEDURE IF EXISTS agregar_periodos_academicos; 
+CREATE  PROCEDURE agregar_periodos_academicos (nombrePeriodo VARCHAR(50), abreviacionPeriodo VARCHAR(20)) 		
 BEGIN  										
-   INSERT INTO preguntas_frecuentes (pregunta, respuesta) VALUES (preguntaFrecuente, respuestaFrecuente);
+   INSERT INTO periodos_academicos (nombre, abreviacion) VALUES (nombrePeriodo, abreviacionPeriodo);
 END //  
 
   -- Procedimiento para modificar los periodos academicos
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_preguntas_frecuentes; 
-CREATE  PROCEDURE modificar_preguntas_frecuentes (idPreguntaFrecuente INT, preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000)) 		
+DROP PROCEDURE IF EXISTS modificar_periodos_academicos; 
+CREATE  PROCEDURE modificar_periodos_academicos (idPeriodo INT, nombrePeriodo VARCHAR(50), abreviacionPeriodo VARCHAR(20)) 		
 BEGIN  	
-	UPDATE preguntas_frecuentes  SET
-    pregunta = preguntaFrecuente, 
-	respuesta = respuestaFrecuente
-    WHERE id = idPreguntaFrecuente;							
+	UPDATE periodos_academicos  SET
+    nombre = nombrePeriodo, 
+	abreviacion = abreviacionPeriodo
+    WHERE id = idPeriodo;							
 END // 
 
   -- Procedimiento para eliminar los periodos academicos
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_preguntas_frecuentes; 
-CREATE  PROCEDURE eliminar_preguntas_frecuentes (idPreguntaFrecuente INT) 		
+DROP PROCEDURE IF EXISTS eliminar_periodos_academicos; 
+CREATE  PROCEDURE eliminar_periodos_academicos (idPeriodo INT) 		
 BEGIN  	
-	DELETE FROM preguntas_frecuentes
-    WHERE id = idPreguntaFrecuente;							
-END //
-
--- A U D I E N C I A
-			
--- Procedimiento para agregar audiencia
-DELIMITER // 									
-DROP PROCEDURE IF EXISTS agregar_audiencia;
-CREATE  PROCEDURE agregar_audiencia (idPeriodoAcademico INT, idFichaRecurso INT) 		
-BEGIN  										
-   INSERT INTO audiencia (fk_periodos_academicos, fk_fichas_recursos_audi) VALUES (idPeriodoAcademico, idFichaRecurso);
-END //  
- 
-  -- Procedimiento para eliminar audencia
-DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_audiencia; 
-CREATE  PROCEDURE eliminar_audiencia(idAudiencia INT)
-BEGIN  	
-	DELETE FROM audiencia
-    WHERE id = idAudiencia;							
-END //
-
-
-  -- Procedimiento para eliminar los periodos academicos
-DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_preguntas_frecuentes; 
-CREATE  PROCEDURE eliminar_preguntas_frecuentes (idPreguntaFrecuente INT) 		
-BEGIN  	
-	DELETE FROM preguntas_frecuentes
-    WHERE id = idPreguntaFrecuente;							
+	DELETE FROM periodos_academicos
+    WHERE id = idPeriodo;							
 END //
 
 -- A U D I E N C I A
@@ -359,8 +354,8 @@ END //
 
 -- Procedimiento para consultar las asignaturas
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_asignaturas;
-CREATE  PROCEDURE consultar_asignaturas (idAsignatura INT) 
+DROP PROCEDURE IF EXISTS consultar_asignaturas_id;
+CREATE  PROCEDURE consultar_asignaturas_id (idAsignatura INT) 
 BEGIN 
     SELECT * FROM asignaturas where id = idAsignatura;
 END // 
@@ -411,3 +406,66 @@ BEGIN
     WHERE id = idAudiencia;							
 END //
 
+-- T E M A S 
+
+-- Procedimiento para consultar todas los temas
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_temas;
+CREATE  PROCEDURE consultar_temas () 
+BEGIN 
+    SELECT * FROM temas;
+END // 
+
+-- Procedimiento para consultar los temas por ID
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_temas_id;
+CREATE  PROCEDURE consultar_temas_id (idTema INT) 
+BEGIN 
+    SELECT * FROM temas where id = idTema;
+END // 
+
+-- Procedimiento para agregar temas
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS agregar_temas; 
+CREATE  PROCEDURE agregar_temas (nombreTema VARCHAR(1000)) 		
+BEGIN  										
+   INSERT INTO temas (nombre) VALUES (nombreTema);
+END //  
+
+  -- Procedimiento para modificar temas
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS modificar_temas; 
+CREATE  PROCEDURE modificar_temas (idTema INT, nombreTema VARCHAR(1000)) 		
+BEGIN  	
+	UPDATE temas  SET
+    nombre = nombreTema
+    WHERE id = idTema;							
+END // 
+
+  -- Procedimiento para eliminar temas
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_temas; 
+CREATE  PROCEDURE eliminar_temas (idTema INT) 		
+BEGIN  	
+	DELETE FROM temas
+    WHERE id = idTema;							
+END //
+
+-- C O N T E N I D O S
+			
+-- Procedimiento para agregar contenidos
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS agregar_contenidos;
+CREATE  PROCEDURE agregar_contenidos (idTema INT, idFichaRecurso INT) 		
+BEGIN  										
+   INSERT INTO contenidos (fk_temas, fk_fichas_recursos_cont) VALUES (idTema, idFichaRecurso);
+END //  
+ 
+  -- Procedimiento para eliminar audencia
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_contenidos; 
+CREATE  PROCEDURE eliminar_contenidos(idContenido INT)
+BEGIN  	
+	DELETE FROM contenidos
+    WHERE id = idContenido;							
+END //
