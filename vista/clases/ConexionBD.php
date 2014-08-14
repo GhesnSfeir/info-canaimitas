@@ -18,7 +18,6 @@ class ConexionBD {
         $this->usuario = DB_USERNAME;
         $this->clave = DB_PASSWORD;
         $this->baseDeDatos = DB_DATABASE;
-        
     }
     
     public function abrir(){
@@ -61,7 +60,7 @@ class ConexionBD {
                 while ($registro = mysql_fetch_array($resultado, MYSQLI_ASSOC)){
 
                     array_push($cursor, $registro);
-
+                    
                 }
 
                 return $cursor;

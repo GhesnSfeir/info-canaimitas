@@ -1,31 +1,3 @@
-<?php
-
-// Turn off all error reporting
-//error_reporting(0);
-
-// Report simple running errors
-//error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
-// Reporting E_NOTICE can be good too (to report uninitialized
-// variables or catch variable name misspellings ...)
-//error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
-
-// Report all errors except E_NOTICE
-//error_reporting(E_ALL & ~E_NOTICE);
-
-// Report all PHP errors (see changelog)
-//error_reporting(E_ALL);
-
-// Report all PHP errors
-error_reporting(E_ALL);
-
-// Same as error_reporting(E_ALL);
-ini_set('error_reporting', E_ALL);
-
-?>
-
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -79,7 +51,7 @@ ini_set('error_reporting', E_ALL);
                     <li class="active"><a onclick="cargarContenido('inicio.php')">Inicio</a></li>
                     <li><a onclick="cargarContenido('recursos.php')">Buscar recursos</a></li>
                     <li><a onclick="cargarContenido('preguntas_frecuentes.php')">Preguntas frecuentes</a></li>
-                    <li><a onclick="cargarContenido('contacto.php')">Contacto</a></li>
+                    <li><a onclick="cargarContenido('batr.php')">Contacto</a></li>
                     <li><a id="rigthNav" onclick="cargarContenido('inicio.php')">Iniciar Sesi&oacute;n</a></li>
                     <li><a onclick="cargarContenido('registrarse.php')">Registrarse</a></li>
                 </ul>

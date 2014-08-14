@@ -132,6 +132,7 @@ table tbody tr{
 
 #subContenido{
     margin-top: 30px !important;
+    height: 400px;
 }
 
 #faq{
@@ -169,5 +170,21 @@ th, td{
 
 textarea {
     resize: none;
+}
+
+
+.overflowY
+{
+    overflow-y:auto; 
+}
+
+.noPadding
+{
+    padding-right: 0px;
+}
+
+.subSubContenido
+{
+    height: 330px;
 }
 

@@ -31,7 +31,7 @@
                     <option value="matematica">Matematica</option>
                 </select>        
         </li>
-        <li>
+       <!-- <li>
            
                 <select id="tipo-select" class="form-control">
                     <option value="0">Tema</option>
@@ -39,13 +39,14 @@
                     <option value="arboles">Arboles</option>
                 </select>
         </li>
+    -->
         <li>
             
                 <select id="tipo-select" class="form-control">
                     <option value="0">Formato</option>
-                    <option value="all">Todos</option>
+                    <option value="all" selected>Todos</option>
                     <option value="video">Video</option>
-                    <option value="pdf" selected>PDF</option>                    
+                    <option value="pdf" >PDF</option>                    
                     <option value="jclick">JClick</option>
 
                 </select>

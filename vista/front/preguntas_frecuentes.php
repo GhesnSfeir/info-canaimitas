@@ -1,15 +1,26 @@
 <h1 class="text-center">Preguntas frecuentes</h1>
 
-<div class="col-md-8 col-md-offset-2" style="overflow-y:auto; height:400px;">
+<div id="subContenido" class="col-md-8 col-md-offset-2 ">
 
-    <div id="subContenido" class="tab-content" >
+    <div class="tab-content overflowY subSubContenido">
 
         <div id="accordion" class="panel-group" >
          
         </div>
     </div>
 
+    <div class="col-md-2 col-md-offset-10 noPadding">
+        <button id="agregarFaq" class="btn btn-default float-right "
+                onclick="cargarContenido('pregunta_frecuente.php')">
+            <img class="glyphicon " src="../fonts/glyphicons_plus.png"></img>
+            <label class="between-margin-left">Pregunta</label>
+
+        </button>
+
+    </div>
+
 </div>
+
 
 
 
@@ -20,8 +31,9 @@
 
     function GetListFaq()
     {
-        $.get("scripts/FAQ-cargar-faq.php", function(resultado){
+        $.get("scripts/S_FAQ.php", function(resultado){
             console.log("Recibo: ");
+            
             if(resultado == false)
             {
                 console.log("resultado");
@@ -29,7 +41,7 @@
             }
             else
             {   
-                $('#subContenido div#accordion').append(resultado);
+                $('div#accordion').append(resultado);
             }
         }); 
     }
