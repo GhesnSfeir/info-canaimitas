@@ -5,3 +5,4 @@ INSERT INTO usuarios (nombre,email,clave,tipo,activo) VALUES ("Casey", "coll@gma
 
 INSERT INTO preguntas_particulares (pregunta,revisada,fk_usuarios) VALUES ("Pregunta de pruebas", false, 1);
 
+

@@ -8,7 +8,7 @@ CREATE DATABASE infocanaimitas;
 -- Uso de la base de datos. Se debe de setear antes para poder usar dicha bd
 USE infocanaimitas;
 
--- Sql clave de Mimia: 1234
+
 -- Para hacer load de un archivo .sql
 -- source /var/www/infoCanaimitas/info-canaimitas/baseDeDatos/CREATE_InfoCanaimitas.sql;
 

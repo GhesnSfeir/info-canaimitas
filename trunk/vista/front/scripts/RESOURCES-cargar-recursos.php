@@ -2,7 +2,7 @@
 	header('Content-Type: text/html; charset=UTF-8'); 
 	  
 	//Llamada al Nvo. PHP contenido dentro de la carpeta Class  
-	include("class/RESOURCES.php"); 
+	include("../class/RESOURCES.php"); 
 
 	$selects = new selects();
 	$Clases = $selects->CargarRecursos(); 
