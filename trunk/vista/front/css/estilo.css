@@ -146,6 +146,7 @@ table tbody tr{
 textarea{
     height: 150px !important;
     overflow: auto;
+    resize: none;
 }
 
 .block{
@@ -166,10 +167,6 @@ th, td{
 
 #rigthNav{
     margin-left: 466.4px;
-}
-
-textarea {
-    resize: none;
 }
 
 
