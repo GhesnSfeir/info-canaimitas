@@ -299,4 +299,21 @@ BEGIN
     WHERE id = idPreguntaFrecuente;							
 END //
 
-
+-- A U D I E N C I A
+			
+-- Procedimiento para agregar audiencia
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS agregar_audiencia;
+CREATE  PROCEDURE agregar_audiencia (idPeriodoAcademico INT, idFichaRecurso INT) 		
+BEGIN  										
+   INSERT INTO audiencia (fk_periodos_academicos, fk_fichas_recursos_audi) VALUES (idPeriodoAcademico, idFichaRecurso);
+END //  
+ 
+  -- Procedimiento para eliminar audencia
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_audiencia; 
+CREATE  PROCEDURE eliminar_audiencia(idAudiencia INT)
+BEGIN  	
+	DELETE FROM audiencia
+    WHERE id = idAudiencia;							
+END //

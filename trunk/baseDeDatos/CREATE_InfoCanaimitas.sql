@@ -7,7 +7,7 @@ CREATE TABLE usuarios (
 			nombre VARCHAR(100)			not null, 
 			email VARCHAR(100) 			not null unique, 
 			clave VARCHAR(32)			not null, 
-			tipo varchar(50)			not null, 	
+			tipo VARCHAR(50)			not null, 	
 			activo TINYINT 				not null,	
 			PRIMARY KEY (id)
 			);
@@ -76,7 +76,7 @@ CREATE TABLE temas (
 			PRIMARY KEY (id)
 			);
 			
-CREATE TABLE audencia (
+CREATE TABLE audiencia (
 			id int 							not null auto_increment,
 			fk_periodos_academicos int 		not null,
 			fk_fichas_recursos_audi int 	not null,
