@@ -25,15 +25,9 @@
 
     function crearPregunta() 
     {
-        
-        var mensajeCamposIncompletos = "Por favor, complete el campo.";
-        var mensajeError = "No se ha podido completar su solicitud, intente luego.";
-        var mensajeExitoso = "Se ha realizado la operaci'on correctamente";
-
         var pregunta = $('#nuevaPregunta').val();
-        
-        
-        if (pregunta!="")
+
+        if ( (validarTextoNumerico(pregunta)) && (pregunta.trim()))
         { 
             url = "scripts/S_FAQ.php";
 

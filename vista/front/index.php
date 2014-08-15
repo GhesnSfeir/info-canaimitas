@@ -41,9 +41,7 @@ ini_set('error_reporting', E_ALL);
         <script type="text/javascript" src="js/jquery-1.10.2.js"></script>        
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/bootstrap-checkbox.js"></script>
-        <script type="text/javascript" src="js/benyi.js"></script>
-        <script type="text/javascript" src="js/ghesn.js"></script>
-        <script type="text/javascript" src="js/mimia.js"></script>
+        <script type="text/javascript" src="js/own.js"></script>
        
         
         <title>InfoCanaimitas</title>
