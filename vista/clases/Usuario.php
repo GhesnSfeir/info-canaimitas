@@ -84,7 +84,7 @@ class Usuario {
         
         if ($mensajeErrores == "") {
             
-            $this->clave = md5($claveNueva);
+            $this->clave = $claveNueva;
             
         }
         else {

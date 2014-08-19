@@ -1,6 +1,7 @@
 <br>
 <br>
 <br>
+<br>
 <div class="row text-center">
     <div class="col-sm-4" onclick="cargarContenido('preguntas_frecuentes.php')">
         <a><img src="img/faq.png" alt="" class="img-rounded"></a>
