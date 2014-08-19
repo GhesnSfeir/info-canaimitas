@@ -32,7 +32,7 @@
                     }
                     else {
                         alert(xmlhttp.responseText);
-                        cargarContenido('inicio.php');
+                        chequearSesion();
                     }
                 }
             }
@@ -85,7 +85,7 @@
             <div class="row row-custom">
                 <ul class="row-inline">
                     <li>
-                        <button id="cancelar" type="button" class="btn btn-default" onclick="cargarContenido('inicio.php')">Cancelar</button>
+                        <button id="cancelar" type="button" class="btn btn-default" onclick="chequearSesion()">Cancelar</button>
                     </li>
                     <li> 
                         <button id="guardar" class="btn btn-default">Guardar</button>

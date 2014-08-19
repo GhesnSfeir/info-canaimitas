@@ -150,7 +150,6 @@ class Usuario {
 
                 if ($conexion->correrQuery($query)){
 
-                    $this->id = $conexion->obtenerId();
                     $conexion->cerrar();
                     return true;
 
