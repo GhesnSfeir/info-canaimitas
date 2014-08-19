@@ -53,9 +53,15 @@
         xmlhttp.send(parametros);
     }
     
-    function verPreguntaFrecuente(id) {
+    function verPreguntaFrecuente(id, pregunta, respuesta) {
         
-        
+        $("#contenido").load('modificar_pregunta_frecuente.php', function() {
+            
+            document.getElementById('idFAQ').value = id;
+            document.getElementById('pregunta').value = pregunta;
+            document.getElementById('respuesta').value = respuesta;
+            
+        });
         
     }
     

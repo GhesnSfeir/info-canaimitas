@@ -27,13 +27,19 @@ class TablaPreguntasFrecuentes extends ElementoHTML{
         
         foreach ($this->preguntas as $preguntaFrecuente) {
             
-            $pregunta = $preguntaFrecuente->getPregunta();
-            $respuesta = $preguntaFrecuente->getRespuesta();
+            $pregunta = strlen($preguntaFrecuente->getPregunta()) > 40 ? 
+                    substr($preguntaFrecuente->getPregunta(), 0, 40) . "..." : 
+                    $preguntaFrecuente->getPregunta();
+            $respuesta = strlen($preguntaFrecuente->getRespuesta()) > 40 ? 
+                    substr($preguntaFrecuente->getRespuesta(), 0, 40) . "..." : 
+                    $preguntaFrecuente->getRespuesta();
             $id = $preguntaFrecuente->getId();
             
             $celdaPregunta = new ElementoHTML("td", 
                     new ElementoHTML("a", $pregunta, array(
-                        "onclick" => "verPreguntaFrecuente($id)"
+                        "onclick" => "verPreguntaFrecuente($id, '".
+                        $preguntaFrecuente->getPregunta()."', '".
+                        $preguntaFrecuente->getRespuesta()."')"
                     )));
             $celdaRespuesta = new ElementoHTML("td", $respuesta);
             $celdaVisible = new ElementoHTML("td", 
