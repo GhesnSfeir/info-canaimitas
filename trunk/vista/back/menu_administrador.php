@@ -1,4 +1,4 @@
-<li class="tab active">
+<li>
     <a onclick="clickNavMenu(this, 'preguntas_frecuentes.php')">
         Preguntas frecuentes
     </a>

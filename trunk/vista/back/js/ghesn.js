@@ -49,13 +49,13 @@ function chequearSesion() {
     var tipoUsuario = obtenerTipoUsuario();
     
     if (tipoUsuario == "administrador") {
-        $('#contenido').load('inicio.php');
+        $('#contenido').load('inicio-administrador.php');
         if (document.getElementById('menu-principal').innerHTML == '') {
             $('#menu-principal').load('menu_administrador.php');
         }
     }
     else if (tipoUsuario == "gestor") {
-        $('#contenido').load('inicio.php');
+        $('#contenido').load('inicio-gestor.php');
         if (document.getElementById('menu-principal').innerHTML == '') {
             $('#menu-principal').load('menu_gestor.php');
         }
