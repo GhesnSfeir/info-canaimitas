@@ -2,7 +2,7 @@
 
 session_start();
 
-include_once "../../clases/Usuario.php";
+include_once "../clases/Usuario.php";
 
 $nombreNuevo = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRING);
 $claveNueva = md5(filter_input(INPUT_POST, 'clave', FILTER_SANITIZE_STRING));

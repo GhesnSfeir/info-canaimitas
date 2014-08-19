@@ -1,6 +1,6 @@
 <?php
 
-include_once "../../clases/TablaUsuarios.php";
+include_once "../clases/TablaUsuarios.php";
 
 $busqueda = filter_input(INPUT_POST, 'busqueda', FILTER_SANITIZE_STRING);
 
