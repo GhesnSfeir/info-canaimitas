@@ -172,6 +172,7 @@ table tbody tr{
 textarea{
     height: 150px !important;
     overflow: auto;
+    resize: none;
 }
 
 .block{

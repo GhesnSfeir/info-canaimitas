@@ -44,6 +44,6 @@
     <br/>
     <div class="form-group block">
         <button type="submit" class="btn btn-default pequeno">Guardar</button>
-        <button type="button" class="btn btn-default pequeno" onclick="chequearSesion()">Cancelar</button>
+        <button type="button" class="btn btn-default pequeno" onclick="cargarContenido('preguntas_frecuentes.php')">Cancelar</button>
     </div>  
 </form>
