@@ -32,8 +32,7 @@ class TablaUsuarios extends ElementoHTML{
                 $emailUsuario = $usuario->getEmail();
                 $nombreUsuario = $usuario->getNombre();
 
-                $celdaUsuario = new ElementoHTML("td", 
-                        new ElementoHTML("a",$emailUsuario));
+                $celdaUsuario = new ElementoHTML("td", $emailUsuario);
                 $celdaNombre = new ElementoHTML("td", $nombreUsuario);
                 $celdaSuspendido = new ElementoHTML("td", 
                         new ElementoHTML("input", null, array(
