@@ -29,8 +29,12 @@ class TablaPreguntasFrecuentes extends ElementoHTML{
             
             $pregunta = $preguntaFrecuente->getPregunta();
             $respuesta = $preguntaFrecuente->getRespuesta();
+            $id = $preguntaFrecuente->getId();
             
-            $celdaPregunta = new ElementoHTML("td", $pregunta);
+            $celdaPregunta = new ElementoHTML("td", 
+                    new ElementoHTML("a", $pregunta, array(
+                        "onclick" => "verPreguntaFrecuente($id)"
+                    )));
             $celdaRespuesta = new ElementoHTML("td", $respuesta);
             $celdaVisible = new ElementoHTML("td", 
                     new ElementoHTML("input", null, array(

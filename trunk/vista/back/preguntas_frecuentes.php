@@ -53,6 +53,11 @@
         xmlhttp.send(parametros);
     }
     
+    function verPreguntaFrecuente(id) {
+        
+        
+        
+    }
     
 </script>
 <h1 class="text-center">Preguntas frecuentes</h1>

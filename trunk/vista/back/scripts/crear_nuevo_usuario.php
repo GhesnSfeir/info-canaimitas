@@ -12,12 +12,12 @@ try {
     
     if ($usuario->Guardar()) {
         
-        echo "¡Enhorabuena!\n\nEl usuario ha sido creado con éxito!";
+        echo "¡Enhorabuena!\n\nEl usuario ha sido creado con éxito.";
         
     }
     else {
         
-        echo "¡Error!\n\nNo se ha podido agregar el usuario";
+        echo "¡Error!\n\nNo se ha podido agregar el usuario.";
         
     }
 }
