@@ -2,7 +2,7 @@
 
 session_start();
 
-include_once "../../clases/Usuario.php";
+include_once "../clases/Usuario.php";
 
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
 $clave = md5(filter_input(INPUT_POST, 'clave', FILTER_SANITIZE_STRING));
