@@ -27,19 +27,19 @@ class TablaPreguntasFrecuentes extends ElementoHTML{
         
         foreach ($this->preguntas as $preguntaFrecuente) {
             
-            $pregunta = strlen($preguntaFrecuente->getPregunta()) > 40 ? 
-                    substr($preguntaFrecuente->getPregunta(), 0, 40) . "..." : 
-                    $preguntaFrecuente->getPregunta();
-            $respuesta = strlen($preguntaFrecuente->getRespuesta()) > 40 ? 
-                    substr($preguntaFrecuente->getRespuesta(), 0, 40) . "..." : 
-                    $preguntaFrecuente->getRespuesta();
-            $id = $preguntaFrecuente->getId();
+            $pregunta = strlen($preguntaFrecuente->obtenerPregunta()) > 40 ? 
+                    substr($preguntaFrecuente->obtenerPregunta(), 0, 40) . "..." : 
+                    $preguntaFrecuente->obtenerPregunta();
+            $respuesta = strlen($preguntaFrecuente->obtenerRespuesta()) > 40 ? 
+                    substr($preguntaFrecuente->obtenerRespuesta(), 0, 40) . "..." : 
+                    $preguntaFrecuente->obtenerRespuesta();
+            $id = $preguntaFrecuente->obtenerId();
             
             $celdaPregunta = new ElementoHTML("td", 
                     new ElementoHTML("a", $pregunta, array(
                         "onclick" => "verPreguntaFrecuente($id, '".
-                        $preguntaFrecuente->getPregunta()."', '".
-                        $preguntaFrecuente->getRespuesta()."')"
+                        $preguntaFrecuente->obtenerPregunta()."', '".
+                        $preguntaFrecuente->obtenerRespuesta()."')"
                     )));
             $celdaRespuesta = new ElementoHTML("td", $respuesta);
             $celdaVisible = new ElementoHTML("td", 

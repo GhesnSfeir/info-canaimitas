@@ -29,8 +29,8 @@ class TablaUsuarios extends ElementoHTML{
             
             if ($usuario->getTipo() == "gestor") {
                 
-                $emailUsuario = $usuario->getEmail();
-                $nombreUsuario = $usuario->getNombre();
+                $emailUsuario = $usuario->obtenerEmail();
+                $nombreUsuario = $usuario->obtenerNombre();
 
                 $celdaUsuario = new ElementoHTML("td", $emailUsuario);
                 $celdaNombre = new ElementoHTML("td", $nombreUsuario);
@@ -38,7 +38,7 @@ class TablaUsuarios extends ElementoHTML{
                         new ElementoHTML("input", null, array(
                             "type" => "checkbox",
                             "class" => "checkbox",
-                            $usuario->getActivo()=="1" ? "" : "checked",
+                            $usuario->obtenerActivo()=="1" ? "" : "checked",
                             "onclick" => "javascript: desactivar('$emailUsuario');"
                         )));
 

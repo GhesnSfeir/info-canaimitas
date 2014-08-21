@@ -17,36 +17,30 @@ class PreguntaFrecuente {
             
     }
     
-    public function getId() {
+    public function obtenerId() {
         
         return $this->id;
         
     }
     
-    public function getPregunta() {
+    public function obtenerPregunta() {
         
         return $this->pregunta;
         
     }
     
-    public function getRespuesta() {
+    public function obtenerRespuesta() {
         
         return $this->respuesta;
         
     }
     
-    public function toArray() {
+    public function convertirEnArreglo() {
         
         return array(
                 "id" => $this->id,
                 "pregunta" => $this->pregunta,
                 "respuesta" => $this->respuesta);
-    }
-    
-    public function toJSON() {
-        
-        return json_encode($this->obtenerArreglo());
-        
     }
     
     public function cambiarPregunta($preguntaNueva) {
@@ -88,8 +82,8 @@ class PreguntaFrecuente {
     public function Guardar() {
         
         $mensajeErrores = "";
-        $mensajeErrores = $mensajeErrores . $this->validarPregunta($this->pregunta);
-        $mensajeErrores = $mensajeErrores . $this->validarRespuesta($this->respuesta);
+        $mensajeErrores .= $this->validarPregunta($this->pregunta);
+        $mensajeErrores .= $this->validarRespuesta($this->respuesta);
         
         if ($mensajeErrores == "") {
             
@@ -241,7 +235,7 @@ class PreguntaFrecuente {
 
         if (strlen($pregunta) > 1000){
 
-            $mensaje = $mensaje . "- La pregunta no debe exceder los 100 
+            $mensaje = $mensaje . "- La pregunta no debe exceder los 1000 
                     caracteres.\n";
 
         }
