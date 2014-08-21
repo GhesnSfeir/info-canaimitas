@@ -16,15 +16,15 @@ try {
         echo "¡Error!\n\nNo existe una cuenta de usuario asociada al email especificado.";
         
     }
-    else if ($usuario->getClave() == $clave and
-            $usuario->getTipo() != "general") {
+    else if ($usuario->obtenerClave() == $clave and
+            $usuario->obtenerTipo() != "general") {
         
         if ($usuario->getActivo() == 1) {
             
-            $_SESSION['UsuarioId'] = $usuario->getId();
-            $_SESSION['UsuarioTipo'] = $usuario->getTipo();
-            $_SESSION['UsuarioNombre'] = $usuario->getNombre();
-            echo $usuario->getTipo();
+            $_SESSION['UsuarioId'] = $usuario->obtenerId();
+            $_SESSION['UsuarioTipo'] = $usuario->obtenerTipo();
+            $_SESSION['UsuarioNombre'] = $usuario->obtenerNombre();
+            echo $usuario->obtenerTipo();
             
         }
         else {

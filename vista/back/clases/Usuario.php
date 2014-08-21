@@ -23,58 +23,51 @@ class Usuario {
             
     }
     
-    public function getId() {
+    public function obtenerId() {
         
         return $this->id;
         
     }
     
-    public function getNombre() {
+    public function obtenerNombre() {
         
         return $this->nombre;
         
     }
     
-    public function getEmail() {
+    public function obtenerEmail() {
         
         return $this->email;
         
     }
     
-    public function getClave() {
+    public function obtenerClave() {
         
         return $this->clave;
         
     }
     
-    public function getTipo() {
+    public function obtenerTipo() {
         
         return $this->tipo;
         
     }
     
-    public function getActivo() {
+    public function obtenerActivo() {
         
         return $this->activo;
         
     }
     
-    public function toArray() {
+    public function convertirEnArreglo() {
         
-        $arreglo = array(
+        return array(
                 "id" => $this->id,
                 "nombre" => $this->nombre,
                 "email" => $this->email,
                 "clave" => $this->clave,
                 "tipo" => $this->tipo,
                 "activo" => $this->activo);
-        
-        return $arreglo;
-    }
-    
-    public function toJSON() {
-        
-        return json_encode($this->obtenerArreglo());
         
     }
     
@@ -132,9 +125,9 @@ class Usuario {
     public function Guardar() {
         
         $mensajeErrores = "";
-        $mensajeErrores = $mensajeErrores . $this->validarNombreUsuario($this->nombre);
-        $mensajeErrores = $mensajeErrores . $this->validarEmail($this->email);
-        $mensajeErrores = $mensajeErrores . $this->validarClave($this->clave);
+        $mensajeErrores .= $this->validarNombreUsuario($this->nombre);
+        $mensajeErrores .= $this->validarEmail($this->email);
+        $mensajeErrores .= $this->validarClave($this->clave);
         
         if ($mensajeErrores == "") {
             
@@ -356,20 +349,20 @@ class Usuario {
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
 
-            $mensaje = $mensaje . "- El email no tiene un formato válido.\n";
+            $mensaje .= "- El email no tiene un formato válido.\n";
 
         }
 
         if (strlen($email) > 100){
 
-            $mensaje = $mensaje . "- El email no debe exceder los 100 
+            $mensaje .= "- El email no debe exceder los 100 
                     caracteres.\n";
 
         }
 
         if ($this->existeEmail($email) and !isset($this->id)){
 
-            $mensaje = $mensaje . "- El email especificado ya existe.\n";
+            $mensaje .= "- El email especificado ya existe.\n";
 
         }
 
@@ -388,7 +381,7 @@ class Usuario {
 
         if (strlen($nombreUsuario) > 100) {
 
-            $mensaje = $mensaje . "- El nombre de usuario no debe exceder los 100 
+            $mensaje .= "- El nombre de usuario no debe exceder los 100 
                     caracteres.\n";
 
         }

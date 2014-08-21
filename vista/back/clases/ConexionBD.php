@@ -76,5 +76,32 @@ class ConexionBD {
         return mysql_insert_id($this->conexion);
         
     }
+    
+    public function correrProcedimiento($procedimiento, $argumentos = null) {
+        
+        if (empty($argumentos)) {
+            
+            $query = "CALL $procedimiento()";
+            
+        }
+        else if (is_array($argumentos)) {
+            
+            $argumentosTransformados = array();
+            
+            foreach ($argumentos as $valor) {
+                
+                array_push($argumentosTransformados, 
+                        is_string($valor) ? "'$valor'" : $valor);
+                
+            }
+            
+            $query = "CALL $procedimiento(" . 
+                    implode(",", $argumentosTransformados) . ")";
+            
+        }
+        
+        return $this->correrQuery($query);
+        
+    }
 }
 ?>
