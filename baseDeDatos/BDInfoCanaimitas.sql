@@ -28,5 +28,5 @@ source /var/www/infoCanaimitas/info-canaimitas/baseDeDatos/StoredProceduresInfoC
 -- Para hacer load de un archivo .sql
 -- source /var/www/infoCanaimitas/info-canaimitas/baseDeDatos/DROP_InfoCanaimitas.sql;
 
-
-
+-- en windows xD
+-- source C:/Users/Benyi/Documents/LSC/ProyectoInfoCanaimitas/baseDeDatos/StoredProceduresInfoCanaimitas.sql;
