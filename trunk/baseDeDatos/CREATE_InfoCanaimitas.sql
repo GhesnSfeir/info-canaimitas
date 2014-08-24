@@ -25,7 +25,8 @@ CREATE TABLE preguntas_particulares (
 CREATE TABLE preguntas_frecuentes (
 			id int 						not null auto_increment,
 			pregunta VARCHAR(1000)		not null,
-			respuesta VARCHAR(1000)		not null,			
+			respuesta VARCHAR(1000)		not null,
+			visible TINYINT 			not null,			
 			PRIMARY KEY (id)
 			);
 			
@@ -120,7 +121,7 @@ CREATE TABLE recomendaciones (
 			
 CREATE TABLE autores (
 			id int 					not null auto_increment,
-			nombre VARCHAR(50)	not null,
+			nombre VARCHAR(50)		not null,
 			PRIMARY KEY (id)
 			);
 			

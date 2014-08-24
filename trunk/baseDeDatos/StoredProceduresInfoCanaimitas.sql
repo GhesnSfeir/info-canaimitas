@@ -61,19 +61,20 @@ END //
 -- Procedimiento para agregar preguntas frecuentes
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_preguntas_frecuentes; 
-CREATE  PROCEDURE agregar_preguntas_frecuentes (preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000)) 		
+CREATE  PROCEDURE agregar_preguntas_frecuentes (preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000), visibleFrecuente TINYINT) 		
 BEGIN  										
-   INSERT INTO preguntas_frecuentes (pregunta, respuesta) VALUES (preguntaFrecuente, respuestaFrecuente);
+   INSERT INTO preguntas_frecuentes (pregunta, respuesta, visible) VALUES (preguntaFrecuente, respuestaFrecuente, visibleFrecuente);
 END //  
 
   -- Procedimiento para modificar preguntas frecuentes
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS modificar_preguntas_frecuentes; 
-CREATE  PROCEDURE modificar_preguntas_frecuentes (idPreguntaFrecuente INT, preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000)) 		
+CREATE  PROCEDURE modificar_preguntas_frecuentes (idPreguntaFrecuente INT, preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000), visibleFrecuente TINYINT) 		
 BEGIN  	
 	UPDATE preguntas_frecuentes  SET
     pregunta = preguntaFrecuente, 
-	respuesta = respuestaFrecuente
+	respuesta = respuestaFrecuente, 
+	visible = visibleFrecuente
     WHERE id = idPreguntaFrecuente;							
 END // 
 
@@ -100,7 +101,7 @@ END //
 -- Procedimiento para consultar todas las preguntas particulares por id
 DELIMITER // 
 DROP PROCEDURE IF EXISTS consultar_preguntas_particulares_id;
-CREATE  PROCEDURE consultar_preguntas_particulares_id (idPregunta) 
+CREATE  PROCEDURE consultar_preguntas_particulares_id (idPregunta INT) 
 BEGIN 
     SELECT * FROM preguntas_particulares WHERE id = idPregunta;
 END // 
@@ -126,10 +127,10 @@ END //
   -- Procedimiento para eliminar preguntas particulares
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS eliminar_preguntas_particulares; 
-CREATE  PROCEDURE eliminar_preguntas_particulares (idPreguntaFrecuente INT) 		
+CREATE  PROCEDURE eliminar_preguntas_particulares (idPreguntaParticular INT) 		
 BEGIN  	
 	DELETE FROM preguntas_particulares
-    WHERE id = idPreguntaFrecuente;							
+    WHERE id = idPreguntaParticular;							
 END //
 
 
@@ -172,15 +173,6 @@ BEGIN
 	recurso_url = recurso_urlRecurso
     WHERE id = idFichaRecurso;							
 END // 
-
-  -- Procedimiento para eliminar las fichas de los recursos
-DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_preguntas_particulares; 
-CREATE  PROCEDURE eliminar_fichas_recursos (idFichaRecurso INT) 		
-BEGIN  	
-	DELETE FROM fichas_recursos
-    WHERE id = idFichaRecurso;							
-END //
 
 
 -- R E C O M E N D A C I O N E S
@@ -290,7 +282,7 @@ END //
 -- Procedimiento para consultar los periodos academicos
 DELIMITER // 
 DROP PROCEDURE IF EXISTS consultar_periodos_academicos_id;
-CREATE  PROCEDURE consultar_preguntas_frecuentes_id (idPeriodo INT) 
+CREATE  PROCEDURE consultar_periodos_academicos_id (idPeriodo INT) 
 BEGIN 
     SELECT * FROM periodos_academicos where id = idPeriodo;
 END // 
@@ -388,22 +380,22 @@ BEGIN
 END //
 
 -- D I S C I P L I N A   D E L   C O N O C I M I E N T O
-			
+	
 -- Procedimiento para agregar disciplina del conocimiento
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS agregar_audiencia;
-CREATE  PROCEDURE agregar_audiencia (idPeriodoAcademico INT, idFichaRecurso INT) 		
+DROP PROCEDURE IF EXISTS agregar_disciplina_conocimiento;
+CREATE  PROCEDURE agregar_disciplina_conocimiento (idAsignatura INT, idFichaRecurso INT) 		
 BEGIN  										
-   INSERT INTO audiencia (fk_periodos_academicos, fk_fichas_recursos_audi) VALUES (idPeriodoAcademico, idFichaRecurso);
+   INSERT INTO disciplina_conocimiento (fk_asignaturas, fk_fichas_recursos_disc) VALUES (idPeriodoAcademico, idFichaRecurso);
 END //  
  
-  -- Procedimiento para eliminar audencia
+  -- Procedimiento para eliminar disciplina del conocimiento
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_audiencia; 
-CREATE  PROCEDURE eliminar_audiencia(idAudiencia INT)
+DROP PROCEDURE IF EXISTS eliminar_disciplina_conocimiento; 
+CREATE  PROCEDURE eliminar_disciplina_conocimiento(idDisciplina INT)
 BEGIN  	
-	DELETE FROM audiencia
-    WHERE id = idAudiencia;							
+	DELETE FROM disciplina_conocimiento
+    WHERE id = idDisciplina;							
 END //
 
 -- T E M A S 
