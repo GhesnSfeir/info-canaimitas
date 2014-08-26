@@ -7,11 +7,10 @@ class PeriodoAcademico extends Entidad{
     protected $nombre;
     protected $abreviacion;
     
-    public function __construct($nombre = null, $abreviacion = null, $id = null) {
+    public function __construct($nombre = null, $abreviacion = null) {
         
-        $this->id = $id;
-        $this->establecerNombre($nombre);
-        $this->establecerAbreviacion($abreviacion);
+        if (!is_null($nombre)) $this->establecerNombre($nombre);
+        if (!is_null($abreviacion)) $this->establecerAbreviacion($abreviacion);
         
     }
     
@@ -20,67 +19,57 @@ class PeriodoAcademico extends Entidad{
     public function obtenerAbreviacion() { return $this->abreviacion; }
     
     public function establecerNombre($nombre) {
-        
-        $mensajeError = "";
 
         if (empty($nombre)) {
 
-            $mensajeError .= "Es necesario especificar un nombre para el 
-                período académico";
+            throw new Exception("Es necesario especificar un nombre para el 
+                período académico");
 
         }
         else if (!is_string($nombre)) {
             
-            $mensajeError .= "El nombre del período académico debe ser un 
-                string";
+            throw new Exception("El nombre del período académico debe ser un 
+                string");
             
         }
         else if (strlen($nombre) > 50){
 
-            $mensajeError .= "- El nombre no debe exceder los 50 caracteres.\n";
+            throw new Exception("El nombre no debe exceder los 50 caracteres.\n");
 
         }
         else {
             
             $this->nombre = $nombre;
-            return true;
-            
+            return $this;
         }
-        
-        throw new Exception($mensajeError);
     }
     
     public function establecerAbreviacion($abreviacion) {
-        
-        $mensajeError = "";
 
         if (empty($abreviacion)) {
 
-            $mensajeError .= "Es necesario especificar una abreviación para el 
-                período académico";
+            throw new Exception("Es necesario especificar una abreviación para el 
+                período académico");
 
         }
         else if (!is_string($abreviacion)) {
             
-            $mensajeError .= "La abreviación del período académico debe ser un 
-                string";
+            throw new Exception("La abreviación del período académico debe ser un 
+                string");
             
         }
         else if (strlen($abreviacion) > 50){
 
-            $mensajeError .= "La abreviación del período académico no debe 
-                exceder los 50 caracteres";
+            throw new Exception("La abreviación del período académico no debe 
+                exceder los 50 caracteres");
 
         }
         else {
             
             $this->abreviacion = $abreviacion;
-            return true;
+            return $this;
             
         }
-        
-        throw new Exception($mensajeError);
-        
     }
     
     public function Guardar() {
@@ -120,11 +109,13 @@ class PeriodoAcademico extends Entidad{
     public static function consultarPorId($id) {
         
         $procedimiento = SP_CONSULTAR_PERIODOS_ACADEMICOS_ID;
+        //$query = "SELECT * FROM periodos_academicos WHERE id=$id";
         
         $conexion = new ConexionBD();
         $conexion->abrir();
         
         $resultado = $conexion->correrProcedimiento($procedimiento, array($id));
+        //$resultado = $conexion->correrQuery($query);
         $conexion->cerrar();
         
         $registro = $resultado[0];

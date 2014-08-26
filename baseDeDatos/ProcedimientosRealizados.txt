@@ -1,3 +1,9 @@
+PROCEDIMIENTOS QUE FALTAN:
+
+consultar_recurso_JSON_id( INT id):
+    Crea un objeto JSON con todos los datos pertinentes a un recurso, es decir, con sus "m a n" y todo... Ejemplo de lo que debe retornar:
+{"Recurso":{"Nombre":"Arbustos del Amazonas","Formato":"PDF","Autores":[{"Autor":"Ghesn Sfeir"},{"Autor":"Aiskel Zamora"}]}}
+
 procedimientos creados:
 
 consultar_usuarios

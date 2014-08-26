@@ -22,7 +22,7 @@ try {
         $usuario->cambiarClave($claveNueva);
         if ($usuario->Guardar()) {
             
-            $_SESSION['UsuarioNombre'] = $usuario->getNombre();
+            $_SESSION['UsuarioNombre'] = $usuario->obtenerNombre();
             echo "¡Enhorabuena!\n\nEl usuario ha sido actualizado con éxito!";
 
         }
