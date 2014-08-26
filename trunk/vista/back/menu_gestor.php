@@ -9,7 +9,7 @@
     </a>
 </li>
 <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         Mi cuenta 
         <span class="caret"></span>
     </a>

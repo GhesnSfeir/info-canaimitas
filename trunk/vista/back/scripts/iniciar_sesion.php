@@ -19,7 +19,7 @@ try {
     else if ($usuario->obtenerClave() == $clave and
             $usuario->obtenerTipo() != "general") {
         
-        if ($usuario->getActivo() == 1) {
+        if ($usuario->obtenerActivo() == 1) {
             
             $_SESSION['UsuarioId'] = $usuario->obtenerId();
             $_SESSION['UsuarioTipo'] = $usuario->obtenerTipo();

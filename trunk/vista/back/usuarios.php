@@ -55,7 +55,7 @@
     
     
 </script>
-<h1 class="text-center">Usuarios</h1>
+<h1 class="text-center">Cuentas de usuario</h1>
 
 <div class="navbar">
     <ul id="search" class="nav">

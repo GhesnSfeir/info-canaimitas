@@ -27,7 +27,7 @@ class TablaUsuarios extends ElementoHTML{
         
         foreach ($this->usuarios as $usuario) {
             
-            if ($usuario->getTipo() == "gestor") {
+            if ($usuario->obtenerTipo() == "gestor") {
                 
                 $emailUsuario = $usuario->obtenerEmail();
                 $nombreUsuario = $usuario->obtenerNombre();
