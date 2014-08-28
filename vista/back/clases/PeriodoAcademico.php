@@ -90,7 +90,7 @@ class PeriodoAcademico extends Entidad{
             return false;
             
         }
-        else { //Si el usuario no esta en la base de datos
+        else { //Si el periodo academico no esta en la base de datos
 
             if ($conexion->correrProcedimiento(SP_AGREGAR_PERIODOS_ACADEMICOS, 
                 array ($this->nombre, $this->abreviacion))){
