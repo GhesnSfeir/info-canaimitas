@@ -8,7 +8,7 @@ procedimientos creados:
 
 consultar_usuarios
 consultar_usuarios_id
-agregar_usuarios
+call agregar_usuarios("Lofia", "lofita@gmail.com","soyunalofia", "Gestor", @idUsuario); select @idUsuario;
 modificar_usuarios
 
 consultar_preguntas_frecuentes

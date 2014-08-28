@@ -20,9 +20,10 @@ END //
 -- Procedimiento para agregar usuarios
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_usuarios; 
-CREATE  PROCEDURE agregar_usuarios (nombreUsuario VARCHAR(50), emailUsuario VARCHAR(100), claveUsuario VARCHAR(32), tipoUsuario VARCHAR(50)) 		
+CREATE  PROCEDURE agregar_usuarios (IN nombreUsuario VARCHAR(50), IN emailUsuario VARCHAR(100), IN claveUsuario VARCHAR(32), IN tipoUsuario VARCHAR(50), OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO usuarios (nombre,email,clave,tipo,activo) VALUES (nombreUsuario, emailUsuario, claveUsuario, tipoUsuario, true);
+   SELECT LAST_INSERT_ID() INTO idInsertado;
 END //  
 
   -- Procedimiento para modificar usuarios
@@ -61,9 +62,10 @@ END //
 -- Procedimiento para agregar preguntas frecuentes
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_preguntas_frecuentes; 
-CREATE  PROCEDURE agregar_preguntas_frecuentes (preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000), visibleFrecuente TINYINT) 		
+CREATE  PROCEDURE agregar_preguntas_frecuentes (IN preguntaFrecuente VARCHAR(1000), IN respuestaFrecuente VARCHAR(1000), IN visibleFrecuente TINYINT, OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO preguntas_frecuentes (pregunta, respuesta, visible) VALUES (preguntaFrecuente, respuestaFrecuente, visibleFrecuente);
+   SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
 
   -- Procedimiento para modificar preguntas frecuentes
@@ -108,9 +110,10 @@ END //
 -- Procedimiento para agregar preguntas particulares
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_preguntas_particulares; 
-CREATE  PROCEDURE agregar_preguntas_particulares (preguntaparticular VARCHAR(1000), idUsuario INT) 		
+CREATE  PROCEDURE agregar_preguntas_particulares (IN preguntaparticular VARCHAR(1000), IN idUsuario INT, OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO preguntas_particulares (pregunta, revisada, fk_usuarios) VALUES (preguntaparticular, false, idUsuario);
+   SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
 
   -- Procedimiento para modificar preguntas particulares
@@ -155,9 +158,10 @@ END //
 -- Procedimiento para agregar las fichas de los recursos
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_fichas_recursos; 
-CREATE  PROCEDURE agregar_fichas_recursos (tituloRecurso VARCHAR(100), formatoRecurso VARCHAR(10), ruta_accesoRecurso VARCHAR(1000), caracterizacion_urlRecurso VARCHAR(1000), recurso_urlRecurso VARCHAR(1000)) 		
+CREATE  PROCEDURE agregar_fichas_recursos (IN tituloRecurso VARCHAR(100), IN formatoRecurso VARCHAR(10), IN ruta_accesoRecurso VARCHAR(1000), IN caracterizacion_urlRecurso VARCHAR(1000), IN recurso_urlRecurso VARCHAR(1000), OUT idInsertado INT) 		
 BEGIN  										
-   INSERT INTO fichas_recursos (titulo, formato, ruta_acceso, caracterizacion_url, recurso_url) VALUES (tituloRecurso, formatoRecurso, ruta_accesoRecurso, caracterizacion_urlRecurso, recurso_urlRecurso);
+	INSERT INTO fichas_recursos (titulo, formato, ruta_acceso, caracterizacion_url, recurso_url) VALUES (tituloRecurso, formatoRecurso, ruta_accesoRecurso, caracterizacion_urlRecurso, recurso_urlRecurso);
+	SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
 
   -- Procedimiento para modificar las fichas de los recursos
@@ -188,9 +192,10 @@ END //
 -- Procedimiento para agregar recomendaciones
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_recomendaciones;
-CREATE  PROCEDURE agregar_recomendaciones (recomendacionRecurso	VARCHAR(40), idFichaRecurso INT) 		
+CREATE  PROCEDURE agregar_recomendaciones (IN recomendacionRecurso	VARCHAR(40), IN idFichaRecurso INT, OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO recomendaciones (recomendacion, fk_fichas_recursos_reco) VALUES (recomendacionRecurso, idFichaRecurso);
+   SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
 
   -- Procedimiento para modificar recomendaciones
@@ -226,9 +231,10 @@ END //
 -- Procedimiento para agregar autores
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_autores;
-CREATE  PROCEDURE agregar_autores (nombreAutor VARCHAR(50)) 		
+CREATE  PROCEDURE agregar_autores (IN nombreAutor VARCHAR(50), OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO autores (nombre) VALUES (nombreAutor);
+   SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
 
   -- Procedimiento para modificar autores
@@ -255,9 +261,10 @@ END //
 -- Procedimiento para agregar autores fichas recursos
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_autores_fichas_recursos;
-CREATE  PROCEDURE agregar_autores_fichas_recursos (idAutor INT, idFichaRecurso INT) 		
+CREATE  PROCEDURE agregar_autores_fichas_recursos (IN idAutor INT, IN idFichaRecurso INT, OUT idInsertado INT) 		
 BEGIN  										
-   INSERT INTO autores_fichas_recursos (fk_autores, fk_fichas_recursos_auto) VALUES (idAutor, idFichaRecurso);
+    INSERT INTO autores_fichas_recursos (fk_autores, fk_fichas_recursos_auto) VALUES (idAutor, idFichaRecurso);
+	SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
  
   -- Procedimiento para eliminar autores fichas recursos
@@ -290,9 +297,10 @@ END //
 -- Procedimiento para agregar los periodos academicos
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_periodos_academicos; 
-CREATE  PROCEDURE agregar_periodos_academicos (nombrePeriodo VARCHAR(50), abreviacionPeriodo VARCHAR(20)) 		
+CREATE  PROCEDURE agregar_periodos_academicos (IN nombrePeriodo VARCHAR(50), IN abreviacionPeriodo VARCHAR(20), OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO periodos_academicos (nombre, abreviacion) VALUES (nombrePeriodo, abreviacionPeriodo);
+   SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
 
   -- Procedimiento para modificar los periodos academicos
@@ -320,9 +328,10 @@ END //
 -- Procedimiento para agregar audiencia
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_audiencia;
-CREATE  PROCEDURE agregar_audiencia (idPeriodoAcademico INT, idFichaRecurso INT) 		
+CREATE  PROCEDURE agregar_audiencia (IN idPeriodoAcademico INT, IN idFichaRecurso INT, OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO audiencia (fk_periodos_academicos, fk_fichas_recursos_audi) VALUES (idPeriodoAcademico, idFichaRecurso);
+   SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
  
   -- Procedimiento para eliminar audencia
@@ -355,9 +364,10 @@ END //
 -- Procedimiento para agregar asignaturas
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_asignaturas; 
-CREATE  PROCEDURE agregar_asignaturas (nombreAsignatura VARCHAR(100)) 		
+CREATE  PROCEDURE agregar_asignaturas (IN nombreAsignatura VARCHAR(100), OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO asignaturas (nombre) VALUES (nombreAsignatura);
+   SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
 
   -- Procedimiento para modificar asignaturas
@@ -384,9 +394,10 @@ END //
 -- Procedimiento para agregar disciplina del conocimiento
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_disciplina_conocimiento;
-CREATE  PROCEDURE agregar_disciplina_conocimiento (idAsignatura INT, idFichaRecurso INT) 		
+CREATE  PROCEDURE agregar_disciplina_conocimiento (IN idAsignatura INT, IN idFichaRecurso INT, OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO disciplina_conocimiento (fk_asignaturas, fk_fichas_recursos_disc) VALUES (idPeriodoAcademico, idFichaRecurso);
+   SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
  
   -- Procedimiento para eliminar disciplina del conocimiento
@@ -419,9 +430,10 @@ END //
 -- Procedimiento para agregar temas
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_temas; 
-CREATE  PROCEDURE agregar_temas (nombreTema VARCHAR(1000)) 		
+CREATE  PROCEDURE agregar_temas (IN nombreTema VARCHAR(1000), OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO temas (nombre) VALUES (nombreTema);
+   SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
 
   -- Procedimiento para modificar temas
@@ -448,9 +460,10 @@ END //
 -- Procedimiento para agregar contenidos
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS agregar_contenidos;
-CREATE  PROCEDURE agregar_contenidos (idTema INT, idFichaRecurso INT) 		
+CREATE  PROCEDURE agregar_contenidos (IN idTema INT, IN idFichaRecurso INT, OUT idInsertado INT) 		
 BEGIN  										
    INSERT INTO contenidos (fk_temas, fk_fichas_recursos_cont) VALUES (idTema, idFichaRecurso);
+   SELECT LAST_INSERT_ID() INTO idInsertado; 
 END //  
  
   -- Procedimiento para eliminar audencia
