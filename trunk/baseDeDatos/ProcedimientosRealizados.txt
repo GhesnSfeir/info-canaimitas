@@ -8,7 +8,7 @@ procedimientos creados:
 
 consultar_usuarios
 consultar_usuarios_id
-call agregar_usuarios("Lofia", "lofita@gmail.com","soyunalofia", "Gestor", @idUsuario); select @idUsuario;
+select agregar_usuario("Lofia", "lofita@gmail.com","soyunalofia", "Gestor"); 
 modificar_usuarios
 
 consultar_preguntas_frecuentes
@@ -29,6 +29,8 @@ agregar_fichas_recursos
 modificar_fichas_recursos
 
 consultar_recomendaciones
+consultar_recomendaciones_id
+consultar_recomendaciones_idFichaRecurso
 agregar_recomendaciones
 modificar_recomendaciones
 eliminar_recomendaciones
