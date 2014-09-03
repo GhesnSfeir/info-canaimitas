@@ -9,32 +9,27 @@ BEGIN  											-- inicio cuerpo procedimiento almacenado
     SELECT * FROM usuarios;						-- consulta
 END //  										-- fin de cuerpo del procedimiento almacenado
 
--- Procedimiento para consultar todas usuarios por ID
+-- Procedimiento para consultar usuario por ID
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS consultar_usuarios_id; 
-CREATE  PROCEDURE consultar_usuarios_id (idUsuario INT)
+DROP PROCEDURE IF EXISTS consultar_usuario_id; 
+CREATE  PROCEDURE consultar_usuario_id (idUsuario INT)
 BEGIN  											
     SELECT * FROM usuarios WHERE id = idUsuario;
 END //  
 
--- funcion para agregar usuarios
+-- procedimiento para agregar usuarios
 DELIMITER // 
-DROP FUNCTION IF EXISTS agregar_usuario; 
-CREATE FUNCTION agregar_usuario(nombreUsuario VARCHAR(50), emailUsuario VARCHAR(100), claveUsuario VARCHAR(32), tipoUsuario VARCHAR(50)) RETURNS INT
-    DETERMINISTIC
+DROP PROCEDURE IF EXISTS agregar_usuario; 
+CREATE PROCEDURE agregar_usuario(nombreUsuario VARCHAR(50), emailUsuario VARCHAR(100), claveUsuario VARCHAR(32), tipoUsuario VARCHAR(50))
 BEGIN
-    DECLARE idInsertado INT;
- 
     INSERT INTO usuarios (nombre,email,clave,tipo,activo) VALUES (nombreUsuario, emailUsuario, claveUsuario, tipoUsuario, true);
-	SELECT LAST_INSERT_ID() INTO idInsertado;
- 
-    RETURN (idInsertado);
+	SELECT LAST_INSERT_ID() id;
 END //
 
   -- Procedimiento para modificar usuarios
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_usuarios; 
-CREATE  PROCEDURE modificar_usuarios (idUsuario INT, nombreUsuario VARCHAR(50), emailUsuario VARCHAR(100), claveUsuario VARCHAR(32), tipoUsuario VARCHAR(50), activoUsuario TINYINT) 		
+DROP PROCEDURE IF EXISTS modificar_usuario; 
+CREATE  PROCEDURE modificar_usuario (idUsuario INT, nombreUsuario VARCHAR(50), emailUsuario VARCHAR(100), claveUsuario VARCHAR(32), tipoUsuario VARCHAR(50), activoUsuario TINYINT) 		
 BEGIN  	
 	UPDATE usuarios  SET
     nombre = nombreUsuario, 
@@ -45,6 +40,13 @@ BEGIN
     WHERE id = idUsuario;							
 END // 
 
+-- Procedimiento para contar la cantidad de repeticiones de un email para la tabla usuarios
+DELIMITER //
+DROP PROCEDURE IF EXISTS contar_usuarios_email;
+CREATE PROCEDURE contar_usuarios_email (email VARCHAR(100))
+BEGIN
+    SELECT COUNT(*) cuenta FROM usuarios u WHERE u.email = email;
+END //
 
 -- P R E G U N T A S   F R E C U E N T E S
 
@@ -58,30 +60,25 @@ END //
 
 -- Procedimiento para consultar preguntas frecuentes por id
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_preguntas_frecuentes_id;
-CREATE  PROCEDURE consultar_preguntas_frecuentes_id (idPregunta INT) 
+DROP PROCEDURE IF EXISTS consultar_pregunta_frecuente_id;
+CREATE  PROCEDURE consultar_pregunta_frecuente_id (idPregunta INT) 
 BEGIN 
     SELECT * FROM preguntas_frecuentes where id = idPregunta;
 END // 
 
--- funcion para agregar preguntas frecuentes
+-- procedimiento para agregar preguntas frecuentes
 DELIMITER // 
-DROP FUNCTION IF EXISTS agregar_pregunta_frecuente; 
-CREATE FUNCTION agregar_pregunta_frecuente(preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000), visibleFrecuente TINYINT) RETURNS INT
-    DETERMINISTIC
+DROP PROCEDURE IF EXISTS agregar_pregunta_frecuente; 
+CREATE PROCEDURE agregar_pregunta_frecuente(preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000), visibleFrecuente TINYINT) 
 BEGIN
-    DECLARE idInsertado INT;
- 
     INSERT INTO preguntas_frecuentes (pregunta, respuesta, visible) VALUES (preguntaFrecuente, respuestaFrecuente, visibleFrecuente);
-	SELECT LAST_INSERT_ID() INTO idInsertado; 
- 
-    RETURN (idInsertado);
+	SELECT LAST_INSERT_ID() id; 
 END //  
 
   -- Procedimiento para modificar preguntas frecuentes
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_preguntas_frecuentes; 
-CREATE  PROCEDURE modificar_preguntas_frecuentes (idPreguntaFrecuente INT, preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000), visibleFrecuente TINYINT) 		
+DROP PROCEDURE IF EXISTS modificar_pregunta_frecuente; 
+CREATE  PROCEDURE modificar_pregunta_frecuente (idPreguntaFrecuente INT, preguntaFrecuente VARCHAR(1000), respuestaFrecuente VARCHAR(1000), visibleFrecuente TINYINT) 		
 BEGIN  	
 	UPDATE preguntas_frecuentes  SET
     pregunta = preguntaFrecuente, 
@@ -92,8 +89,8 @@ END //
 
   -- Procedimiento para eliminar preguntas frecuentes
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_preguntas_frecuentes; 
-CREATE  PROCEDURE eliminar_preguntas_frecuentes (idPreguntaFrecuente INT) 		
+DROP PROCEDURE IF EXISTS eliminar_pregunta_frecuente; 
+CREATE  PROCEDURE eliminar_pregunta_frecuente (idPreguntaFrecuente INT) 		
 BEGIN  	
 	DELETE FROM preguntas_frecuentes
     WHERE id = idPreguntaFrecuente;							
@@ -112,30 +109,25 @@ END //
 
 -- Procedimiento para consultar todas las preguntas particulares por id
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_preguntas_particulares_id;
-CREATE  PROCEDURE consultar_preguntas_particulares_id (idPregunta INT) 
+DROP PROCEDURE IF EXISTS consultar_pregunta_particular_id;
+CREATE  PROCEDURE consultar_pregunta_particular_id (idPregunta INT) 
 BEGIN 
     SELECT * FROM preguntas_particulares WHERE id = idPregunta;
 END // 
 
--- funcion para agregar preguntas particulares
+-- procedimiento para agregar preguntas particulares
 DELIMITER // 
-DROP FUNCTION IF EXISTS agregar_pregunta_particular; 
-CREATE FUNCTION agregar_pregunta_particular(preguntaparticular VARCHAR(1000), idUsuario INT) RETURNS INT
-    DETERMINISTIC
-BEGIN
-   DECLARE idInsertado INT;
- 									
+DROP PROCEDURE IF EXISTS agregar_pregunta_particular; 
+CREATE PROCEDURE agregar_pregunta_particular(preguntaparticular VARCHAR(1000), idUsuario INT)
+BEGIN 									
    INSERT INTO preguntas_particulares (pregunta, revisada, fk_usuarios) VALUES (preguntaparticular, false, idUsuario);
-   SELECT LAST_INSERT_ID() INTO idInsertado; 
-   
-   RETURN (idInsertado);
+   SELECT LAST_INSERT_ID() id; 
 END //  
 
   -- Procedimiento para modificar preguntas particulares
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_preguntas_particulares; 
-CREATE  PROCEDURE modificar_preguntas_particulares (idPreguntaParticular INT, preguntaparticular VARCHAR(1000), revisadaparticular TINYINT) 		
+DROP PROCEDURE IF EXISTS modificar_pregunta_particular; 
+CREATE  PROCEDURE modificar_pregunta_particular (idPreguntaParticular INT, preguntaparticular VARCHAR(1000), revisadaparticular TINYINT) 		
 BEGIN  	
 	UPDATE preguntas_particulares  SET
     pregunta = preguntaparticular, 
@@ -145,8 +137,8 @@ END //
 
   -- Procedimiento para eliminar preguntas particulares
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_preguntas_particulares; 
-CREATE  PROCEDURE eliminar_preguntas_particulares (idPreguntaParticular INT) 		
+DROP PROCEDURE IF EXISTS eliminar_pregunta_particular; 
+CREATE  PROCEDURE eliminar_pregunta_particular (idPreguntaParticular INT) 		
 BEGIN  	
 	DELETE FROM preguntas_particulares
     WHERE id = idPreguntaParticular;							
@@ -165,30 +157,25 @@ END //
 
 -- Procedimiento para consultar las fichas de los recursos por ID
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_fichas_recursos_id;
-CREATE  PROCEDURE consultar_fichas_recursos_id (idFicha INT) 
+DROP PROCEDURE IF EXISTS consultar_ficha_recurso_id;
+CREATE  PROCEDURE consultar_ficha_recurso_id (idFicha INT) 
 BEGIN 
     SELECT * FROM fichas_recursos WHERE id = idFicha;
 END // 
 
--- funcion para agregar las fichas de los recursos
+-- procedimiento para agregar las fichas de los recursos
 DELIMITER // 		
-DROP FUNCTION IF EXISTS agregar_ficha_recurso; 
-CREATE FUNCTION agregar_ficha_recurso(tituloRecurso VARCHAR(100), formatoRecurso VARCHAR(10), ruta_accesoRecurso VARCHAR(1000), caracterizacion_urlRecurso VARCHAR(1000), recurso_urlRecurso VARCHAR(1000)) RETURNS INT
-    DETERMINISTIC
+DROP PROCEDURE IF EXISTS agregar_ficha_recurso; 
+CREATE PROCEDURE agregar_ficha_recurso(tituloRecurso VARCHAR(100), formatoRecurso VARCHAR(10), ruta_accesoRecurso VARCHAR(1000), caracterizacion_urlRecurso VARCHAR(1000), recurso_urlRecurso VARCHAR(1000))
 BEGIN
-    DECLARE idInsertado INT;
-	
 	INSERT INTO fichas_recursos (titulo, formato, ruta_acceso, caracterizacion_url, recurso_url) VALUES (tituloRecurso, formatoRecurso, ruta_accesoRecurso, caracterizacion_urlRecurso, recurso_urlRecurso);
-	SELECT LAST_INSERT_ID() INTO idInsertado; 
-
-	RETURN (idInsertado);
+	SELECT LAST_INSERT_ID() id; 
 END //  
 
   -- Procedimiento para modificar las fichas de los recursos
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_fichas_recursos; 
-CREATE  PROCEDURE modificar_fichas_recursos (idFichaRecurso INT, tituloRecurso VARCHAR(100), formatoRecurso VARCHAR(10), ruta_accesoRecurso VARCHAR(1000), caracterizacion_urlRecurso VARCHAR(1000), recurso_urlRecurso VARCHAR(1000)) 		
+DROP PROCEDURE IF EXISTS modificar_ficha_recurso; 
+CREATE  PROCEDURE modificar_ficha_recurso (idFichaRecurso INT, tituloRecurso VARCHAR(100), formatoRecurso VARCHAR(10), ruta_accesoRecurso VARCHAR(1000), caracterizacion_urlRecurso VARCHAR(1000), recurso_urlRecurso VARCHAR(1000)) 		
 BEGIN  	
 	UPDATE fichas_recursos  SET
     titulo = tituloRecurso, 
@@ -212,13 +199,13 @@ END //
 
 -- Procedimiento para consultar todas las recomendaciones por ID
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_recomendaciones_id;
-CREATE  PROCEDURE consultar_recomendaciones_id (idRecomendacion INT) 
+DROP PROCEDURE IF EXISTS consultar_recomendacion_id;
+CREATE  PROCEDURE consultar_recomendacion_id (idRecomendacion INT) 
 BEGIN 
     SELECT * FROM recomendaciones WHERE id = idRecomendacion;
 END // 
 
--- Procedimiento para consultar todas las recomendaciones por ID de recurso
+-- Procedimiento para consultar recomendaciones por ID de recurso
 DELIMITER // 
 DROP PROCEDURE IF EXISTS consultar_recomendaciones_idFichaRecurso;
 CREATE  PROCEDURE consultar_recomendaciones_idRecurso (idFichaRecurso INT) 
@@ -226,24 +213,19 @@ BEGIN
     SELECT * FROM recomendaciones WHERE fk_fichas_recursos_reco = idFichaRecurso;
 END // 
 
--- funcion para agregar recomendaciones
+-- procedimiento para agregar recomendaciones
 DELIMITER // 									
-DROP FUNCTION IF EXISTS agregar_recomendacion; 
-CREATE FUNCTION agregar_recomendacion(recomendacionRecurso	VARCHAR(1000), idFichaRecurso INT) RETURNS INT
-    DETERMINISTIC
+DROP PROCEDURE IF EXISTS agregar_recomendacion; 
+CREATE PROCEDURE agregar_recomendacion(recomendacionRecurso	VARCHAR(1000), idFichaRecurso INT) 
 BEGIN
-   DECLARE idInsertado INT;
-									
    INSERT INTO recomendaciones (recomendacion, fk_fichas_recursos_reco) VALUES (recomendacionRecurso, idFichaRecurso);
-   SELECT LAST_INSERT_ID() INTO idInsertado; 
-   
-   RETURN (idInsertado);
+   SELECT LAST_INSERT_ID() id; 
 END //  
 
   -- Procedimiento para modificar recomendaciones
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_recomendaciones; 
-CREATE  PROCEDURE modificar_recomendaciones (idRecomendacion INT, recomendacionRecurso	VARCHAR(40), idFichaRecurso INT) 		
+DROP PROCEDURE IF EXISTS modificar_recomendacion; 
+CREATE  PROCEDURE modificar_recomendacion (idRecomendacion INT, recomendacionRecurso	VARCHAR(40), idFichaRecurso INT) 		
 BEGIN  	
 	UPDATE recomendaciones  SET
     recomendacion = recomendacionRecurso, 
@@ -253,8 +235,8 @@ END //
 
   -- Procedimiento para eliminar recomendaciones
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_recomendaciones; 
-CREATE  PROCEDURE eliminar_recomendaciones (idRecomendacion INT) 		
+DROP PROCEDURE IF EXISTS eliminar_recomendacion; 
+CREATE  PROCEDURE eliminar_recomendacion (idRecomendacion INT) 		
 BEGIN  	
 	DELETE FROM recomendaciones
     WHERE id = idRecomendacion;							
@@ -270,24 +252,20 @@ BEGIN
     SELECT * FROM autores;
 END // 
 
--- funcion para agregar autores
+-- procedimiento para agregar autores
 DELIMITER // 	
-DROP FUNCTION IF EXISTS agregar_autor; 
-CREATE FUNCTION agregar_autor(nombreAutor VARCHAR(100)) RETURNS INT
-    DETERMINISTIC
+DROP PROCEDURE IF EXISTS agregar_autor;
+CREATE PROCEDURE agregar_autor (nombre VARCHAR(100))
 BEGIN
-   DECLARE idInsertado INT;
- 										
-   INSERT INTO autores (nombre) VALUES (nombreAutor);
-   SELECT LAST_INSERT_ID() INTO idInsertado; 
-   
-   RETURN (idInsertado);
-END //  
+    INSERT INTO autores (nombre) VALUES (nombre);
+    SELECT LAST_INSERT_ID() id;
+END //
 
-  -- Procedimiento para modificar autores
+
+-- Procedimiento para modificar autores
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_autores; 
-CREATE  PROCEDURE modificar_autores (idAutor INT, nombre VARCHAR(50)) 		
+DROP PROCEDURE IF EXISTS modificar_autor; 
+CREATE  PROCEDURE modificar_autor (idAutor INT, nombre VARCHAR(50)) 		
 BEGIN  	
 	UPDATE autores  SET
     nombre = nombreAutor
@@ -296,8 +274,8 @@ END //
 
   -- Procedimiento para eliminar autores
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_autores; 
-CREATE  PROCEDURE eliminar_autores(idAutor INT)
+DROP PROCEDURE IF EXISTS eliminar_autor; 
+CREATE  PROCEDURE eliminar_autor(idAutor INT)
 BEGIN  	
 	DELETE FROM autores
     WHERE id = idAutor;							
@@ -305,24 +283,19 @@ END //
 
 -- A U T O R E  S   F I C H A S    R E C U R S O S
 
--- funcion para agregar autores fichas recursos
+-- procedimiento para agregar autores fichas recursos
 DELIMITER // 
-DROP FUNCTION IF EXISTS agregar_autor_ficha_recurso; 
-CREATE FUNCTION agregar_autor_ficha_recurso(idAutor INT, idFichaRecurso INT) RETURNS INT
-    DETERMINISTIC
+DROP PROCEDURE IF EXISTS agregar_autor_ficha_recurso; 
+CREATE PROCEDURE agregar_autor_ficha_recurso(idAutor INT, idFichaRecurso INT)
 BEGIN
-	DECLARE idInsertado INT;
-   
 	INSERT INTO autores_fichas_recursos (fk_autores, fk_fichas_recursos_auto) VALUES (idAutor, idFichaRecurso);
-	SELECT LAST_INSERT_ID() INTO idInsertado; 
-	
-	RETURN (idInsertado);
+	SELECT LAST_INSERT_ID() id; 
 END //  
  
   -- Procedimiento para eliminar autores fichas recursos
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_autores_fichas_recursos; 
-CREATE  PROCEDURE eliminar_autores_fichas_recursos(idAutorFR INT)
+DROP PROCEDURE IF EXISTS eliminar_autor_fichas_recursos; 
+CREATE  PROCEDURE eliminar_autor_fichas_recursos(idAutorFR INT)
 BEGIN  	
 	DELETE FROM autores_fichas_recursos
     WHERE id = idAutorFR;							
@@ -340,30 +313,25 @@ END //
 
 -- Procedimiento para consultar los periodos academicos
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_periodos_academicos_id;
-CREATE  PROCEDURE consultar_periodos_academicos_id (idPeriodo INT) 
+DROP PROCEDURE IF EXISTS consultar_periodo_academico_id;
+CREATE  PROCEDURE consultar_periodo_academico_id (idPeriodo INT) 
 BEGIN 
     SELECT * FROM periodos_academicos where id = idPeriodo;
 END // 
 
--- funcion para agregar los periodos academicos
+-- procedimiento para agregar los periodos academicos
 DELIMITER // 	
-DROP FUNCTION IF EXISTS agregar_periodo_academico; 
-CREATE FUNCTION agregar_periodo_academico(nombrePeriodo VARCHAR(50), abreviacionPeriodo VARCHAR(20)) RETURNS INT
-    DETERMINISTIC
-BEGIN
-	DECLARE idInsertado INT;
-   								 										
+DROP PROCEDURE IF EXISTS agregar_periodo_academico; 
+CREATE PROCEDURE agregar_periodo_academico(nombrePeriodo VARCHAR(50), abreviacionPeriodo VARCHAR(20)) 
+BEGIN							 										
 	INSERT INTO periodos_academicos (nombre, abreviacion) VALUES (nombrePeriodo, abreviacionPeriodo);
-	SELECT LAST_INSERT_ID() INTO idInsertado; 
-	
-	RETURN (idInsertado);
+	SELECT LAST_INSERT_ID() id;
 END //  
 
   -- Procedimiento para modificar los periodos academicos
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_periodos_academicos; 
-CREATE  PROCEDURE modificar_periodos_academicos (idPeriodo INT, nombrePeriodo VARCHAR(50), abreviacionPeriodo VARCHAR(20)) 		
+DROP PROCEDURE IF EXISTS modificar_periodo_academico; 
+CREATE  PROCEDURE modificar_periodo_academico (idPeriodo INT, nombrePeriodo VARCHAR(50), abreviacionPeriodo VARCHAR(20)) 		
 BEGIN  	
 	UPDATE periodos_academicos  SET
     nombre = nombrePeriodo, 
@@ -373,7 +341,7 @@ END //
 
   -- Procedimiento para eliminar los periodos academicos
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_periodos_academicos; 
+DROP PROCEDURE IF EXISTS eliminar_periodo_academico; 
 CREATE  PROCEDURE eliminar_periodos_academicos (idPeriodo INT) 		
 BEGIN  	
 	DELETE FROM periodos_academicos
@@ -382,18 +350,13 @@ END //
 
 -- A U D I E N C I A
 			
--- funcion para agregar audiencia
+-- procedimiento para agregar audiencia
 DELIMITER // 		
-DROP FUNCTION IF EXISTS agregar_audiencia; 
-CREATE FUNCTION agregar_audiencia(idPeriodoAcademico INT, idFichaRecurso INT) RETURNS INT
-    DETERMINISTIC
-BEGIN
-	DECLARE idInsertado INT;
-   																		
+DROP PROCEDURE IF EXISTS agregar_audiencia; 
+CREATE PROCEDURE agregar_audiencia(idPeriodoAcademico INT, idFichaRecurso INT) 
+BEGIN																	
 	INSERT INTO audiencia (fk_periodos_academicos, fk_fichas_recursos_audi) VALUES (idPeriodoAcademico, idFichaRecurso);
-	SELECT LAST_INSERT_ID() INTO idInsertado; 
-	
-	RETURN (idInsertado);
+	SELECT LAST_INSERT_ID() id; 
 END //  
  
   -- Procedimiento para eliminar audencia
@@ -417,30 +380,25 @@ END //
 
 -- Procedimiento para consultar las asignaturas
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_asignaturas_id;
-CREATE  PROCEDURE consultar_asignaturas_id (idAsignatura INT) 
+DROP PROCEDURE IF EXISTS consultar_asignatura_id;
+CREATE  PROCEDURE consultar_asignatura_id (idAsignatura INT) 
 BEGIN 
     SELECT * FROM asignaturas where id = idAsignatura;
 END // 
 
--- funcion para agregar asignaturas
+-- procedimiento para agregar asignaturas
 DELIMITER // 	
-DROP FUNCTION IF EXISTS agregar_asignatura; 
-CREATE FUNCTION agregar_asignatura(nombreAsignatura VARCHAR(100)) RETURNS INT
-    DETERMINISTIC
-BEGIN
-	DECLARE idInsertado INT;
-  								
+DROP PROCEDURE IF EXISTS agregar_asignatura; 
+CREATE PROCEDURE agregar_asignatura(nombreAsignatura VARCHAR(100))
+BEGIN							
 	INSERT INTO asignaturas (nombre) VALUES (nombreAsignatura);
-	SELECT LAST_INSERT_ID() INTO idInsertado;
-
-	RETURN (idInsertado);
+	SELECT LAST_INSERT_ID() INTO id;
 END //  
 
   -- Procedimiento para modificar asignaturas
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_asignaturas; 
-CREATE  PROCEDURE modificar_asignaturas (idAsignatura INT, nombreAsignatura VARCHAR(1000)) 		
+DROP PROCEDURE IF EXISTS modificar_asignatura; 
+CREATE  PROCEDURE modificar_asignatura (idAsignatura INT, nombreAsignatura VARCHAR(1000)) 		
 BEGIN  	
 	UPDATE asignaturas  SET
     nombre = nombreAsignatura
@@ -449,8 +407,8 @@ END //
 
   -- Procedimiento para eliminar asignaturas
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_asignaturas; 
-CREATE  PROCEDURE eliminar_asignaturas (idAsignatura INT) 		
+DROP PROCEDURE IF EXISTS eliminar_asignatura; 
+CREATE  PROCEDURE eliminar_asignatura (idAsignatura INT) 		
 BEGIN  	
 	DELETE FROM asignaturas
     WHERE id = idAsignatura;							
@@ -458,18 +416,13 @@ END //
 
 -- D I S C I P L I N A   D E L   C O N O C I M I E N T O
 	
--- funcion para agregar disciplina del conocimiento
+-- procediento para agregar disciplina del conocimiento
 DELIMITER // 	
-DROP FUNCTION IF EXISTS agregar_disciplina_conocimiento; 
-CREATE FUNCTION agregar_disciplina_conocimiento(idAsignatura INT, idFichaRecurso INT) RETURNS INT
-    DETERMINISTIC
+DROP PROCEDURE IF EXISTS agregar_disciplina_conocimiento; 
+CREATE PROCEDURE agregar_disciplina_conocimiento(idAsignatura INT, idFichaRecurso INT) 
 BEGIN
-	DECLARE idInsertado INT;
-  																			
 	INSERT INTO disciplina_conocimiento (fk_asignaturas, fk_fichas_recursos_disc) VALUES (idPeriodoAcademico, idFichaRecurso);
-	SELECT LAST_INSERT_ID() INTO idInsertado; 
-	
-	RETURN (idInsertado);
+	SELECT LAST_INSERT_ID() INTO id;
 END //  
  
   -- Procedimiento para eliminar disciplina del conocimiento
@@ -493,30 +446,25 @@ END //
 
 -- Procedimiento para consultar los temas por ID
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_temas_id;
-CREATE  PROCEDURE consultar_temas_id (idTema INT) 
+DROP PROCEDURE IF EXISTS consultar_tema_id;
+CREATE  PROCEDURE consultar_tema_id (idTema INT) 
 BEGIN 
     SELECT * FROM temas where id = idTema;
 END // 
 
--- funcion para agregar temas
+-- Procedimiento para agregar temas
 DELIMITER // 
-DROP FUNCTION IF EXISTS agregar_tema; 
-CREATE FUNCTION agregar_tema(nombreTema VARCHAR(1000)) RETURNS INT
-    DETERMINISTIC
+DROP PROCEDURE IF EXISTS agregar_tema; 
+CREATE PROCEDURE agregar_tema(nombreTema VARCHAR(1000))
 BEGIN
-	DECLARE idInsertado INT;
-  																			
 	INSERT INTO temas (nombre) VALUES (nombreTema);
-	SELECT LAST_INSERT_ID() INTO idInsertado; 
-	
-	RETURN (idInsertado);
+	SELECT LAST_INSERT_ID() id; 
 END //  
 
   -- Procedimiento para modificar temas
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_temas; 
-CREATE  PROCEDURE modificar_temas (idTema INT, nombreTema VARCHAR(1000)) 		
+DROP PROCEDURE IF EXISTS modificar_tema; 
+CREATE  PROCEDURE modificar_tema (idTema INT, nombreTema VARCHAR(1000)) 		
 BEGIN  	
 	UPDATE temas  SET
     nombre = nombreTema
@@ -525,8 +473,8 @@ END //
 
   -- Procedimiento para eliminar temas
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_temas; 
-CREATE  PROCEDURE eliminar_temas (idTema INT) 		
+DROP PROCEDURE IF EXISTS eliminar_tema; 
+CREATE  PROCEDURE eliminar_tema (idTema INT) 		
 BEGIN  	
 	DELETE FROM temas
     WHERE id = idTema;							
@@ -534,24 +482,19 @@ END //
 
 -- C O N T E N I D O S
 			
--- funcion para agregar contenidos
+-- procedimiento para agregar contenidos
 DELIMITER // 
-DROP FUNCTION IF EXISTS agregar_contenido; 
-CREATE FUNCTION agregar_contenido(idTema INT, idFichaRecurso INT) RETURNS INT
-    DETERMINISTIC
-BEGIN
-	DECLARE idInsertado INT;
-										
+DROP PROCEDURE IF EXISTS agregar_contenido; 
+CREATE PROCEDURE agregar_contenido(idTema INT, idFichaRecurso INT)
+BEGIN								
 	INSERT INTO contenidos (fk_temas, fk_fichas_recursos_cont) VALUES (idTema, idFichaRecurso);
-	SELECT LAST_INSERT_ID() INTO idInsertado; 
-	
-	RETURN (idInsertado);
+	SELECT LAST_INSERT_ID() id;
 END //  
  
   -- Procedimiento para eliminar audencia
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_contenidos; 
-CREATE  PROCEDURE eliminar_contenidos(idContenido INT)
+DROP PROCEDURE IF EXISTS eliminar_contenido; 
+CREATE  PROCEDURE eliminar_contenido(idContenido INT)
 BEGIN  	
 	DELETE FROM contenidos
     WHERE id = idContenido;							
