@@ -208,7 +208,7 @@ END //
 -- Procedimiento para consultar recomendaciones por ID de recurso
 DELIMITER // 
 DROP PROCEDURE IF EXISTS consultar_recomendaciones_idFichaRecurso;
-CREATE  PROCEDURE consultar_recomendaciones_idRecurso (idFichaRecurso INT) 
+CREATE  PROCEDURE consultar_recomendaciones_idFichaRecurso (idFichaRecurso INT) 
 BEGIN 
     SELECT * FROM recomendaciones WHERE fk_fichas_recursos_reco = idFichaRecurso;
 END // 
@@ -342,7 +342,7 @@ END //
   -- Procedimiento para eliminar los periodos academicos
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS eliminar_periodo_academico; 
-CREATE  PROCEDURE eliminar_periodos_academicos (idPeriodo INT) 		
+CREATE  PROCEDURE eliminar_periodo_academico (idPeriodo INT) 		
 BEGIN  	
 	DELETE FROM periodos_academicos
     WHERE id = idPeriodo;							
@@ -392,7 +392,7 @@ DROP PROCEDURE IF EXISTS agregar_asignatura;
 CREATE PROCEDURE agregar_asignatura(nombreAsignatura VARCHAR(100))
 BEGIN							
 	INSERT INTO asignaturas (nombre) VALUES (nombreAsignatura);
-	SELECT LAST_INSERT_ID() INTO id;
+	SELECT LAST_INSERT_ID() id;
 END //  
 
   -- Procedimiento para modificar asignaturas
@@ -422,7 +422,7 @@ DROP PROCEDURE IF EXISTS agregar_disciplina_conocimiento;
 CREATE PROCEDURE agregar_disciplina_conocimiento(idAsignatura INT, idFichaRecurso INT) 
 BEGIN
 	INSERT INTO disciplina_conocimiento (fk_asignaturas, fk_fichas_recursos_disc) VALUES (idPeriodoAcademico, idFichaRecurso);
-	SELECT LAST_INSERT_ID() INTO id;
+	SELECT LAST_INSERT_ID() id;
 END //  
  
   -- Procedimiento para eliminar disciplina del conocimiento
