@@ -42,7 +42,7 @@ CREATE TABLE fichas_recursos (
 			
 CREATE TABLE comentarios (
 			id int 						not null auto_increment,
-			comentario VARCHAR(250)		not null, 
+			comentario VARCHAR(1000)		not null, 
 			fecha date 					not null,
 			denunciado TINYINT 			not null,
 			permitido TINYINT			not null,
@@ -112,7 +112,7 @@ CREATE TABLE contenidos (
 			
 CREATE TABLE recomendaciones (
 			id int 							not null auto_increment,
-			recomendacion	VARCHAR(40) 	not null,
+			recomendacion	VARCHAR(1000) 	not null,
 			fk_fichas_recursos_reco int 	not null,
 			PRIMARY KEY (id),
 			FOREIGN KEY (fk_fichas_recursos_reco)
@@ -121,7 +121,7 @@ CREATE TABLE recomendaciones (
 			
 CREATE TABLE autores (
 			id int 					not null auto_increment,
-			nombre VARCHAR(50)		not null,
+			nombre VARCHAR(100)		not null,
 			PRIMARY KEY (id)
 			);
 			
