@@ -25,12 +25,12 @@ BEGIN
     SELECT * FROM usuarios WHERE email = emailUsuario;
 END //  
 
--- Procedimiento para consultar usuarios por filtro
+-- Procedimiento para buscar usuarios por filtro
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS buscar_usuarios_filtro; 
 CREATE  PROCEDURE buscar_usuarios_filtro (filtro VARCHAR(100))
 BEGIN  											
-    SELECT * FROM usuarios u WHERE u.nombre like '%filtro%' OR u.email like '%filtro%';
+    SELECT * FROM usuarios u WHERE u.nombre like concat('%',filtro,'%') OR u.email like concat('%',filtro,'%');
 END // 
 
 -- procedimiento para agregar usuarios
