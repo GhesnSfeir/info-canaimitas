@@ -25,6 +25,14 @@ BEGIN
     SELECT * FROM usuarios WHERE email = emailUsuario;
 END //  
 
+-- Procedimiento para consultar usuarios por filtro
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS buscar_usuarios_filtro; 
+CREATE  PROCEDURE buscar_usuarios_filtro (filtro VARCHAR(100))
+BEGIN  											
+    SELECT * FROM usuarios u WHERE u.nombre like '%filtro%' OR u.email like '%filtro%';
+END // 
+
 -- procedimiento para agregar usuarios
 DELIMITER // 
 DROP PROCEDURE IF EXISTS agregar_usuario; 
@@ -54,6 +62,15 @@ DROP PROCEDURE IF EXISTS contar_usuarios_email;
 CREATE PROCEDURE contar_usuarios_email (email VARCHAR(100))
 BEGIN
     SELECT COUNT(*) cuenta FROM usuarios u WHERE u.email = email;
+END //
+
+  -- Procedimiento para eliminar usuarios
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_usuario; 
+CREATE  PROCEDURE eliminar_usuario (idUsuario INT) 		
+BEGIN  	
+	DELETE FROM usuarios
+    WHERE id = idUsuario;							
 END //
 
 -- P R E G U N T A S   F R E C U E N T E S
