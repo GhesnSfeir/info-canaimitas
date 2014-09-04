@@ -17,6 +17,14 @@ BEGIN
     SELECT * FROM usuarios WHERE id = idUsuario;
 END //  
 
+-- Procedimiento para consultar usuarios por email
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS consultar_usuarios_email; 
+CREATE  PROCEDURE consultar_usuarios_email (emailUsuario VARCHAR(100))
+BEGIN  											
+    SELECT * FROM usuarios WHERE email = emailUsuario;
+END //  
+
 -- procedimiento para agregar usuarios
 DELIMITER // 
 DROP PROCEDURE IF EXISTS agregar_usuario; 
