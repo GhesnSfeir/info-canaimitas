@@ -10,9 +10,11 @@ consultar_usuarios
 consultar_usuarios_id
 select agregar_usuario("Lofia", "lofita@gmail.com","soyunalofia", "Gestor"); 
 modificar_usuarios
+eliminar_usuario
 
 consultar_preguntas_frecuentes
 consultar_preguntas_frecuentes_id
+buscar_preguntas_frecuentes_filtro
 agregar_preguntas_frecuentes
 modificar_preguntas_frecuentes
 eliminar_preguntas_frecuentes
