@@ -91,6 +91,14 @@ BEGIN
     SELECT * FROM preguntas_frecuentes where id = idPregunta;
 END // 
 
+-- Procedimiento para buscar preguntas frecuentes por filtro
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS buscar_preguntas_frecuentes_filtro; 
+CREATE  PROCEDURE buscar_preguntas_frecuentes_filtro (filtro VARCHAR(100))
+BEGIN  											
+    SELECT * FROM preguntas_frecuentes p WHERE p.pregunta like concat('%',filtro,'%') OR p.respuesta like concat('%',filtro,'%');
+END // 
+
 -- procedimiento para agregar preguntas frecuentes
 DELIMITER // 
 DROP PROCEDURE IF EXISTS agregar_pregunta_frecuente; 
