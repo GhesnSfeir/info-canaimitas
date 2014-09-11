@@ -11,6 +11,7 @@ class Recomendacion extends Entidad {
     const SP_ELIMINAR = SP_ELIMINAR_RECOMENDACION;
 
     protected $recomendacion;
+    protected $fkIdRecurso;
     
     protected static function armarDesdeRegistro($registro) {
         
@@ -39,10 +40,12 @@ class Recomendacion extends Entidad {
         
     }
 
-    public function __construct($recomendacion = null) {
+    public function __construct($recomendacion = null, $fkIdRecurso = null) {
 
         if (!empty($recomendacion)) 
             $this->establecerRecomendacion($recomendacion);
+        if (!empty($fkIdRecurso)) 
+            $this->establecerFkIdRecurso($recomendacion);
 
     }
 
