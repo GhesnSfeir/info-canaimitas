@@ -11,7 +11,7 @@ try {
     
     $usuario = Usuario::consultarPorEmail($email);
     
-    if (is_null($usuario)) {
+    if (empty($usuario)) {
         
         echo "¡Error!\n\nNo existe una cuenta de usuario asociada al email especificado.";
         
@@ -19,7 +19,7 @@ try {
     else if ($usuario->obtenerClave() == $clave and
             $usuario->obtenerTipo() != "general") {
         
-        if ($usuario->obtenerActivo() == 1) {
+        if ($usuario->obtenerEstado() == 1) {
             
             $_SESSION['UsuarioId'] = $usuario->obtenerId();
             $_SESSION['UsuarioTipo'] = $usuario->obtenerTipo();

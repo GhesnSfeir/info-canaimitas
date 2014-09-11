@@ -39,6 +39,8 @@ class ConexionBD {
                 
             }
         }
+        
+        mysql_query("SET NAMES UTF8");
     }
     
     public function cerrar() {
@@ -49,24 +51,24 @@ class ConexionBD {
     
     public function correrQuery($query) {
         
+        $this->abrir();
         $resultado = mysql_query($query);
         
-        if (is_resource($resultado)){
+        if (is_resource($resultado) and mysql_num_rows($resultado) > 0){
             
-            if (mysql_num_rows($resultado)) {
+            $cursor = array();
 
-                $cursor = array();
+            while ($registro = mysql_fetch_array($resultado, MYSQLI_ASSOC)){
 
-                while ($registro = mysql_fetch_array($resultado, MYSQLI_ASSOC)){
+                array_push($cursor, $registro);
 
-                    array_push($cursor, $registro);
-                    
-                }
-
-                return $cursor;
             }
-            
+
+            $this->cerrar();
+            return $cursor;
         }
+        
+        $this->cerrar();
         return $resultado;
         
     }
@@ -96,6 +98,33 @@ class ConexionBD {
             }
             
             $query = "CALL $procedimiento(" . 
+                    implode(",", $argumentosTransformados) . ")";
+            
+        }
+        
+        return $this->correrQuery($query);
+        
+    }
+    
+    public function correrFuncion($funcion, $argumentos = null) {
+        
+        if (empty($argumentos)) {
+            
+            $query = "SELECT $funcion()";
+            
+        }
+        else if (is_array($argumentos)) {
+            
+            $argumentosTransformados = array();
+            
+            foreach ($argumentos as $valor) {
+                
+                array_push($argumentosTransformados, 
+                        is_string($valor) ? "'$valor'" : $valor);
+                
+            }
+            
+            $query = "SELECT $funcion(" . 
                     implode(",", $argumentosTransformados) . ")";
             
         }

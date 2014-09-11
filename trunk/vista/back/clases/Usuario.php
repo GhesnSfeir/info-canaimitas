@@ -1,408 +1,232 @@
 <?php
 
-include_once "ConexionBD.php";
+include_once "Entidad.php";
 
-class Usuario {
+class Usuario extends Entidad {
     
-    private $id;
-    private $nombre;
-    private $email;
-    private $clave;
-    private $tipo;
-    private $activo;
+    const SP_CONSULTAR_TODOS = SP_CONSULTAR_USUARIOS;
+    const SP_CONSULTAR_POR_ID = SP_CONSULTAR_USUARIO_ID;
+    const SP_AGREGAR = SP_AGREGAR_USUARIO;
+    const SP_MODIFICAR = SP_MODIFICAR_USUARIO;
+    const SP_ELIMINAR = SP_ELIMINAR_USUARIO;
     
+    protected $nombre;
+    protected $email;
+    protected $clave;
+    protected $tipo;
+    protected $activo;
     
-    public function __construct($nombre, $email, $clave, $tipo, $activo = 1, $id = null) {
+    protected static function armarDesdeRegistro($registro) {
         
+        $usuario = new Usuario();
+        $usuario->establecerId($registro['id'])
+            ->establecerNombre($registro['nombre'])
+            ->establecerEmail($registro['email'])
+            ->establecerClave($registro['clave'])
+            ->establecerTipo($registro['tipo']);
+        if ($registro['activo'] == 0) $usuario->cambiarEstado();
+        
+        return $usuario;
+    }
+    
+    protected function obtenerParametrosSPAgregar() {
+        
+        return array($this->nombre,$this->email,$this->clave,$this->tipo);
+        
+    }
+    
+    protected function obtenerParametrosSPModificar() {
+        
+        return array($this->id, $this->nombre, $this->email, $this->clave, 
+            $this->tipo, $this->activo);
+        
+    }
+    
+    protected function validarTodo() {
+        
+        $this->validarNombre($this->nombre);
+        $this->validarEmail($this->email);
+        $this->validarClave($this->clave);
+        $this->validarTipo($this->tipo);
+        
+    }
+    
+    public function __construct($nombre = null, $email = null, $clave = null, $tipo = "gestor") {
+        
+        if (!empty($nombre)) $this->establecerNombre($nombre);
+        if (!empty($email)) $this->establecerEmail($email);
+        if (!empty($clave)) $this->establecerClave($clave);
+        if (!empty($tipo)) $this->establecerTipo($tipo);
+        $this->activo = 1;
+        
+    }
+
+    public function cambiarEstado() {
+
+        $this->activo = $this->activo == 1 ? 0 : 1;
+        return $this;
+
+    }
+
+    public function establecerNombre($nombre) {
+
+        $this->validarNombre($nombre);
         $this->nombre = $nombre;
+        return $this;
+
+    }
+
+    public function establecerEmail($email) {
+
+        $this->validarEmail($email);
         $this->email = $email;
+        return $this;
+
+    }
+
+    public function establecerClave($clave) {
+
+        $this->validarClave($clave);
         $this->clave = $clave;
-        $this->tipo = $tipo;
-        $this->activo = $activo;
-        $this->id = $id;
-            
+        return $this;
+
     }
-    
-    public function obtenerId() {
-        
-        return $this->id;
-        
+
+    public function establecerTipo($tipo) {
+
+        $this->validarTipo($tipo);
+        $this->tipo = strtolower($tipo);
+        return $this;
+
     }
-    
-    public function obtenerNombre() {
-        
-        return $this->nombre;
-        
-    }
-    
-    public function obtenerEmail() {
-        
-        return $this->email;
-        
-    }
-    
-    public function obtenerClave() {
-        
-        return $this->clave;
-        
-    }
-    
-    public function obtenerTipo() {
-        
-        return $this->tipo;
-        
-    }
-    
-    public function obtenerActivo() {
-        
-        return $this->activo;
-        
-    }
-    
-    public function convertirEnArreglo() {
-        
-        return array(
-                "id" => $this->id,
-                "nombre" => $this->nombre,
-                "email" => $this->email,
-                "clave" => $this->clave,
-                "tipo" => $this->tipo,
-                "activo" => $this->activo);
-        
-    }
-    
-    public function cambiarClave($claveNueva) {
-        
-        $mensajeErrores = $this->validarClave($claveNueva);
-        
-        if ($mensajeErrores == "") {
-            
-            $this->clave = $claveNueva;
-            
-        }
-        else {
-            
-            throw new Exception($mensajeErrores);
-        
-        }
-        
+
+    public function obtenerNombre() { return $this->nombre; }
+
+    public function obtenerEmail() { return $this->email; }
+
+    public function obtenerClave() { return $this->clave; }
+
+    public function obtenerEstado() { return $this->activo; }
+
+    public function obtenerTipo() { return $this->tipo; }
+
+    private function validarNombre($nombre) {
+
+        if (empty($nombre))
+            throw new Exception("El nombre del usuario no puede estar vacío");
+
+        else if (!is_string($nombre))
+            throw new Exception("El nombre del usuario debe ser una cadena de caracteres");
+
+        else if (strlen($nombre) > 100)
+            throw new Exception("El nombre del usuario debe tener máximo 100 caracteres");
+
         return true;
+
     }
-    
-    public function cambiarEstado(){
-        
-        if ($this->activo === '1'){
-            
-            $this->activo = '0';
-            
-        }
-        else {
-            
-            $this->activo = '1';
-            
-        }
-        
-    }
-    
-    public function cambiarNombre($nombreNuevo) {
-        
-        $mensajeErrores = $this->validarNombreUsuario($nombreNuevo);
-        
-        if ($mensajeErrores == "") {
-            
-            $this->nombre = $nombreNuevo;
-            
-        }
-        else {
-            
-            throw new Exception($mensajeErrores);
-        
-        }
-        
-        return true;
-    }
-    
-    public function Guardar() {
-        
-        $mensajeErrores = "";
-        $mensajeErrores .= $this->validarNombreUsuario($this->nombre);
-        $mensajeErrores .= $this->validarEmail($this->email);
-        $mensajeErrores .= $this->validarClave($this->clave);
-        
-        if ($mensajeErrores == "") {
-            
-            if (isset($this->id)) { //Si el usuario ya esta en la base de datos
 
-                $query = "UPDATE usuarios SET nombre='$this->nombre', 
-                            email='$this->email', clave='$this->clave', 
-                            tipo='$this->tipo', activo='$this->activo'
-                            WHERE id=$this->id";
-                
-                $conexion = new ConexionBD();
-                $conexion->abrir();
-
-                if ($conexion->correrQuery($query)){
-
-                    $conexion->cerrar();
-                    return true;
-
-                }
-
-                return false;
-
-            }
-            else { //Si el usuario no esta en la base de datos
-
-                $query = "INSERT INTO usuarios (nombre, email, clave, tipo, activo) 
-                            VALUES ('$this->nombre', '$this->email', '$this->clave',
-                                    '$this->tipo', '$this->activo')";
-
-                $conexion = new ConexionBD();
-                $conexion->abrir();
-
-                if ($conexion->correrQuery($query)){
-
-                    $this->id = $conexion->obtenerId();
-                    $conexion->cerrar();
-                    return true;
-
-                }
-
-                return false;
-            }
-        }
-        else {
-            
-            throw new Exception($mensajeErrores);
-            
-        }
-        
-        
-    }
-    
-    public static function consultarPorEmail($email) {
-        
-        $query = "SELECT * from usuarios where email='$email'";
-        
-        $conexion = new ConexionBD();
-        $conexion->abrir();
-        
-        $resultado = $conexion->correrQuery($query);
-        
-        $registro = $resultado[0];
-        
-        if ($registro) {
-            
-            return new Usuario(
-                    $registro['nombre'],
-                    $registro['email'],
-                    $registro['clave'],
-                    $registro['tipo'],
-                    $registro['activo'],
-                    $registro['id']);
-            
-        }
-        else {
-            
-            return $registro;
-            
-        }
-        
-        $conexion->cerrar();
-        
-    }
-    
-    public static function consultarPorId($id) {
-        
-        $query = "SELECT * from usuarios where id=$id";
-        
-        $conexion = new ConexionBD();
-        $conexion->abrir();
-        
-        $resultado = $conexion->correrQuery($query);
-        
-        $registro = $resultado[0];
-        
-        if ($registro) {
-            
-            return new Usuario(
-                    $registro['nombre'],
-                    $registro['email'],
-                    $registro['clave'],
-                    $registro['tipo'],
-                    $registro['activo'],
-                    $registro['id']);
-        }
-        else {
-            
-            return $registro;
-            
-        }
-        
-        $conexion->cerrar();
-    }
-    
-    public static function consultarTodos() {
-        
-        $query = "SELECT * from usuarios";
-        
-        $conexion = new ConexionBD();
-        $conexion->abrir();
-        
-        $resultado = $conexion->correrQuery($query);
-        $usuarios = array();
-        
-        foreach ($resultado as &$registro) {
-            
-            array_push($usuarios, new Usuario($registro['nombre'], 
-                    $registro['email'], 
-                    $registro['clave'], 
-                    $registro['tipo'], 
-                    $registro['activo'],
-                    $registro['id']));
-            
-        }
-        
-        $conexion->cerrar();
-        
-        return $usuarios;
-    }
-    
-    public static function buscarCoincidencias($cadena) {
-        
-        if (empty($cadena)) {
-            
-            $query = "SELECT * FROM usuarios";
-            
-        }
-        else {
-            
-            $query = "SELECT * 
-                FROM usuarios 
-                WHERE nombre like '%$cadena%'
-                OR email like '%$cadena%'";
-            
-        }
-        
-        $conexion = new ConexionBD();
-        $conexion->abrir();
-        
-        $resultado = $conexion->correrQuery($query);
-        $usuarios = array();
-        
-        if (is_array($resultado)) {
-            
-            foreach ($resultado as $registro) {
-
-                array_push($usuarios, new Usuario($registro['nombre'], 
-                        $registro['email'], 
-                        $registro['clave'], 
-                        $registro['tipo'], 
-                        $registro['activo'],
-                        $registro['id']));
-
-            }
-        }
-        else {
-            
-            return array();
-            
-        }
-        
-        $conexion->cerrar();
-        
-        return $usuarios;
-    }
-    
-    private function existeEmail($email) {
-        
-        $query = "SELECT COUNT(*) cuenta FROM usuarios WHERE email='$email'";
-        
-        $conexion = new ConexionBD();
-        $conexion->abrir();
-        
-        $resultado = $conexion->correrQuery($query);
-        
-        $conexion->cerrar();
-        
-        if ($resultado[0]['cuenta'] == 1) {
-            
-            return true;
-            
-        }
-        else {
-            
-            return false;
-            
-        }
-    }
-    
     private function validarEmail($email) {
 
-        $mensaje = "";
+        if (empty($email))
+            throw new Exception("El email del usuario no puede estar vacío");
 
-        if (empty($email)) {
+        else if (!is_string($email))
+            throw new Exception("El email del usuario debe ser una cadena de caracteres");
 
-            return "- Es necesario especificar un email.\n";
+        else if (strlen($email) > 100)
+            throw new Exception("El email del usuario debe tener máximo 100 caracteres");
 
-        }
+        else if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+            throw new Exception("El email especificado para el usuario no tiene un formato válido");
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        if ($this->existeEmail($email) and empty($this->id)) 
+            throw new Exception("El email especificado para el usuario ya existe.");
 
-            $mensaje .= "- El email no tiene un formato válido.\n";
+        return true;
 
-        }
-
-        if (strlen($email) > 100){
-
-            $mensaje .= "- El email no debe exceder los 100 
-                    caracteres.\n";
-
-        }
-
-        if ($this->existeEmail($email) and !isset($this->id)){
-
-            $mensaje .= "- El email especificado ya existe.\n";
-
-        }
-
-        return $mensaje;
     }
-    
-    private function validarNombreUsuario($nombreUsuario) {
-    
-        $mensaje = "";
 
-        if (empty($nombreUsuario)) {
-
-            return "- Es necesario especificar un nombre de usuario.\n";
-
-        }
-
-        if (strlen($nombreUsuario) > 100) {
-
-            $mensaje .= "- El nombre de usuario no debe exceder los 100 
-                    caracteres.\n";
-
-        }
-
-        return $mensaje;
-    }
-    
     private function validarClave($clave) {
-    
-        if (empty($clave)){
 
-            return "- Es necesario especificar una clave.\n";
+        if (empty($clave))
+            throw new Exception("La clave del usuario no puede estar vacía");
 
-        }
-        else {
+        else if (!is_string($clave))
+            throw new Exception("La clave del usuario debe ser una cadena de caracteres");
 
-            return "";
+        else if (strlen($clave) > 32)
+            throw new Exception("La clave del usuario debe tener máximo 32 caracteres");
 
-        }
+        return true;
+
+    }
+
+    private function validarTipo($tipo) {
+
+        if (empty($tipo))
+            throw new Exception("EL tipo del usuario no debe estar vacío");
+
+        else if (!is_string($tipo))
+            throw new Exception("El tipo del usuario debe ser una cadena de caracteres");
+
+        else if (strlen($tipo) > 50)
+            throw new Exception("EL tipo del usuario debe tener máximo 50 caracteres");
+
+        else if (strtolower($tipo) != "gestor" and
+                strtolower($tipo) != "administrador" and
+                strtolower($tipo) != "general")
+            throw new Exception("El tipo del usuario debe ser 'administrador', 'gestor', o 'general'");
+
+        return true;
+
+    }
+
+    private function existeEmail($email) {
+
+        $procedimiento = SP_CONTAR_USUARIOS_EMAIL;
+        
+        $conexion = new ConexionBD();
+        
+        $resultado = $conexion->correrProcedimiento($procedimiento, array ($email));
+
+        if ($resultado[0]["cuenta"] == 1 ) return true;
+        
+        return false;
+
     }
     
-    
+    public static function buscarPorFiltro ($filtro) {
+        
+        $conexion = new ConexionBD();
+        $procedimiento = SP_BUSCAR_USUARIOS_FILTRO;
+        $parametros = array($filtro);
+        $resultado = $conexion->correrProcedimiento($procedimiento, $parametros);
+        $usuarios = array();
+
+        foreach ($resultado as $registro) {
+
+            array_push($usuarios, self::armarDesdeRegistro($registro));
+
+        }
+
+        return $usuarios;
+    }
+
+    public static function consultarPorEmail($email) {
+
+        $conexion = new ConexionBD();
+        $procedimiento = SP_CONSULTAR_USUARIOS_EMAIL;
+        $parametros = array($email);
+        $resultado = $conexion->correrProcedimiento($procedimiento, $parametros);
+        $registro = $resultado[0];
+
+        if ($registro) {
+
+            return self::armarDesdeRegistro($registro);
+
+        }
+        else return $registro;
+
+    }
 }
 ?>

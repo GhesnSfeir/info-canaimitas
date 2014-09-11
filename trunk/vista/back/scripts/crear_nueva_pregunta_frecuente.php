@@ -9,7 +9,7 @@ try {
     
     $preguntaFrecuente = new PreguntaFrecuente($pregunta, $respuesta);
     
-    if ($preguntaFrecuente->Guardar()) {
+    if ($preguntaFrecuente->guardar()) {
         
         echo "¡Enhorabuena!\n\nLa pregunta frecuente ha sido creada con éxito.";
         

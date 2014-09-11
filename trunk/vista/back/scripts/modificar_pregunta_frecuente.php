@@ -19,10 +19,10 @@ try {
     }
     else {
         
-        $preguntaFrecuente->cambiarPregunta($preguntaNueva);
-        $preguntaFrecuente->cambiarRespuesta($respuestaNueva);
+        $preguntaFrecuente->establecerPregunta($preguntaNueva);
+        $preguntaFrecuente->establecerRespuesta($respuestaNueva);
         
-        if ($preguntaFrecuente->Guardar()) {
+        if ($preguntaFrecuente->guardar()) {
             
             echo "¡Enhorabuena!\n\nLa pregunta frecuente ha sido actualizada con éxito.";
 

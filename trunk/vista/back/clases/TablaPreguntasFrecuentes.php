@@ -9,7 +9,7 @@ class TablaPreguntasFrecuentes extends ElementoHTML{
     
     public function __construct($filtro, $atributos = null) {
         
-        $this->preguntas = PreguntaFrecuente::buscarCoincidencias($filtro);
+        $this->preguntas = PreguntaFrecuente::buscarPorFiltro($filtro);
         
         $this->etiqueta = "table";
         $this->contenido = array();
@@ -45,8 +45,9 @@ class TablaPreguntasFrecuentes extends ElementoHTML{
             $celdaVisible = new ElementoHTML("td", 
                     new ElementoHTML("input", null, array(
                         "type" => "checkbox", 
-                        "class" => "checkbox"
-                        
+                        "class" => "checkbox",
+                        $preguntaFrecuente->obtenerEstado()==1 ? "" : "checked",
+                        "onclick" => "javascript: cambiarEstado('$id');"
                     )));
             
             $filaPreguntaFrecuente = new ElementoHTML("tr", array(

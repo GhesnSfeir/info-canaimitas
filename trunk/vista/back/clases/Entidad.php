@@ -8,9 +8,104 @@ abstract class Entidad {
     
     public function obtenerId() { return $this->id; }
     
-    protected function establecerId($id) { $this->id = $id; }
+    protected function establecerId($id) { $this->id = $id; return $this;}
     
-    public static function crearDesdeJSON($json) {
+    protected function estaEnBaseDeDatos() { 
+        
+        return (empty($this->id)) ? false : true;
+        
+    }
+    
+    public function guardar() {
+        
+        $clase = get_called_class();
+        $this->validarTodo();
+
+        $conexion = new ConexionBD();
+
+        if($this->estaEnBaseDeDatos()) {
+
+            $procedimiento = $clase::SP_MODIFICAR;
+            $parametros = $this->obtenerParametrosSPModificar();
+
+            if($conexion->correrProcedimiento($procedimiento, $parametros)) {
+
+                return $this;
+
+	    }
+
+            return false;
+
+        }
+        else {
+
+            $procedimiento = $clase::SP_AGREGAR;
+            $parametros = $this->obtenerParametrosSPAgregar();
+            $resultado = $conexion->correrProcedimiento($procedimiento, $parametros);
+            $id = $resultado[0]['id'];
+            
+            if ($id > 0) {
+
+                $this->id = $id;
+                return $this;
+
+	    }
+
+            return false;
+        }
+    }
+    
+    public function eliminar() {
+        
+        $clase = get_called_class();
+        
+        if (!$this->estaEnBaseDeDatos())
+            throw new Exception ("No se puede eliminar el objeto de tipo $clase 
+                    porque el mismo no se encuentra en la base de datos");
+        
+        $conexion = new ConexionBD();
+        $procedimiento = $clase::SP_ELIMINAR;
+        $parametros = array($this->id);
+        
+        return $conexion->correrProcedimiento($procedimiento, $parametros);
+        
+    }
+    
+    public static function consultarTodos() {
+        
+        $conexion = new ConexionBD();
+        $clase = get_called_class();
+        $procedimiento = $clase::SP_CONSULTAR_TODOS;
+        $resultado = $conexion->correrProcedimiento($procedimiento);
+        $entidades = array();
+
+        foreach ($resultado as $registro) {
+
+            $entidad = $clase::armarDesdeRegistro($registro);
+            array_push($entidades, $entidad);
+
+        }
+
+        return $entidades;
+    }
+
+    public static function consultarPorId($id) {
+
+        $conexion = new ConexionBD();
+        $clase = get_called_class();
+        $procedimiento = $clase::SP_CONSULTAR_POR_ID;
+        $resultado = $conexion->correrProcedimiento($procedimiento, array($id));
+        $registro = $resultado[0];
+        
+        if ($registro) {
+
+            return $clase::armarDesdeRegistro($registro);;
+
+        }
+        else return $registro;
+    }
+    
+    /*public static function crearDesdeJSON($json) {
         
         if (is_string($json)) {
             
@@ -55,7 +150,7 @@ abstract class Entidad {
         }
         
         return $arreglo;
-    }
+    }*/
     
     
     

@@ -45,7 +45,7 @@ class Tema extends Entidad {
     
         if(isset($this->id)) {//Si el Tema existe en la base de datos
         
-            if($conexion->correrProcedimiento(SP_MODIFICAR_TEMAS, 
+            if($conexion->correrProcedimiento(SP_MODIFICAR_TEMA, 
                 array($this->id, $this->nombre))) {
 
 	        $conexion->cerrar();
@@ -58,7 +58,7 @@ class Tema extends Entidad {
         }
         else {
 
-            $id = $conexion->correrProcedimiento(SP_AGREGAR_TEMAS,
+            $id = $conexion->correrProcedimiento(SP_AGREGAR_TEMA,
                     array($this->nombre));
 
             if ($id > 0) {
@@ -76,7 +76,7 @@ class Tema extends Entidad {
 
     public static function consultarPorId($id) {
 
-        $procedimiento = SP_CONSULTAR_TEMAS_ID;
+        $procedimiento = SP_CONSULTAR_TEMA_ID;
 
         $conexion = new ConexionBD();
         $conexion->abrir();

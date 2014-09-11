@@ -1,25 +1,61 @@
 <?php
 
-include_once "ConexionBD.php";
+include_once "Entidad.php";
 
-class PreguntaFrecuente {
+class PreguntaFrecuente extends Entidad {
     
-    private $id;
-    private $pregunta;
-    private $respuesta;
+    const SP_CONSULTAR_TODOS = SP_CONSULTAR_PREGUNTAS_FRECUENTES;
+    const SP_CONSULTAR_POR_ID = SP_CONSULTAR_PREGUNTA_FRECUENTE_ID;
+    const SP_AGREGAR = SP_AGREGAR_PREGUNTA_FRECUENTE;
+    const SP_MODIFICAR = SP_MODIFICAR_PREGUNTA_FRECUENTE;
+    const SP_ELIMINAR = SP_ELIMINAR_PREGUNTA_FRECUENTE;
     
+    protected $pregunta;
+    protected $respuesta;
+    protected $visible;
     
-    public function __construct($pregunta, $respuesta, $id = null) {
+    protected static function armarDesdeRegistro($registro) {
         
-        $this->pregunta = $pregunta;
-        $this->respuesta = $respuesta;
-        $this->id = $id;
+        $preguntaFrecuente = new PreguntaFrecuente();
+        $preguntaFrecuente->establecerId($registro['id'])
+            ->establecerPregunta($registro['pregunta'])
+            ->establecerRespuesta($registro['respuesta']);
+        if ($registro['visible'] == 0) $preguntaFrecuente->cambiarEstado();
+        
+        return $preguntaFrecuente;
+    }
+    
+    protected function obtenerParametrosSPAgregar() {
+        
+        return array($this->pregunta, $this->respuesta, $this->visible);
+        
+    }
+    
+    protected function obtenerParametrosSPModificar() {
+        
+        return array($this->id, $this->pregunta, $this->respuesta, 
+            $this->visible);
+        
+    }
+    
+    protected function validarTodo() {
+        
+        $this->validarPregunta($this->pregunta);
+        $this->validarRespuesta($this->respuesta);
+        
+    }
+    
+    public function __construct($pregunta = null, $respuesta = null) {
+        
+        if (!empty($pregunta)) $this->establecerPregunta($pregunta);
+        if (!empty($respuesta)) $this->establecerRespuesta($respuesta);
+        $this->visible = 1;
             
     }
     
-    public function obtenerId() {
+    public function obtenerEstado() {
         
-        return $this->id;
+        return $this->visible;
         
     }
     
@@ -34,234 +70,88 @@ class PreguntaFrecuente {
         return $this->respuesta;
         
     }
-    
-    public function convertirEnArreglo() {
-        
-        return array(
-                "id" => $this->id,
-                "pregunta" => $this->pregunta,
-                "respuesta" => $this->respuesta);
+
+    public function cambiarEstado() {
+
+        $this->visible = $this->visible == 1 ? 0 : 1;
+        return $this;
+
     }
     
-    public function cambiarPregunta($preguntaNueva) {
+    public function establecerPregunta($pregunta) {
         
-        $mensajeErrores = $this->validarPregunta($preguntaNueva);
+        $this->validarPregunta($pregunta);
+        $this->pregunta = $pregunta;
+        return $this;
         
-        if ($mensajeErrores == "") {
-            
-            $this->pregunta = $preguntaNueva;
-            
-        }
-        else {
-            
-            throw new Exception($mensajeErrores);
-        
-        }
-        
-        return true;
     }
     
-    public function cambiarRespuesta($respuestaNueva) {
+    public function establecerRespuesta($respuesta) {
         
-        $mensajeErrores = $this->validarRespuesta($respuestaNueva);
+        $this->validarRespuesta($respuesta);
+        $this->respuesta = $respuesta;
+        return $this;
         
-        if ($mensajeErrores == "") {
-            
-            $this->respuesta = $respuestaNueva;
-            
-        }
-        else {
-            
-            throw new Exception($mensajeErrores);
-        
-        }
-        
-        return true;
-    }
-    
-    public function Guardar() {
-        
-        $mensajeErrores = "";
-        $mensajeErrores .= $this->validarPregunta($this->pregunta);
-        $mensajeErrores .= $this->validarRespuesta($this->respuesta);
-        
-        if ($mensajeErrores == "") {
-            
-            if (isset($this->id)) { //Si la pregunta frecuente ya esta en la base de datos
-
-                $query = "UPDATE preguntas_frecuentes SET 
-                            pregunta='$this->pregunta', 
-                            respuesta='$this->respuesta' 
-                            WHERE id=$this->id";
-                
-                $conexion = new ConexionBD();
-                $conexion->abrir();
-
-                if ($conexion->correrQuery($query)){
-
-                    $conexion->cerrar();
-                    return true;
-
-                }
-
-                return false;
-
-            }
-            else { //Si el usuario no esta en la base de datos
-
-                $query = "INSERT INTO preguntas_frecuentes (pregunta, respuesta) 
-                            VALUES ('$this->pregunta', '$this->respuesta')";
-
-                $conexion = new ConexionBD();
-                $conexion->abrir();
-
-                if ($conexion->correrQuery($query)){
-
-                    $this->id = $conexion->obtenerId();
-                    $conexion->cerrar();
-                    return true;
-
-                }
-
-                return false;
-            }
-        }
-        else {
-            
-            throw new Exception($mensajeErrores);
-            
-        }        
-    }
-    
-    public static function consultarPorId($id) {
-        
-        $query = "SELECT * from preguntas_frecuentes where id=$id";
-        
-        $conexion = new ConexionBD();
-        $conexion->abrir();
-        
-        $resultado = $conexion->correrQuery($query);
-        $conexion->cerrar();
-        
-        $registro = $resultado[0];
-        
-        if ($registro) {
-            
-            return new PreguntaFrecuente(
-                    $registro['pregunta'],
-                    $registro['respuesta'],
-                    $registro['id']);
-        }
-        else {
-            
-            return $registro;
-            
-        }
-    }
-    
-    public static function consultarTodos() {
-        
-        $query = "SELECT * from preguntas_frecuentes";
-        
-        $conexion = new ConexionBD();
-        $conexion->abrir();
-        
-        $resultado = $conexion->correrQuery($query);
-        $preguntas = array();
-        $conexion->cerrar();
-        
-        foreach ($resultado as &$registro) {
-            
-            array_push($preguntas, new PreguntaFrecuente($registro['pregunta'], 
-                    $registro['respuesta'], 
-                    $registro['id']));
-            
-        }
-        
-        return $preguntas;
-    }
-    
-    public static function buscarCoincidencias($cadena) {
-        
-        if (empty($cadena)) {
-            
-            $query = "SELECT * FROM preguntas_frecuentes";
-            
-        }
-        else {
-            
-            $query = "SELECT * 
-                FROM preguntas_frecuentes 
-                WHERE pregunta like '%$cadena%'
-                OR respuesta like '%$cadena%'";
-            
-        }
-        
-        $conexion = new ConexionBD();
-        $conexion->abrir();
-        
-        $resultado = $conexion->correrQuery($query);
-        $preguntas = array();
-        $conexion->cerrar();
-        
-        if (is_array($resultado)) {
-            
-            foreach ($resultado as $registro) {
-
-                array_push($preguntas, new PreguntaFrecuente($registro['pregunta'], 
-                        $registro['respuesta'], 
-                        $registro['id']));
-
-            }
-        }
-        else {
-            
-            return array();
-            
-        }
-        
-        return $preguntas;
     }
     
     private function validarPregunta($pregunta) {
 
-        $mensaje = "";
+        if (empty($pregunta))
+            throw new Exception("La pregunta en una pregunta frecuente no puede
+                estar vacía");
 
-        if (empty($pregunta)) {
+        else if (!is_string($pregunta))
+            throw new Exception("La pregunta en una pregunta frecuente debe
+                ser una cadena de caracteres");
 
-            return "- Es necesario especificar una pregunta.\n";
+        else if (strlen($pregunta) > 1000)
+            throw new Exception("La pregunta en una pregunta frecuente debe 
+                tener máximo 1000 caracteres");
 
-        }
+        return true;
 
-        if (strlen($pregunta) > 1000){
-
-            $mensaje = $mensaje . "- La pregunta no debe exceder los 1000 
-                    caracteres.\n";
-
-        }
-
-        return $mensaje;
     }
     
     private function validarRespuesta($respuesta) {
 
-        $mensaje = "";
+        if (empty($respuesta))
+            throw new Exception("La respuesta en una pregunta frecuente no puede
+                estar vacía");
 
-        if (empty($respuesta)) {
+        else if (!is_string($respuesta))
+            throw new Exception("La respuesta en una pregunta frecuente debe
+                ser una cadena de caracteres");
 
-            return "- Es necesario especificar una respuesta.\n";
+        else if (strlen($respuesta) > 1000)
+            throw new Exception("La respuesta en una pregunta frecuente debe 
+                tener máximo 1000 caracteres");
+
+        return true;
+
+    }
+    
+    public static function buscarPorFiltro($filtro) {
+        
+        $conexion = new ConexionBD();
+        $procedimiento = SP_BUSCAR_PREGUNTAS_FRECUENTES_FILTRO;
+        $parametros = array($filtro);
+        $resultado = $conexion->correrProcedimiento($procedimiento, $parametros);
+        $preguntasFrecuentes = array();
+
+        foreach ($resultado as $registro) {
+
+            $preguntaFrecuente = new PreguntaFrecuente();
+            $preguntaFrecuente->establecerId($registro['id'])
+                ->establecerPregunta($registro['pregunta'])
+                ->establecerRespuesta($registro['respuesta']);
+            if ($registro['visible'] == 0) $preguntaFrecuente->cambiarEstado();
+
+            array_push($preguntasFrecuentes, $preguntaFrecuente);
 
         }
 
-        if (strlen($respuesta) > 1000){
-
-            $mensaje = $mensaje . "- La respuesta no debe exceder los 100 
-                    caracteres.\n";
-
-        }
-
-        return $mensaje;
-    }    
+        return $preguntasFrecuentes;
+    }
     
 }
 ?>
