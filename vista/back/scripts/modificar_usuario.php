@@ -11,16 +11,16 @@ try {
     
     $usuario = Usuario::consultarPorId($_SESSION['UsuarioId']);
     
-    if (is_null($usuario)) {
+    if (empty($usuario)) {
         
         echo "¡Error!\n\nNo se ha podido actualizar el usuario.";
         
     }
     else {
         
-        $usuario->cambiarNombre($nombreNuevo);
-        $usuario->cambiarClave($claveNueva);
-        if ($usuario->Guardar()) {
+        $usuario->establecerNombre($nombreNuevo);
+        $usuario->establecerClave($claveNueva);
+        if ($usuario->guardar()) {
             
             $_SESSION['UsuarioNombre'] = $usuario->obtenerNombre();
             echo "¡Enhorabuena!\n\nEl usuario ha sido actualizado con éxito!";

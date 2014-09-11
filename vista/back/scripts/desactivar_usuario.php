@@ -9,7 +9,7 @@ try {
     $usuario = Usuario::consultarPorEmail($email);
     $usuario->cambiarEstado();
     
-    if ($usuario->Guardar()) {
+    if ($usuario->guardar()) {
         
         echo "¡Enhorabuena!\n\nEl usuario \"$email\" ha sido actualizado con 
             éxito!";

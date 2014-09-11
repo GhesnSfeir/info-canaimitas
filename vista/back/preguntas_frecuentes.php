@@ -1,13 +1,12 @@
 <script type="text/javascript">
-    function desactivar(email) {
+    function cambiarEstado(id) {
         
-        var mensaje = '¿Seguro de que desea cambiar el estado de la cuenta de '+
-                'usuario "' + email + '"?';
+        var mensaje = '¿Seguro de que desea cambiar el estado de la pregunta frecuente?';
         if (confirm(mensaje)) {
             
             var xmlhttp = new XMLHttpRequest();
-            var parametros = 'email=' + email;
-            var url = 'scripts/desactivar_usuario.php';
+            var parametros = 'id=' + id;
+            var url = 'scripts/cambiar_estado_pregunta_frecuente.php';
             
             xmlhttp.open('POST', url, true);
 
@@ -17,7 +16,7 @@
                 if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     respuesta = xmlhttp.responseText;
                     alert(respuesta);
-                    buscarUsuarios();
+                    buscarPreguntasFrecuentes();
                 }
             }
 
@@ -26,7 +25,7 @@
         }
         else {
             
-            buscarUsuarios();
+            buscarPreguntasFrecuentes();
             
         }
     }

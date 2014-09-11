@@ -9,7 +9,7 @@ class TablaUsuarios extends ElementoHTML{
     
     public function __construct($filtro, $atributos = null) {
         
-        $this->usuarios = Usuario::buscarCoincidencias($filtro);
+        $this->usuarios = Usuario::buscarPorFiltro($filtro);
         
         $this->etiqueta = "table";
         $this->contenido = array();
@@ -38,7 +38,7 @@ class TablaUsuarios extends ElementoHTML{
                         new ElementoHTML("input", null, array(
                             "type" => "checkbox",
                             "class" => "checkbox",
-                            $usuario->obtenerActivo()=="1" ? "" : "checked",
+                            $usuario->obtenerEstado()==1 ? "" : "checked",
                             "onclick" => "javascript: desactivar('$emailUsuario');"
                         )));
 
