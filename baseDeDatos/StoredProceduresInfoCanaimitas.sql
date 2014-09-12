@@ -64,6 +64,14 @@ BEGIN
     SELECT COUNT(*) cuenta FROM usuarios u WHERE u.email = email;
 END //
 
+-- Procedimiento para contar la cantidad de repeticiones de un id para la tabla usuarios
+DELIMITER //
+DROP PROCEDURE IF EXISTS contar_usuarios_id;
+CREATE PROCEDURE contar_usuarios_id (idUsuario INT)
+BEGIN
+    SELECT COUNT(*) cuenta FROM usuarios u WHERE u.id = idUsuario;
+END //
+
   -- Procedimiento para eliminar usuarios
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS eliminar_usuario; 
@@ -196,6 +204,14 @@ BEGIN
     SELECT * FROM fichas_recursos WHERE id = idFicha;
 END // 
 
+-- Procedimiento para consultar la existencia de una ficha por su ID
+DELIMITER // 
+DROP PROCEDURE IF EXISTS contar_ficha_recurso_id;
+CREATE  PROCEDURE contar_ficha_recurso_id (idFicha INT) 
+BEGIN 
+    SELECT COUNT(id) FROM fichas_recursos WHERE id = idFicha;
+END //
+
 -- procedimiento para agregar las fichas de los recursos
 DELIMITER // 		
 DROP PROCEDURE IF EXISTS agregar_ficha_recurso; 
@@ -285,6 +301,14 @@ BEGIN
     SELECT * FROM autores;
 END // 
 
+-- Procedimiento para consultar autor por id
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_autores_id;
+CREATE  PROCEDURE consultar_autores (idAutor INT) 
+BEGIN 
+    SELECT * FROM autores WHERE id = idAutor;
+END // 
+
 -- procedimiento para agregar autores
 DELIMITER // 	
 DROP PROCEDURE IF EXISTS agregar_autor;
@@ -298,7 +322,7 @@ END //
 -- Procedimiento para modificar autores
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS modificar_autor; 
-CREATE  PROCEDURE modificar_autor (idAutor INT, nombre VARCHAR(50)) 		
+CREATE  PROCEDURE modificar_autor (idAutor INT, nombre VARCHAR(100)) 		
 BEGIN  	
 	UPDATE autores  SET
     nombre = nombreAutor
@@ -532,3 +556,36 @@ BEGIN
 	DELETE FROM contenidos
     WHERE id = idContenido;							
 END //
+
+-- C O M E N T A R I O S	
+		 
+-- procedimiento para agregar comentario
+DELIMITER // 
+DROP PROCEDURE IF EXISTS agregar_comentario; 
+CREATE PROCEDURE agregar_comentario(comentarioAgregar VARCHAR(1000), fechaComentario date, denunciadoAgregar TINYINT, permitidoAgregar TINYINT, idComentarioId INT, idUsuarios INT, idFichasRecursos INT)
+BEGIN								
+	INSERT INTO comentarios (comentario, fecha, denunciado, permitido, fk_comentarios, fk_usuarios, fk_fichas_recursos) VALUES (comentarioAgregar, fechaComentario, denunciadoAgregar, permitidoAgregar, idComentarioId, idUsuarios, idFichasRecursos);
+	SELECT LAST_INSERT_ID() id;
+END // 
+
+  -- Procedimiento para modificar comentarios
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS modificar_comentario; 
+CREATE  PROCEDURE modificar_comentario (idComentario INT, comentarioAgregar VARCHAR(1000), fechaComentario date, denunciadoAgregar TINYINT, permitidoAgregar TINYINT)
+BEGIN  	
+	UPDATE comentarios  SET
+	comentario = comentarioAgregar, 
+	fecha = fechaComentario, 
+	denunciado = denunciadoAgregar, 
+	permitido = permitidoAgregar 
+    WHERE id = idComentario;							
+END // 
+
+-- Procedimiento para contar la cantidad de repeticiones de un id para la tabla comentarios
+DELIMITER //
+DROP PROCEDURE IF EXISTS contar_comentarios_id;
+CREATE PROCEDURE contar_comentarios_id (idComentario INT)
+BEGIN
+    SELECT COUNT(*) cuenta FROM comentarios c WHERE c.id = idComentario;
+END //
+

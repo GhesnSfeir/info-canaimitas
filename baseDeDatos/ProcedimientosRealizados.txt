@@ -8,9 +8,13 @@ procedimientos creados:
 
 consultar_usuarios
 consultar_usuarios_id
-select agregar_usuario("Lofia", "lofita@gmail.com","soyunalofia", "Gestor"); 
+consultar_usuarios_email
+agregar_usuario
 modificar_usuarios
 eliminar_usuario
+buscar_usuarios_filtro
+contar_usuarios_email
+contar_usuarios_id
 
 consultar_preguntas_frecuentes
 consultar_preguntas_frecuentes_id
@@ -38,6 +42,7 @@ modificar_recomendaciones
 eliminar_recomendaciones
 
 consultar_autores
+consultar_autores_id
 agregar_autores
 modificar_autores
 eliminar_autores
@@ -71,3 +76,6 @@ eliminar_temas
 
 agregar_contenidos
 eliminar_contenidos
+
+agregar_comentario
+
