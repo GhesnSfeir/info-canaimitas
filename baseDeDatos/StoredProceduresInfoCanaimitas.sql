@@ -347,7 +347,7 @@ END //
 -- Procedimiento para modificar autores
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS modificar_autor; 
-CREATE  PROCEDURE modificar_autor (idAutor INT, nombre VARCHAR(100)) 		
+CREATE  PROCEDURE modificar_autor (idAutor INT, nombreAutor VARCHAR(100)) 		
 BEGIN  	
 	UPDATE autores  SET
     nombre = nombreAutor
@@ -362,6 +362,15 @@ BEGIN
 	DELETE FROM autores
     WHERE id = idAutor;							
 END //
+
+-- Procedimiento para contar la cantidad de repeticiones de un nombre para la tabla autor
+DELIMITER //
+DROP PROCEDURE IF EXISTS contar_autores_nombre;
+CREATE PROCEDURE contar_autores_nombre (nombreAutor VARCHAR(100))
+BEGIN
+    SELECT COUNT(*) cuenta FROM autores WHERE nombre = nombreAutor;
+END //
+
 
 -- A U T O R E  S   F I C H A S    R E C U R S O S
 
@@ -446,6 +455,13 @@ BEGIN
     SELECT na.* FROM niveles_academicos na, audiencia a where a.fk_fichas_recursos_audi = idRecurso AND a.fk_niveles_academicos = na.id;
 END // 
 
+-- Procedimiento para contar la cantidad de repeticiones de un nombre para la tabla niveles academicos
+DELIMITER //
+DROP PROCEDURE IF EXISTS contar_niveles_academicos_nombre;
+CREATE PROCEDURE contar_niveles_academicos_nombre (nombreNivel VARCHAR(50))
+BEGIN
+    SELECT COUNT(*) cuenta FROM niveles_academicos WHERE nombre = nombreNivel;
+END //
 
 -- A U D I E N C I A
 			
@@ -529,6 +545,14 @@ BEGIN
     WHERE id = idAsignatura;							
 END //
 
+-- Procedimiento para contar la cantidad de repeticiones de un nombre para la tabla niveles academicos
+DELIMITER //
+DROP PROCEDURE IF EXISTS contar_asignaturas_nombre;
+CREATE PROCEDURE contar_asignaturas_nombre (nombreAsignatura VARCHAR(1000))
+BEGIN
+    SELECT COUNT(*) cuenta FROM asignaturas WHERE nombre = nombreAsignatura;
+END //
+
 -- D I S C I P L I N A   D E L   C O N O C I M I E N T O
 	
 -- procediento para agregar disciplina del conocimiento
@@ -606,10 +630,18 @@ END //
 -- Procedimiento para consultar los temas por nombre
 DELIMITER // 
 DROP PROCEDURE IF EXISTS consultar_tema_nombre;
-CREATE  PROCEDURE consultar_tema_nombre (nombreTema INT) 
+CREATE  PROCEDURE consultar_tema_nombre (nombreTema VARCHAR(1000)) 
 BEGIN 
     SELECT * FROM temas where nombre = nombreTema;
 END // 
+
+-- Procedimiento para contar la cantidad de repeticiones de un nombre para la tabla temas
+DELIMITER //
+DROP PROCEDURE IF EXISTS contar_temas_nombre;
+CREATE PROCEDURE contar_temas_nombre (nombreTema VARCHAR(1000))
+BEGIN
+    SELECT COUNT(*) cuenta FROM temas WHERE nombre = nombreTema;
+END //
 
 
 -- C O N T E N I D O S
