@@ -235,6 +235,15 @@ BEGIN
     WHERE id = idFichaRecurso;							
 END // 
 
+  -- Procedimiento para eliminar fichas de los recursos
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_ficha_recurso; 
+CREATE  PROCEDURE eliminar_ficha_recurso (idFichaRecurso INT) 		
+BEGIN  	
+	DELETE FROM fichas_recursos
+    WHERE id = idFichaRecurso;							
+END //
+
 
 -- R E C O M E N D A C I O N E S
 
@@ -304,19 +313,35 @@ END //
 -- Procedimiento para consultar autor por id
 DELIMITER // 
 DROP PROCEDURE IF EXISTS consultar_autores_id;
-CREATE  PROCEDURE consultar_autores (idAutor INT) 
+CREATE  PROCEDURE consultar_autores_id (idAutor INT) 
 BEGIN 
     SELECT * FROM autores WHERE id = idAutor;
+END // 
+
+-- Procedimiento para consultar autor por nombre
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_autores_nombre;
+CREATE  PROCEDURE consultar_autores_nombre (nombreAutor VARCHAR(100)) 
+BEGIN 
+    SELECT * FROM autores WHERE nombre = nombreAutor;
 END // 
 
 -- procedimiento para agregar autores
 DELIMITER // 	
 DROP PROCEDURE IF EXISTS agregar_autor;
-CREATE PROCEDURE agregar_autor (nombre VARCHAR(100))
+CREATE PROCEDURE agregar_autor (nombreAutor VARCHAR(100))
 BEGIN
-    INSERT INTO autores (nombre) VALUES (nombre);
+    INSERT INTO autores (nombre) VALUES (nombreAutor);
     SELECT LAST_INSERT_ID() id;
 END //
+
+-- Procedimiento para consultar autores idRecurso
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_autores_id_recurso;
+CREATE  PROCEDURE consultar_autores_id_recurso (idRecurso INT) 
+BEGIN 
+    SELECT a.* FROM autores a, autores_fichas_recursos ar where ar.fk_fichas_recursos_auto = idRecurso AND ar.fk_autores = a.id;
+END // 
 
 
 -- Procedimiento para modificar autores
@@ -352,77 +377,94 @@ END //
   -- Procedimiento para eliminar autores fichas recursos
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS eliminar_autor_fichas_recursos; 
-CREATE  PROCEDURE eliminar_autor_fichas_recursos(idAutorFR INT)
+CREATE  PROCEDURE eliminar_autor_fichas_recursos(idAutor INT, idFichaRecurso INT)
 BEGIN  	
 	DELETE FROM autores_fichas_recursos
-    WHERE id = idAutorFR;							
+    WHERE fk_autores = idAutor AND fk_fichas_recursos_auto = idFichaRecurso;							
 END //
 
 -- P E R I O D O S   A C A D E M I C O S
 
--- Procedimiento para consultar todas los periodos academicos
+-- Procedimiento para consultar todas los niveles academicos
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_periodos_academicos;
-CREATE  PROCEDURE consultar_periodos_academicos () 
+DROP PROCEDURE IF EXISTS consultar_niveles_academicos;
+CREATE  PROCEDURE consultar_niveles_academicos () 
 BEGIN 
-    SELECT * FROM periodos_academicos;
+    SELECT * FROM niveles_academicos;
 END // 
 
--- Procedimiento para consultar los periodos academicos
+-- Procedimiento para consultar los niveles academicos ID
 DELIMITER // 
-DROP PROCEDURE IF EXISTS consultar_periodo_academico_id;
-CREATE  PROCEDURE consultar_periodo_academico_id (idPeriodo INT) 
+DROP PROCEDURE IF EXISTS consultar_nivel_academico_id;
+CREATE  PROCEDURE consultar_nivel_academico_id (idNivel INT) 
 BEGIN 
-    SELECT * FROM periodos_academicos where id = idPeriodo;
+    SELECT * FROM niveles_academicos where id = idNivel;
 END // 
 
--- procedimiento para agregar los periodos academicos
+-- procedimiento para agregar los niveles academicos
 DELIMITER // 	
-DROP PROCEDURE IF EXISTS agregar_periodo_academico; 
-CREATE PROCEDURE agregar_periodo_academico(nombrePeriodo VARCHAR(50), abreviacionPeriodo VARCHAR(20)) 
+DROP PROCEDURE IF EXISTS agregar_nivel_academico; 
+CREATE PROCEDURE agregar_nivel_academico(nombreNivel VARCHAR(50), abreviacionNivel VARCHAR(20)) 
 BEGIN							 										
-	INSERT INTO periodos_academicos (nombre, abreviacion) VALUES (nombrePeriodo, abreviacionPeriodo);
+	INSERT INTO niveles_academicos (nombre, abreviacion) VALUES (nombreNivel, abreviacionNivel);
 	SELECT LAST_INSERT_ID() id;
 END //  
 
-  -- Procedimiento para modificar los periodos academicos
+  -- Procedimiento para modificar los niveles academicos
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS modificar_periodo_academico; 
-CREATE  PROCEDURE modificar_periodo_academico (idPeriodo INT, nombrePeriodo VARCHAR(50), abreviacionPeriodo VARCHAR(20)) 		
+DROP PROCEDURE IF EXISTS modificar_nivel_academico; 
+CREATE  PROCEDURE modificar_nivel_academico (idNivel INT, nombreNivel VARCHAR(50), abreviacionNivel VARCHAR(20)) 		
 BEGIN  	
-	UPDATE periodos_academicos  SET
-    nombre = nombrePeriodo, 
-	abreviacion = abreviacionPeriodo
-    WHERE id = idPeriodo;							
+	UPDATE niveles_academicos  SET
+    nombre = nombreNivel, 
+	abreviacion = abreviacionNivel
+    WHERE id = idNivel;							
 END // 
 
-  -- Procedimiento para eliminar los periodos academicos
+  -- Procedimiento para eliminar los Nivel academico
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS eliminar_periodo_academico; 
-CREATE  PROCEDURE eliminar_periodo_academico (idPeriodo INT) 		
+DROP PROCEDURE IF EXISTS eliminar_nivel_academico; 
+CREATE  PROCEDURE eliminar_nivel_academico (idNivel INT) 		
 BEGIN  	
-	DELETE FROM periodos_academicos
-    WHERE id = idPeriodo;							
+	DELETE FROM niveles_academicos
+    WHERE id = idNivel;							
 END //
+
+-- Procedimiento para consultar los niveles academicos por nombre
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_nivel_academico_nombre;
+CREATE  PROCEDURE consultar_nivel_academico_nombre (nombreNivel VARCHAR(50)) 
+BEGIN 
+    SELECT * FROM niveles_academicos where nombre = nombreNivel;
+END // 
+
+-- Procedimiento para consultar los niveles academicos por nombre
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_niveles_academicos_id_recurso;
+CREATE  PROCEDURE consultar_niveles_academicos_id_recurso (idRecurso INT) 
+BEGIN 
+    SELECT na.* FROM niveles_academicos na, audiencia a where a.fk_fichas_recursos_audi = idRecurso AND a.fk_niveles_academicos = na.id;
+END // 
+
 
 -- A U D I E N C I A
 			
 -- procedimiento para agregar audiencia
 DELIMITER // 		
 DROP PROCEDURE IF EXISTS agregar_audiencia; 
-CREATE PROCEDURE agregar_audiencia(idPeriodoAcademico INT, idFichaRecurso INT) 
+CREATE PROCEDURE agregar_audiencia(idNivelAcademico INT, idFichaRecurso INT) 
 BEGIN																	
-	INSERT INTO audiencia (fk_periodos_academicos, fk_fichas_recursos_audi) VALUES (idPeriodoAcademico, idFichaRecurso);
+	INSERT INTO audiencia (fk_niveles_academicos, fk_fichas_recursos_audi) VALUES (idNivelAcademico, idFichaRecurso);
 	SELECT LAST_INSERT_ID() id; 
 END //  
  
   -- Procedimiento para eliminar audencia
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS eliminar_audiencia; 
-CREATE  PROCEDURE eliminar_audiencia(idAudiencia INT)
+CREATE  PROCEDURE eliminar_audiencia(idNivelAcademico INT, idFichaRecurso INT)
 BEGIN  	
 	DELETE FROM audiencia
-    WHERE id = idAudiencia;							
+    WHERE fk_niveles_academicos = idNivelAcademico AND fk_fichas_recursos_audi = idFichaRecurso;							
 END //
 
 -- A S I G N A T U R A S
@@ -435,12 +477,28 @@ BEGIN
     SELECT * FROM asignaturas;
 END // 
 
--- Procedimiento para consultar las asignaturas
+-- Procedimiento para consultar asignaturas id
 DELIMITER // 
 DROP PROCEDURE IF EXISTS consultar_asignatura_id;
 CREATE  PROCEDURE consultar_asignatura_id (idAsignatura INT) 
 BEGIN 
     SELECT * FROM asignaturas where id = idAsignatura;
+END // 
+
+-- Procedimiento para consultar asignaturas por nombre
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_asignatura_nombre;
+CREATE  PROCEDURE consultar_asignatura_nombre (nombreAsignatura VARCHAR(100)) 
+BEGIN 
+    SELECT * FROM asignaturas where nombre = nombreAsignatura;
+END // 
+
+-- Procedimiento para consultar asignaturas idRecurso
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_asignatura_idRecurso;
+CREATE  PROCEDURE consultar_asignatura_idRecurso (idRecurso INT) 
+BEGIN 
+    SELECT a.* FROM asignaturas a, disciplina_conocimiento dc where dc.fk_fichas_recursos_disc = idRecurso AND dc.fk_asignaturas = a.id;
 END // 
 
 -- procedimiento para agregar asignaturas
@@ -478,17 +536,17 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS agregar_disciplina_conocimiento; 
 CREATE PROCEDURE agregar_disciplina_conocimiento(idAsignatura INT, idFichaRecurso INT) 
 BEGIN
-	INSERT INTO disciplina_conocimiento (fk_asignaturas, fk_fichas_recursos_disc) VALUES (idPeriodoAcademico, idFichaRecurso);
+	INSERT INTO disciplina_conocimiento (fk_asignaturas, fk_fichas_recursos_disc) VALUES (idAsignatura, idFichaRecurso);
 	SELECT LAST_INSERT_ID() id;
 END //  
  
   -- Procedimiento para eliminar disciplina del conocimiento
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS eliminar_disciplina_conocimiento; 
-CREATE  PROCEDURE eliminar_disciplina_conocimiento(idDisciplina INT)
+CREATE  PROCEDURE eliminar_disciplina_conocimiento(idAsignatura INT, idFichaRecurso INT)
 BEGIN  	
 	DELETE FROM disciplina_conocimiento
-    WHERE id = idDisciplina;							
+    WHERE fk_asignaturas = idAsignatura AND fk_fichas_recursos_disc = idFichaRecurso;							
 END //
 
 -- T E M A S 
@@ -537,6 +595,23 @@ BEGIN
     WHERE id = idTema;							
 END //
 
+-- Procedimiento para consultar los temas por ID
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_temas_id_recurso;
+CREATE  PROCEDURE consultar_temas_id_recurso (idRecurso INT) 
+BEGIN 
+    SELECT t.* FROM temas t, contenidos c where c.fk_fichas_recursos_cont = idRecurso AND c.fk_temas = t.id;
+END // 
+
+-- Procedimiento para consultar los temas por nombre
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_tema_nombre;
+CREATE  PROCEDURE consultar_tema_nombre (nombreTema INT) 
+BEGIN 
+    SELECT * FROM temas where nombre = nombreTema;
+END // 
+
+
 -- C O N T E N I D O S
 			
 -- procedimiento para agregar contenidos
@@ -548,13 +623,13 @@ BEGIN
 	SELECT LAST_INSERT_ID() id;
 END //  
  
-  -- Procedimiento para eliminar audencia
+  -- Procedimiento para eliminar contenidos
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS eliminar_contenido; 
-CREATE  PROCEDURE eliminar_contenido(idContenido INT)
+CREATE  PROCEDURE eliminar_contenido(idTema INT, idFichaRecurso INT)
 BEGIN  	
 	DELETE FROM contenidos
-    WHERE id = idContenido;							
+    WHERE fk_temas = idTema AND fk_fichas_recursos_cont = idFichaRecurso;							
 END //
 
 -- C O M E N T A R I O S	
@@ -566,6 +641,22 @@ CREATE PROCEDURE agregar_comentario(comentarioAgregar VARCHAR(1000), fechaComent
 BEGIN								
 	INSERT INTO comentarios (comentario, fecha, denunciado, permitido, fk_comentarios, fk_usuarios, fk_fichas_recursos) VALUES (comentarioAgregar, fechaComentario, denunciadoAgregar, permitidoAgregar, idComentarioId, idUsuarios, idFichasRecursos);
 	SELECT LAST_INSERT_ID() id;
+END // 
+
+-- Procedimiento para consultar todas los comentarios
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_comentarios;
+CREATE  PROCEDURE consultar_comentarios () 
+BEGIN 
+    SELECT * FROM comentarios;
+END // 
+
+-- Procedimiento para consultar los comentarios por ID
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_comentario_id;
+CREATE  PROCEDURE consultar_comentario_id (idComentarios INT) 
+BEGIN 
+    SELECT * FROM comentarios where id = idComentarios OR fk_comentarios = idComentarios;
 END // 
 
   -- Procedimiento para modificar comentarios
@@ -589,3 +680,11 @@ BEGIN
     SELECT COUNT(*) cuenta FROM comentarios c WHERE c.id = idComentario;
 END //
 
+  -- Procedimiento para eliminar comentarios
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS eliminar_comentario; 
+CREATE  PROCEDURE eliminar_comentario(idComentario INT)
+BEGIN  	
+	DELETE FROM comentarios
+    WHERE id = idComentario;							
+END //

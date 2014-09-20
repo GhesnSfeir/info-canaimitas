@@ -14,9 +14,9 @@ DROP TABLE contenidos;
 
 DROP TABLE recomendaciones;
 
-DROP TABLE asignaturas;
+DROP TABLE niveles_academicos;
 
-DROP TABLE periodos_academicos;
+DROP TABLE asignaturas;
 
 DROP TABLE temas;
 
@@ -27,3 +27,4 @@ DROP TABLE autores;
 DROP TABLE fichas_recursos;
 
 DROP TABLE autores_fichas_recursos;
+
