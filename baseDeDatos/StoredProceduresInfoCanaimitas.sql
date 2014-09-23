@@ -683,14 +683,21 @@ BEGIN
     SELECT * FROM comentarios;
 END // 
 
--- Procedimiento para consultar los comentarios por ID
+-- Procedimiento para consultar los comentarios por ID(Padres)
 DELIMITER // 
 DROP PROCEDURE IF EXISTS consultar_comentario_id;
-CREATE  PROCEDURE consultar_comentario_id (idComentarios INT) 
+CREATE  PROCEDURE consultar_comentario_id (idComentario INT) 
 BEGIN 
-    SELECT * FROM comentarios where id = idComentarios OR fk_comentarios = idComentarios;
+    SELECT * FROM comentarios where id = idComentario;
 END // 
 
+-- Procedimiento para consultar los comentarios por ID(hijos)
+DELIMITER // 
+DROP PROCEDURE IF EXISTS consultar_comentariosHijos_id;
+CREATE  PROCEDURE consultar_comentario_id (idComentario INT) 
+BEGIN 
+    SELECT * FROM comentarios where fk_comentarios = idComentario;
+END // 
   -- Procedimiento para modificar comentarios
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS modificar_comentario; 
