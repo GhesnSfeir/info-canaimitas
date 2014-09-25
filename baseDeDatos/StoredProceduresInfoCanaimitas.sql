@@ -244,6 +244,13 @@ BEGIN
     WHERE id = idFichaRecurso;							
 END //
 
+-- Procedimiento para buscar preguntas frecuentes por filtro
+DELIMITER // 									
+DROP PROCEDURE IF EXISTS buscar_recursos_filtros; 
+CREATE  PROCEDURE buscar_recursos_filtros (filtro VARCHAR(100))
+BEGIN  											
+    SELECT * FROM fichas_recursos WHERE titulo like concat('%',filtro,'%') OR formato like concat('%',filtro,'%') or ruta_acceso like concat('%',filtro,'%') OR caracterizacion_url like concat('%',filtro,'%') OR recurso_url like concat('%',filtro,'%') ;
+END // 
 
 -- R E C O M E N D A C I O N E S
 
@@ -669,9 +676,9 @@ END //
 -- procedimiento para agregar comentario
 DELIMITER // 
 DROP PROCEDURE IF EXISTS agregar_comentario; 
-CREATE PROCEDURE agregar_comentario(comentarioAgregar VARCHAR(1000), fechaComentario date, denunciadoAgregar TINYINT, permitidoAgregar TINYINT, idComentarioId INT, idUsuarios INT, idFichasRecursos INT)
+CREATE PROCEDURE agregar_comentario(comentarioAgregar VARCHAR(1000), fechaComentario VARCHAR(12), denunciadoAgregar TINYINT, permitidoAgregar TINYINT, idComentarioId INT, idUsuarios INT, idFichasRecursos INT)
 BEGIN								
-	INSERT INTO comentarios (comentario, fecha, denunciado, permitido, fk_comentarios, fk_usuarios, fk_fichas_recursos) VALUES (comentarioAgregar, fechaComentario, denunciadoAgregar, permitidoAgregar, idComentarioId, idUsuarios, idFichasRecursos);
+	INSERT INTO comentarios (comentario, fecha, denunciado, permitido, fk_comentarios, fk_usuarios, fk_fichas_recursos) VALUES (comentarioAgregar, STR_TO_DATE(fechaComentario, '%d/%m/%Y'), denunciadoAgregar, permitidoAgregar, idComentarioId, idUsuarios, idFichasRecursos);
 	SELECT LAST_INSERT_ID() id;
 END // 
 
@@ -680,7 +687,7 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS consultar_comentarios;
 CREATE  PROCEDURE consultar_comentarios () 
 BEGIN 
-    SELECT * FROM comentarios;
+    SELECT id, comentario, DATE_FORMAT(fecha, '%d/%m/%Y'), denunciado, permitido, fk_comentarios, fk_usuarios, fk_fichas_recursos  FROM comentarios;
 END // 
 
 -- Procedimiento para consultar los comentarios por ID(Padres)
@@ -688,7 +695,7 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS consultar_comentario_id;
 CREATE  PROCEDURE consultar_comentario_id (idComentario INT) 
 BEGIN 
-    SELECT * FROM comentarios where id = idComentario;
+    SELECT id, comentario, DATE_FORMAT(fecha, '%d/%m/%Y'), denunciado, permitido, fk_comentarios, fk_usuarios, fk_fichas_recursos FROM comentarios where id = idComentario;
 END // 
 
 -- Procedimiento para consultar los comentarios por ID(hijos)
@@ -696,16 +703,16 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS consultar_comentariosHijos_id;
 CREATE  PROCEDURE consultar_comentario_id (idComentario INT) 
 BEGIN 
-    SELECT * FROM comentarios where fk_comentarios = idComentario;
+    SELECT id, comentario, DATE_FORMAT(fecha, '%d/%m/%Y'), denunciado, permitido, fk_comentarios, fk_usuarios, fk_fichas_recursos FROM comentarios where fk_comentarios = idComentario;
 END // 
   -- Procedimiento para modificar comentarios
 DELIMITER // 									
 DROP PROCEDURE IF EXISTS modificar_comentario; 
-CREATE  PROCEDURE modificar_comentario (idComentario INT, comentarioAgregar VARCHAR(1000), fechaComentario date, denunciadoAgregar TINYINT, permitidoAgregar TINYINT)
+CREATE  PROCEDURE modificar_comentario (idComentario INT, comentarioAgregar VARCHAR(1000), fechaComentario VARCHAR(12), denunciadoAgregar TINYINT, permitidoAgregar TINYINT)
 BEGIN  	
 	UPDATE comentarios  SET
 	comentario = comentarioAgregar, 
-	fecha = fechaComentario, 
+	fecha = STR_TO_DATE(fechaComentario, '%d/%m/%Y'), 
 	denunciado = denunciadoAgregar, 
 	permitido = permitidoAgregar 
     WHERE id = idComentario;							
