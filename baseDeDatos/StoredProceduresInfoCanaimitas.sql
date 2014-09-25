@@ -246,10 +246,10 @@ END //
 
 -- Procedimiento para buscar preguntas frecuentes por filtro
 DELIMITER // 									
-DROP PROCEDURE IF EXISTS buscar_recursos_filtros; 
-CREATE  PROCEDURE buscar_recursos_filtros (filtro VARCHAR(100))
+DROP PROCEDURE IF EXISTS buscar_fichas_recursos_filtros; 
+CREATE  PROCEDURE buscar_fichas_recursos_filtros (tituloRecurso VARCHAR(100), formatoRecurso VARCHAR(10), ruta_accesoRecurso VARCHAR(1000), caracterizacion_urlRecurso VARCHAR(1000), recurso_urlRecurso VARCHAR(1000))
 BEGIN  											
-    SELECT * FROM fichas_recursos WHERE titulo like concat('%',filtro,'%') OR formato like concat('%',filtro,'%') or ruta_acceso like concat('%',filtro,'%') OR caracterizacion_url like concat('%',filtro,'%') OR recurso_url like concat('%',filtro,'%') ;
+    SELECT * FROM fichas_recursos WHERE titulo like concat('%',tituloRecurso,'%') OR formato like concat('%',formatoRecurso,'%') or ruta_acceso like concat('%',ruta_accesoRecurso,'%') OR caracterizacion_url like concat('%',caracterizacion_urlRecurso,'%') OR recurso_url like concat('%',recurso_urlRecurso,'%') ;
 END // 
 
 -- R E C O M E N D A C I O N E S
